@@ -5,16 +5,15 @@
   "dependencies": {
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.3.0",
-    "include-media": "^1.4.9",
     "node-sass": "^4.12.0",
-    "open-color": "^1.7.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -31,7 +30,9 @@
     "rules": {
       "react/prefer-stateless-function": 0,
       "react/jsx-filename-extension": 0,
-      "react/jsx-one-expression-per-line": 0
+      "react/jsx-one-expression-per-line": 0,
+      "react/prop-types": 0,
+      "react/jsx-props-no-spreading": 0
     },
     "env": {
       "browser": true
