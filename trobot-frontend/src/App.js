@@ -4,9 +4,9 @@ import Layout from './containers/common/Layout';
 import HomePage from './pages/HomePage';
 import ListPage from './pages/ListPage';
 import PeoplePage from './pages/PeoplePage';
+import AuthPage from './pages/AuthPage';
 // import EditPage from './pages/EditPage';
 // import UserPage from './pages/UserPage';
-// import AuthPage from './pages/AuthPage';
 // import NotFoundPage from './pages/NotFoundPage';
 
 class App extends Component {
@@ -16,9 +16,9 @@ class App extends Component {
         <Route component={HomePage} exact path="/" />
         <Route component={ListPage} path="/list" />
         <Route component={PeoplePage} path="/people" />
+        <Route component={AuthPage} path="/auth" />
         {/* <Route component={EditPage} path="/edit" />
         <Route component={UserPage} path="/user" />
-        <Route component={AuthPage} path="/auth" />
         <Route component={NotFoundPage} /> */}
       </Switch>
     );

@@ -3,6 +3,17 @@ import styled from 'styled-components';
 import Responsive from './Responsive';
 import palette from '../../lib/styles/palette';
 
+const Footer = () => {
+  return (
+    <FooterBlock>
+      <Wrapper>
+        <p>contact us</p>
+        <p>anrobin719@gmail.com</p>
+      </Wrapper>
+    </FooterBlock>
+  );
+};
+
 const FooterBlock = styled.div`
   width: 100%;
   height: 16rem;
@@ -19,16 +30,5 @@ const Wrapper = styled(Responsive)`
     color: ${palette.gray[6]};
   }
 `;
-
-const Footer = () => {
-  return (
-    <FooterBlock>
-      <Wrapper>
-        <p>contact us</p>
-        <p>anrobin719@gmail.com</p>
-      </Wrapper>
-    </FooterBlock>
-  );
-};
 
 export default Footer;
