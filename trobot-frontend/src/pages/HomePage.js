@@ -1,11 +1,54 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 
 import palette from '../lib/styles/palette';
 import Responsive from '../components/common/Responsive';
 import TagList from '../components/home/TagList';
-// import Button from '../components/ui/Button';
+
+const HomePage = () => {
+  return (
+    <>
+      {/* 인트로 */}
+      <Intro>
+        <Wrapper>
+          <h1>Trouble Bot</h1>
+          <p>해결이 필요한 실제 아이디어 제공 서비스</p>
+        </Wrapper>
+      </Intro>
+
+      {/* 태그 선택 섹션 */}
+      <TagSection>
+        <Wrapper>
+          <h3>아이디어</h3>
+          <p>분류마다 아이디어와 유용한 참고자료를 제공합니다.</p>
+          <TagList />
+        </Wrapper>
+      </TagSection>
+
+      {/* 정보 섹션 */}
+      <InfoSection>
+        <Wrapper>
+          <h3>아이디어를 쉽게 저장하세요</h3>
+          <p>카테고리별로 정리되어 편하게 기록을 확인할 수 있습니다.</p>
+          <ImgBox />
+
+          <h3>푸쉬 알림이 곧 찾아옵니다!</h3>
+          <p>COMING SOON</p>
+          <ImgBox />
+        </Wrapper>
+      </InfoSection>
+
+      {/* 컨텍트 섹션 */}
+      <ContactSection>
+        <Wrapper>
+          <h2>의견이 있으신가요?</h2>
+          <p>제안에 열려있습니다. 개선사항에 대해 연락주세요!</p>
+        </Wrapper>
+      </ContactSection>
+    </>
+  );
+};
 
 const Wrapper = styled(Responsive)`
   height: 100%;
@@ -26,8 +69,9 @@ const Wrapper = styled(Responsive)`
 `;
 
 const Intro = styled.section`
+  padding-bottom: 3rem;
   h1 {
-    font-size: 6rem;
+    font-size: 5.6rem;
     font-weight: 800;
     font-family: 'Heebo', sans-serif;
     line-height: 7rem;
@@ -65,51 +109,5 @@ const ContactSection = styled.section`
     color: white;
   }
 `;
-
-class HomePage extends Component {
-  render() {
-    return (
-      <>
-        {/* 인트로 */}
-        <Intro>
-          <Wrapper>
-            <h1>Trouble Bot</h1>
-            <p>해결이 필요한 실제 아이디어 제공 서비스</p>
-          </Wrapper>
-        </Intro>
-
-        {/* 태그 선택 섹션 */}
-        <TagSection>
-          <Wrapper>
-            <h3>아이디어</h3>
-            <p>분류마다 아이디어와 유용한 참고자료를 제공합니다.</p>
-            <TagList />
-          </Wrapper>
-        </TagSection>
-
-        {/* 정보 섹션 */}
-        <InfoSection>
-          <Wrapper>
-            <h3>아이디어를 쉽게 저장하세요</h3>
-            <p>카테고리별로 정리되어 편하게 기록을 확인할 수 있습니다.</p>
-            <ImgBox />
-
-            <h3>푸쉬 알림이 곧 찾아옵니다!</h3>
-            <p>COMING SOON</p>
-            <ImgBox />
-          </Wrapper>
-        </InfoSection>
-
-        {/* 컨텍트 섹션 */}
-        <ContactSection>
-          <Wrapper>
-            <h2>의견이 있으신가요?</h2>
-            <p>제안에 열려있습니다. 개선사항에 대해 연락주세요!</p>
-          </Wrapper>
-        </ContactSection>
-      </>
-    );
-  }
-}
 
 export default HomePage;
