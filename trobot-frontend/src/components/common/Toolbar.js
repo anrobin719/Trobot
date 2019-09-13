@@ -11,7 +11,7 @@ import NavigationItems from './NavigationItems';
 const Toolbar = ({ drawerToggleClicked }) => {
   return (
     <>
-      <Header>
+      <ToolbarBox>
         <Wrapper>
           <MenuToggleBtn
             onClick={() => drawerToggleClicked()}
@@ -27,13 +27,13 @@ const Toolbar = ({ drawerToggleClicked }) => {
             <NavigationItems />
           </NavigationItemsBox>
         </Wrapper>
-      </Header>
+      </ToolbarBox>
       <Spacer />
     </>
   );
 };
 
-const Header = styled.header`
+const ToolbarBox = styled.div`
   width: 100%;
   height: 4rem;
   position: fixed;
@@ -57,7 +57,6 @@ const Wrapper = styled(Responsive)`
 `;
 
 const LogoBox = styled.div`
-  padding-left: 1rem;
   a {
     height: 100%;
     line-height: 4rem;

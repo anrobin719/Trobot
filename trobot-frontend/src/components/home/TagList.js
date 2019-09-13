@@ -2,6 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 import Tag from './Tag';
+import { stringify } from 'postcss';
 
 // 🌈👬🌦☔️💆🏻‍🌿🌱🐈🏃🏻‍🤝💪🧬🔑💸💵📸📷🔬🦠🎁💻📈📚
 const tagData = [
@@ -15,19 +16,25 @@ const tagData = [
   { title: '그 외 분류', emoji: '👀' },
 ];
 
+const TagList = ({ tagNum }) => {
+  let slicedData;
+  if (!tagNum || tagNum > tagData.length) {
+    slicedData = tagData;
+  } else {
+    slicedData = tagData.slice(0, tagNum);
+  }
+  const tags = slicedData.map(tag => {
+    return <Tag key={tag.title} title={tag.title} emoji={tag.emoji} />;
+  });
+  return <TagListBox>{tags}</TagListBox>;
+};
+
 const TagListBox = styled.div`
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;
   width: 100%;
-  margin: 3rem 0 2rem;
+  margin-top: 3rem;
 `;
-
-const TagList = () => {
-  const tags = tagData.map(tag => {
-    return <Tag key={tag.title} title={tag.title} emoji={tag.emoji} />;
-  });
-  return <TagListBox>{tags}</TagListBox>;
-};
 
 export default TagList;

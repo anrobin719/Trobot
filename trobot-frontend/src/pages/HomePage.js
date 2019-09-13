@@ -70,6 +70,7 @@ const Wrapper = styled(Responsive)`
 
 const Intro = styled.section`
   padding-bottom: 3rem;
+  background: white;
   h1 {
     font-size: 5.6rem;
     font-weight: 800;

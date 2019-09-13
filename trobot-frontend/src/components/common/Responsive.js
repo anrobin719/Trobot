@@ -9,7 +9,10 @@ const Responsive = ({ children, ...rest }) => {
 
 const ResponsiveBlock = styled.div`
   width: 1024px;
+  height: 100%;
   margin: 0 auto; /* 중앙 정렬 */
+  padding-right: 1rem;
+  padding-left: 1rem;
 
   /* 브라우저 크기에 따라 가로 사이즈 변경 */
   @media (max-width: 1024px) {

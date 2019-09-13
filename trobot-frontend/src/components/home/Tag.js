@@ -3,21 +3,35 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
+const Tag = ({ title, emoji }) => {
+  return (
+    <TagOutBox>
+      <div>
+        <div>
+          <h5>{emoji}</h5>
+          <h4>{title}</h4>
+        </div>
+      </div>
+    </TagOutBox>
+  );
+};
+
 const TagOutBox = styled.div`
   padding: 0 2rem;
   margin-bottom: 4rem;
   flex: 0 0 25%;
   height: 14rem;
   > div {
-    height: 100%;
-    background-color: white;
-    border-radius: .6rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    text-align: center;
+    background-color: white;
+    border-radius: .6rem;
     cursor: pointer;
-    transition: box-shadow .2s ease-out;
     box-shadow: 0 4px 8px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.1);
+    transition: box-shadow .2s ease-out;
     h5 {
         font-size: 2rem;
     }
@@ -31,18 +45,5 @@ const TagOutBox = styled.div`
         box-shadow: 0 16px 24px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.1);
   }
 `;
-
-const Tag = ({ title, emoji }) => {
-  return (
-    <TagOutBox>
-      <div>
-        <div>
-          <h5>{emoji}</h5>
-          <h4>{title}</h4>
-        </div>
-      </div>
-    </TagOutBox>
-  );
-};
 
 export default Tag;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-// import ListPage from './pages/ListPage';
+import ListPage from './pages/ListPage';
 // import EditPage from './pages/EditPage';
 // import PeoplePage from './pages/PeoplePage';
 // import UserPage from './pages/UserPage';
@@ -14,8 +14,8 @@ class App extends Component {
     const routes = (
       <Switch>
         <Route component={HomePage} exact path="/" />
-        {/* <Route component={ListPage} path="/list" />
-        <Route component={EditPage} path="/edit" />
+        <Route component={ListPage} path="/list" />
+        {/* <Route component={EditPage} path="/edit" />
         <Route component={PeoplePage} path="/people" />
         <Route component={UserPage} path="/user" />
         <Route component={AuthPage} path="/auth" />
