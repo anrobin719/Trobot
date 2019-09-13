@@ -1,8 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import NotesIcon from '@material-ui/icons/Notes';
 import styled from 'styled-components';
+import palette from '../../lib/styles/palette';
+import device from '../../lib/styles/device';
 import Responsive from './Responsive';
+import NavigationItems from './NavigationItems';
+
+const Toolbar = ({ drawerToggleClicked }) => {
+  return (
+    <>
+      <Header>
+        <Wrapper>
+          <MenuToggleBtn
+            onClick={() => drawerToggleClicked()}
+            role="presentation"
+          >
+            <NotesIcon />
+          </MenuToggleBtn>
+
+          <LogoBox>
+            <Link to="/">Trobot</Link>
+          </LogoBox>
+          <NavigationItemsBox>
+            <NavigationItems />
+          </NavigationItemsBox>
+        </Wrapper>
+      </Header>
+      <Spacer />
+    </>
+  );
+};
 
 const Header = styled.header`
   width: 100%;
@@ -27,22 +56,41 @@ const Wrapper = styled(Responsive)`
   }
 `;
 
+const LogoBox = styled.div`
+  padding-left: 1rem;
+  a {
+    height: 100%;
+    line-height: 4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: ${palette.blue[9]};
+  }
+  @media ${device.tablet} {
+    display: none;
+  }
+`;
+
+const MenuToggleBtn = styled.div`
+  display: none;
+  position: absolute;
+  left: 1rem;
+  svg {
+    font-size: 2rem;
+  }
+  @media ${device.tablet} {
+    display: block;
+  }
+`;
+
+const NavigationItemsBox = styled.div`
+  @media ${device.tablet} {
+    display: none;
+  }
+`;
+
 const Spacer = styled.div`
   width: 100%;
   height: 4rem;
 `;
-
-const Toolbar = () => {
-  return (
-    <>
-      <Header>
-        <Wrapper>
-          <Link to="/">Trobot</Link>
-        </Wrapper>
-      </Header>
-      <Spacer />
-    </>
-  );
-};
 
 export default Toolbar;
