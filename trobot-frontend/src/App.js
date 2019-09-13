@@ -16,7 +16,7 @@ class App extends Component {
         <Route component={HomePage} exact path="/" />
         <Route component={ListPage} path="/list" />
         <Route component={PeoplePage} path="/people" />
-        <Route component={AuthPage} path="/auth" />
+        <Route component={AuthPage} path="/auth/:authpath" />
         {/* <Route component={EditPage} path="/edit" />
         <Route component={UserPage} path="/user" />
         <Route component={NotFoundPage} /> */}

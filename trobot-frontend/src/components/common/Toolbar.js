@@ -37,6 +37,7 @@ const ToolbarBox = styled.div`
   width: 100%;
   height: 4rem;
   position: fixed;
+  z-index: 100;
   background: white;
 `;
 

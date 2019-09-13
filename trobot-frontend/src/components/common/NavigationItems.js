@@ -15,10 +15,10 @@ const NavigationItems = () => {
           함께하는 사람들
         </NavigationItem>
 
-        <NavigationItem link="/auth" exact>
+        <NavigationItem link="/auth/signin" exact>
           로그인
         </NavigationItem>
-        <NavigationItem link="/auth" exact>
+        <NavigationItem link="/auth/signup" exact>
           회원가입
         </NavigationItem>
       </NavigationList>

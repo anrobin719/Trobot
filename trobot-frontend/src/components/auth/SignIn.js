@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
+import styled from 'styled-components';
 import Input from '../ui/Input';
 import { updateObject, checkValidity } from '../../lib/shared/utility';
-import styled from 'styled-components';
 import Button from '../ui/Button';
 
 class SignIn extends Component {
