@@ -8,7 +8,7 @@ const Header = ({ title, emoji }) => {
   return (
     <HeaderBox>
       <Wrapper>
-        <h3>{emoji}</h3>
+        {emoji ? <h3>{emoji}</h3> : null}
         <h2>{title}</h2>
       </Wrapper>
     </HeaderBox>

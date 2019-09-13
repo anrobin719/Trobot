@@ -2,7 +2,6 @@ import React from 'react';
 
 import styled from 'styled-components';
 import Tag from './Tag';
-import { stringify } from 'postcss';
 
 // 🌈👬🌦☔️💆🏻‍🌿🌱🐈🏃🏻‍🤝💪🧬🔑💸💵📸📷🔬🦠🎁💻📈📚
 const tagData = [
@@ -32,7 +31,6 @@ const TagList = ({ tagNum }) => {
 const TagListBox = styled.div`
   display: flex;
   flex-flow: wrap;
-  justify-content: space-between;
   width: 100%;
   margin-top: 3rem;
 `;
