@@ -7,8 +7,8 @@ import SignUp from './SignUp';
 import Responsive from '../common/Responsive';
 
 const Auth = ({ match }) => {
-  const { authpath } = match.params;
-  const isSignup = authpath === 'signup';
+  const { authPath } = match.params;
+  const isSignup = authPath === 'signup';
   const submitHandler = (email, password, signup) => {
     if (signup) {
       console.log('Sign up submit!');
