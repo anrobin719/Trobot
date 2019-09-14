@@ -11,7 +11,7 @@ const List = ({ list, resource }) => {
       {/* 왼쪽 flex box */}
       <IdeaBox>
         <h3>아이디어</h3>
-        <IdeaList />
+        <IdeaList list={list} />
       </IdeaBox>
       {/* 오른쪽 flex box */}
       <ResourceBox>
@@ -25,18 +25,21 @@ const List = ({ list, resource }) => {
 const Wrapper = styled(Responsive)`
   display: flex;
   justify-content: space-between;
-  padding-top: 6rem;
+  padding-top: 4rem;
   padding-bottom: 6rem;
-  outline: 1px solid red;
 `;
 
 const IdeaBox = styled.section`
-  outline: 1px solid cyan;
   flex: 0 0 60%;
+  > h3 {
+    margin-bottom: 1rem;
+  }
 `;
 const ResourceBox = styled.section`
-  outline: 1px solid cyan;
   flex: 0 0 36%;
+  > h3 {
+    margin-bottom: 1rem;
+  }
 `;
 
 export default List;

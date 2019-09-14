@@ -1,7 +1,84 @@
 import React from 'react';
 
-const IdeaList = () => {
-  return <div>IdeaList</div>;
+import styled from 'styled-components';
+import Idea from './Idea';
+
+const IdeaList = ({ list }) => {
+  const testList = [
+    {
+      title: 'Hello Trobot!',
+      sub: '서브 타이틀 입니다.',
+      author: '트로봇',
+      like: 3,
+      body: '아이디어 바디 부분 입니다.',
+      comments: [
+        { id: '업투하이', comment: '댓글 1 입니다.' },
+        { id: '리체', comment: '댓글 2 입니다.' },
+      ],
+      publishedDate: '2019-09-14',
+    },
+    {
+      title: '작동하나요',
+      sub: '작동하나요 서브 타이틀 입니다.',
+      author: '리체',
+      like: 33,
+      body: '작동하나요 아이디어 바디 부분 입니다.',
+      comments: [
+        { id: '업투하이', comment: '댓글 1 입니다.' },
+        { id: '트로봇', comment: '댓글 2 입니다.' },
+      ],
+      publishedDate: '2019-09-14',
+    },
+    {
+      title: 'Hello Trobot!',
+      sub: '서브 타이틀 입니다.',
+      author: '트로봇',
+      like: 3,
+      body: '아이디어 바디 부분 입니다.',
+      comments: [
+        { id: '업투하이', comment: '댓글 1 입니다.' },
+        { id: '리체', comment: '댓글 2 입니다.' },
+      ],
+      publishedDate: '2019-09-14',
+    },
+    {
+      title: '작동하나요',
+      sub: '작동하나요 서브 타이틀 입니다.',
+      author: '리체',
+      like: 33,
+      body: '작동하나요 아이디어 바디 부분 입니다.',
+      comments: [
+        { id: '업투하이', comment: '댓글 1 입니다.' },
+        { id: '트로봇', comment: '댓글 2 입니다.' },
+      ],
+      publishedDate: '2019-09-14',
+    },
+  ];
+
+  const ideas = testList.map(idea => {
+    return (
+      <Idea
+        title={idea.title}
+        sub={idea.sub}
+        author={idea.author}
+        like={idea.like}
+        body={idea.body}
+        comments={idea.comments}
+        publishedDate={idea.publishedDate}
+      />
+    );
+  });
+  return <IdeaListBox>{ideas}</IdeaListBox>;
 };
+
+const IdeaListBox = styled.div`
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  background: white;
+  border-radius: .6rem;
+  overflow-hidden;
+  box-shadow: 0 4px 4px rgba(0,0,0,.1), 0 2px 2px rgba(0,0,0,.1);
+`;
 
 export default IdeaList;

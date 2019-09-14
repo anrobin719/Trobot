@@ -3,8 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
-const Button = ({ theme, children, type, onClick }) => (
-  <BasicButton theme={theme} type={type} onClick={onClick}>
+const Button = ({ theme, size, children, type, onClick }) => (
+  <BasicButton theme={theme} size={size} type={type} onClick={onClick}>
     {children}
   </BasicButton>
 );
@@ -28,7 +28,17 @@ const outline = () => ({ theme }) => {
       color: ${palette.blue[9]};
       background-color: transparent;
       border: 1px solid ${palette.blue[9]};
-      
+      `;
+  }
+  return null;
+};
+
+const outlineWhite = () => ({ theme }) => {
+  if (theme === 'outlineWhite') {
+    return `
+      color: white;
+      background-color: transparent;
+      border: 1px solid white;
       `;
   }
   return null;
@@ -56,6 +66,17 @@ const circleBtn = ({ theme }) => {
   return null;
 };
 
+const full = () => ({ size }) => {
+  if (size === 'full') {
+    return `
+      width: 100%;
+      padding: 5%;
+      font-weight: 600;
+      `;
+  }
+  return null;
+};
+
 const BasicButton = styled.button.attrs({
   type: props => props.type,
   onclick: props => props.onClick,
@@ -74,6 +95,8 @@ const BasicButton = styled.button.attrs({
     ${circleBtn}
     ${basic}
     ${outline}
+    ${outlineWhite}
+    ${full}
 `;
 
 export default Button;

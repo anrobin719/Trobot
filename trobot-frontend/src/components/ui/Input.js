@@ -110,7 +110,7 @@ const InputTag = styled.input`
   color: #484848;
   background-color: #fff;
   border: 1px solid #ced4da;
-  border-radius: 0.25rem;
+  border-radius: 0.2rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   &:focus {
     color: #484848;
@@ -134,7 +134,7 @@ const TextareaTag = styled.textarea`
   color: #484848;
   background-color: #fff;
   border: 1px solid #ced4da;
-  border-radius: 0.25rem;
+  border-radius: 0.2rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   &:focus {
     color: #484848;

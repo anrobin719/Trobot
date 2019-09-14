@@ -5,8 +5,8 @@ import HomePage from './pages/HomePage';
 import ListPage from './pages/ListPage';
 import PeoplePage from './pages/PeoplePage';
 import AuthPage from './pages/AuthPage';
+import UserPage from './pages/UserPage';
 // import EditPage from './pages/EditPage';
-// import UserPage from './pages/UserPage';
 // import NotFoundPage from './pages/NotFoundPage';
 
 class App extends Component {
@@ -17,8 +17,8 @@ class App extends Component {
         <Route component={ListPage} path="/list" />
         <Route component={PeoplePage} path="/people" />
         <Route component={AuthPage} path="/auth/:authpath" />
-        {/* <Route component={EditPage} path="/edit" />
         <Route component={UserPage} path="/user" />
+        {/* <Route component={EditPage} path="/edit" />
         <Route component={NotFoundPage} /> */}
       </Switch>
     );
