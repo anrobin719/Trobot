@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
+import palette from '../../lib/styles/palette';
 
 const Input = ({
   invalid,
@@ -8,7 +9,7 @@ const Input = ({
   touched,
   elementType,
   configType,
-  //   dafaultValue,
+  dafaultValue,
   changed,
   elementConfig,
   value,
@@ -19,16 +20,21 @@ const Input = ({
   switch (elementType) {
     case 'input':
       switch (configType) {
-        // case 'checkbox':
-        //   inputElement = dafaultValue.map(val => {
-        //     return (
-        //       <CheckBoxDiv key={val} className={classes.checkboxTag}>
-        //         <input type="checkbox" value={val} onChange={changed} />
-        //         <span>{val}</span>
-        //       </CheckBoxDiv>
-        //     );
-        //   });
-        //   break;
+        case 'radio':
+          inputElement = dafaultValue.map(val => {
+            return (
+              <RadioTag key={val}>
+                <input
+                  type="radio"
+                  name="tags"
+                  value={val}
+                  onChange={changed}
+                />
+                <span>{val}</span>
+              </RadioTag>
+            );
+          });
+          break;
         case 'text':
         case 'email':
         case 'password':
@@ -94,56 +100,43 @@ const InputDiv = styled.div`
   }
 `;
 
-// const CheckBoxDiv = styled.div`
-
-// `;
-
-const InputTag = styled.input`
+const input = () => `
   display: block;
   width: 100%;
-  height: calc(1.5em + 0.75rem + 2px);
   padding: 0.375rem 0.75rem;
-  box-sizing: border-box;
   font-size: 1rem;
-  font-weight: 400;
   line-height: 1.5;
-  color: #484848;
-  background-color: #fff;
-  border: 1px solid #ced4da;
+  background-color: white;
+  border: 1px solid ${palette.gray[3]};
   border-radius: 0.2rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   &:focus {
-    color: #484848;
-    background-color: #fff;
-    border-color: #80bdff;
+    border-color: ${palette.blue[3]};
     outline: none;
     box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+  }
+  &::placeholder {
+    color: ${palette.gray[5]};
   }
   ${invalid}
 `;
 
+const InputTag = styled.input`
+  height: calc(1.5em + 0.75rem + 2px);
+  ${input}
+`;
+
 const TextareaTag = styled.textarea`
-  display: block;
-  width: 100%;
-  height: calc((1.5em + 0.75rem + 2px) * 3);
-  padding: 0.375rem 0.75rem;
-  box-sizing: border-box;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #484848;
-  background-color: #fff;
-  border: 1px solid #ced4da;
-  border-radius: 0.2rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  &:focus {
-    color: #484848;
-    background-color: #fff;
-    border-color: #80bdff;
-    outline: none;
-    box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+  height: calc((1.5em + 0.75rem + 2px) * 5);
+  ${input}
+`;
+
+const RadioTag = styled.div`
+  display: inline-block;
+  margin-right: 32px;
+  input {
+    margin-right: 6px;
   }
-  ${invalid}
 `;
 
 export default Input;

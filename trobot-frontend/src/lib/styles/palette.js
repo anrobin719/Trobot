@@ -24,20 +24,9 @@ const palette = {
     '#1267b6',
     '#09559c',
   ],
-  yellow: [
-    '#fff9db',
-    '#fff3bf',
-    '#ffec99',
-    '#ffe066',
-    '#ffd43b',
-    '#fcc419',
-    '#fab005',
-    '#f59f00',
-    '#f08c00',
-    '#e67700',
-  ],
   ivory: ['#f6f3ef'],
   backBlue: ['#e5eff5'],
+  point: ['#05cab0', '#15d6bc'],
 };
 
 export default palette;

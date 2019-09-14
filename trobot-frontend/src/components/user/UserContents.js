@@ -47,7 +47,7 @@ const Ideas = styled.section`
       margin-right: 1rem;
       &:hover,
       &:active {
-        color: ${palette.blue[7]};
+        color: ${palette.blue[9]};
       }
     }
   }

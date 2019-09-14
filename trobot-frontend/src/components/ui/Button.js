@@ -33,7 +33,7 @@ const basic = () => ({ theme }) => {
       color: white;
       background-color: ${palette.blue[9]};
       &:hover {
-          background-color: ${palette.blue[7]};
+          background-color: ${palette.blue[8]};
       }
       `;
   }
@@ -44,9 +44,9 @@ const point = () => ({ theme }) => {
   if (theme === 'point') {
     return `
       color: white;
-      background-color: ${palette.yellow[9]};
+      background-color: ${palette.point[0]};
       &:hover {
-          background-color: ${palette.yellow[7]};
+          background-color: ${palette.point[1]};
       }
       `;
   }
@@ -108,6 +108,16 @@ const full = () => ({ size }) => {
   return null;
 };
 
+const big = () => ({ size }) => {
+  if (size === 'big') {
+    return `
+      padding: .8rem 2.8rem;
+      font-weight: 600;
+      `;
+  }
+  return null;
+};
+
 const disable = () => ({ disabled }) => {
   if (disabled) {
     return `
@@ -123,7 +133,7 @@ const disable = () => ({ disabled }) => {
   return null;
 };
 
-const BasicButton = styled.button.attrs`
+const BasicButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,6 +151,7 @@ const BasicButton = styled.button.attrs`
     ${outlineWhite}
     ${circleBtn}
     ${full}
+    ${big}
     ${disable}
 `;
 
@@ -162,6 +173,7 @@ const LinkButton = styled.a`
     ${outlineWhite}
     ${circleBtn}
     ${full}
+    ${big}
     ${disable}
 `;
 

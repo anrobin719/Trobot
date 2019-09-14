@@ -7,7 +7,7 @@ import PeoplePage from './pages/PeoplePage';
 import AuthPage from './pages/AuthPage';
 import UserPage from './pages/UserPage';
 import PostPage from './pages/PostPage';
-// import EditPage from './pages/EditPage';
+import EditorPage from './pages/EditorPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 class App extends Component {
@@ -17,10 +17,10 @@ class App extends Component {
         <Route component={HomePage} exact path="/" />
         <Route component={ListPage} path="/list" />
         <Route component={PeoplePage} path="/people" />
-        <Route component={AuthPage} path="/auth/:authPath" />
+        <Route component={AuthPage} exact path="/auth/:authPath" />
         <Route component={UserPage} path="/user" />
         <Route component={PostPage} path="/post/:postId" />
-        {/* <Route component={EditPage} path="/edit" /> */}
+        <Route component={EditorPage} path="/editor" />
         <Route component={NotFoundPage} />
       </Switch>
     );

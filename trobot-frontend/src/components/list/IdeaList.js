@@ -6,6 +6,7 @@ import Idea from './Idea';
 const IdeaList = ({ list }) => {
   const testList = [
     {
+      id: 1,
       title: 'Hello Trobot!',
       sub: '서브 타이틀 입니다.',
       author: '트로봇',
@@ -18,6 +19,7 @@ const IdeaList = ({ list }) => {
       publishedDate: '2019-09-14',
     },
     {
+      id: 2,
       title: '작동하나요',
       sub: '작동하나요 서브 타이틀 입니다.',
       author: '리체',
@@ -30,6 +32,7 @@ const IdeaList = ({ list }) => {
       publishedDate: '2019-09-14',
     },
     {
+      id: 3,
       title: 'Hello Trobot!',
       sub: '서브 타이틀 입니다.',
       author: '트로봇',
@@ -42,6 +45,7 @@ const IdeaList = ({ list }) => {
       publishedDate: '2019-09-14',
     },
     {
+      id: 4,
       title: '작동하나요',
       sub: '작동하나요 서브 타이틀 입니다.',
       author: '리체',
@@ -58,6 +62,7 @@ const IdeaList = ({ list }) => {
   const ideas = testList.map(idea => {
     return (
       <Idea
+        key={idea.id}
         title={idea.title}
         sub={idea.sub}
         author={idea.author}
