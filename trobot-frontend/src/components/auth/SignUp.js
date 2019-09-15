@@ -107,6 +107,7 @@ class SignUp extends Component {
   render() {
     const formElementsArray = [];
     const { controls } = this.state;
+    const { error } = this.props;
 
     for (const key in controls) {
       formElementsArray.push({
@@ -133,6 +134,7 @@ class SignUp extends Component {
       <>
         <form onSubmit={this.onSubmit}>
           {form}
+          {error ? <ErrorMessage>{error}</ErrorMessage> : null}
           <BtnBox>
             <Button theme="basic" type="submit">
               회원가입
@@ -148,6 +150,11 @@ const BtnBox = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 3rem;
+`;
+
+const ErrorMessage = styled.div`
+  font-weight: 300;
+  text-align: center;
 `;
 
 export default SignUp;

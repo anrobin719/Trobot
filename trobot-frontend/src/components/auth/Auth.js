@@ -11,11 +11,7 @@ const Auth = ({ match, authSubmitHandler, loading, error }) => {
   const { authPath } = match.params;
   const isSignup = authPath === 'signup';
   const submitHandler = authForm => {
-    if (isSignup) {
-      authSubmitHandler(authForm);
-    } else {
-      console.log('Sign in submit!');
-    }
+    authSubmitHandler(authForm);
   };
 
   return (
@@ -25,9 +21,9 @@ const Auth = ({ match, authSubmitHandler, loading, error }) => {
           {loading ? <Loading size="fit" /> : null}
           <h2>{isSignup ? '회원가입' : '로그인'}</h2>
           {isSignup ? (
-            <SignUp submitHandler={submitHandler} />
+            <SignUp submitHandler={submitHandler} error={error} />
           ) : (
-            <SignIn submitHandler={submitHandler} />
+            <SignIn submitHandler={submitHandler} error={error} />
           )}
         </AuthBox>
       </Wrapper>

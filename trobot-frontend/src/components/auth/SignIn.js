@@ -41,15 +41,21 @@ class SignIn extends Component {
           touched: false,
         },
       },
-      isSignup: false,
+      signup: false,
     };
   }
 
   onSubmit = e => {
     const { submitHandler } = this.props;
-    const { controls, isSignup } = this.state;
+    const { controls, signup } = this.state;
     e.preventDefault();
-    submitHandler(controls.email.value, controls.password.value, isSignup);
+    const authForm = {
+      email: controls.email.value,
+      password: controls.password.value,
+      signup,
+    };
+
+    submitHandler(authForm);
   };
 
   inputChangedHandler = (event, controlName) => {
@@ -70,6 +76,7 @@ class SignIn extends Component {
   render() {
     const formElementsArray = [];
     const { controls } = this.state;
+    const { error } = this.props;
 
     for (const key in controls) {
       formElementsArray.push({
@@ -96,6 +103,7 @@ class SignIn extends Component {
       <>
         <form onSubmit={this.onSubmit}>
           {form}
+          {error ? <ErrorMessage>{error}</ErrorMessage> : null}
           <BtnBox>
             <Button theme="basic" type="submit">
               로그인
@@ -111,6 +119,11 @@ const BtnBox = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 4rem;
+`;
+
+const ErrorMessage = styled.div`
+  font-weight: 300;
+  text-align: center;
 `;
 
 export default SignIn;
