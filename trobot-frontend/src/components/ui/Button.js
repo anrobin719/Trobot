@@ -86,7 +86,7 @@ const circleBtn = ({ theme }) => {
       font-weight: 300;
       font-size: 1rem;
       border-radius: 50%;
-      background-color: ${palette.blue[9]};
+      background-color: ${palette.point[0]};
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16), 0 6px 8px rgba(0, 0, 0, 0.22);
       &:hover {
           transform: translateY(-4px);

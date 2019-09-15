@@ -27,13 +27,12 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route exact component={HomePage} path="/" />
-        <Route exact component={ListPage} path="/list" />
-        <Route component={ListPage} path="/list/:tag" />
+        <Route component={ListPage} path="/list/:tag?" />
         <Route component={PeoplePage} path="/people" />
         <Route component={AuthPage} path="/auth/:authPath" />
         <Route component={UserPage} path="/user/:userId" />
         <Route component={PostPage} path="/post/:postId" />
-        <Redirect to="/" />
+        {/* <Redirect to="/" /> */}
         <Route component={NotFoundPage} />
       </Switch>
     );
@@ -42,13 +41,12 @@ class App extends Component {
       routes = (
         <Switch>
           <Route exact component={HomePage} path="/" />
-          <Route exact component={ListPage} path="/list" />
-          <Route component={ListPage} path="/list/:tag" />
+          <Route component={ListPage} path="/list/:tag?" />
           <Route component={PeoplePage} path="/people" />
           <Route component={Logout} path="/logout" />
           <Route component={UserPage} path="/user/:userId" />
           <Route component={PostPage} path="/post/:postId" />
-          <Route component={EditorPage} path="/editor" />
+          <Route component={EditorPage} path="/editor/:pnum?" />
           <Redirect to="/" />
           <Route component={NotFoundPage} />
         </Switch>

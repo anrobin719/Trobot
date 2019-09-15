@@ -11,6 +11,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ScrollToTop from './components/common/ScrollToTop';
 import authReducer from './store/reducers/auth';
+import editorReducer from './store/reducers/editor';
 
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
@@ -19,6 +20,7 @@ const composeEnhancers =
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  editor: editorReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

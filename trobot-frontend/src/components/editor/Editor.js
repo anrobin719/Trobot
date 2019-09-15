@@ -5,6 +5,7 @@ import Responsive from '../common/Responsive';
 import Input from '../ui/Input';
 import { updateObject, checkValidity } from '../../lib/shared/utility';
 import Button from '../ui/Button';
+import Loading from '../ui/Loading';
 
 class Editor extends Component {
   constructor(props) {
@@ -81,9 +82,22 @@ class Editor extends Component {
 
   onSubmit = e => {
     const { submitHandler } = this.props;
-    const { controls, isSignup } = this.state;
+    const { controls } = this.state;
     e.preventDefault();
-    submitHandler(controls.email.value, controls.password.value, isSignup);
+
+    const userId = localStorage.getItem('userId');
+    const newPostpublishedDate = new Date();
+    const newPostData = {
+      title: controls.title.value,
+      sub: controls.sub.value,
+      tag: controls.tag.value,
+      body: controls.body.value,
+      publishedDate: newPostpublishedDate,
+      authorId: userId,
+      like: 0,
+      comment: null,
+    };
+    submitHandler(newPostData);
   };
 
   inputChangedHandler = (event, controlName) => {
@@ -102,11 +116,10 @@ class Editor extends Component {
   };
 
   render() {
-    const { isEdit } = this.props;
+    const { pnum, loading } = this.props;
     const { controls } = this.state;
 
     const formElementsArray = [];
-
     for (const key in controls) {
       formElementsArray.push({
         id: key,
@@ -132,10 +145,11 @@ class Editor extends Component {
 
     return (
       <Wrapper>
-        <form>
+        {loading ? <Loading /> : null}
+        <form onSubmit={this.onSubmit}>
           <EditorBox>{form}</EditorBox>
           <Button theme="basic" size="big" type="submit">
-            {isEdit ? '수정' : '작성'}하기
+            {pnum ? '수정' : '작성'}하기
           </Button>
         </form>
       </Wrapper>

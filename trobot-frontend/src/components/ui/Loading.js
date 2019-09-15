@@ -32,23 +32,24 @@ const bounce = keyframes`
 `;
 
 const LoadingWrapper = styled.div`
-  position: absolute;
-  width: 100vw;
-  height: calc(100vh - 4rem);
+  position: fixed;
   top: 4rem;
+  left: 0;
+  height: calc(100vh - 4rem);
+  width: 100vw;
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 999;
   ${props => props.size === 'fit' && fit}
 `;
 
 const LoadingBox = styled.div`
-  display: inline-block;
-  width: 4.8rem;
-  height: 4.8rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 4.8rem;
+  height: 4.8rem;
   div {
     float: left;
     width: 1rem;
