@@ -6,12 +6,12 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Responsive from '../common/Responsive';
 
-const Auth = ({ match }) => {
+const Auth = ({ match, authSubmitHandler }) => {
   const { authPath } = match.params;
   const isSignup = authPath === 'signup';
-  const submitHandler = (email, password, signup) => {
-    if (signup) {
-      console.log('Sign up submit!');
+  const submitHandler = authForm => {
+    if (isSignup) {
+      authSubmitHandler(authForm);
     } else {
       console.log('Sign in submit!');
     }

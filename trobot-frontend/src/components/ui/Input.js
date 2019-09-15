@@ -90,16 +90,6 @@ const invalid = props => `
   background-color: ${props.inValid && `#ff000015;`}
 `;
 
-const InputDiv = styled.div`
-  margin-bottom: 32px;
-  label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 8px;
-    text-transform: capitalize;
-  }
-`;
-
 const input = () => `
   display: block;
   width: 100%;
@@ -118,17 +108,28 @@ const input = () => `
   &::placeholder {
     color: ${palette.gray[5]};
   }
-  ${invalid}
+`;
+
+const InputDiv = styled.div`
+  margin-bottom: 32px;
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+  }
 `;
 
 const InputTag = styled.input`
   height: calc(1.5em + 0.75rem + 2px);
   ${input}
+  ${invalid}
 `;
 
 const TextareaTag = styled.textarea`
   height: calc((1.5em + 0.75rem + 2px) * 5);
   ${input}
+  ${invalid}
 `;
 
 const RadioTag = styled.div`

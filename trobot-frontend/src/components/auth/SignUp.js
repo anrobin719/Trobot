@@ -11,10 +11,11 @@ class SignUp extends Component {
     this.state = {
       controls: {
         nickname: {
+          label: '닉네임',
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: 'enter your nickname',
+            placeholder: '6자 이내의 닉네임을 입력하세요.',
           },
           value: '',
           validation: {
@@ -25,6 +26,7 @@ class SignUp extends Component {
           touched: false,
         },
         email: {
+          label: '이메일',
           elementType: 'input',
           elementConfig: {
             type: 'email',
@@ -39,10 +41,11 @@ class SignUp extends Component {
           touched: false,
         },
         password: {
+          label: '비밀번호',
           elementType: 'input',
           elementConfig: {
             type: 'password',
-            placeholder: 'password',
+            placeholder: '8자 이상의 비밀번호를 설정하세요.',
           },
           value: '',
           validation: {
@@ -53,10 +56,11 @@ class SignUp extends Component {
           touched: false,
         },
         ckeck_password: {
+          label: '비밀번호 확인',
           elementType: 'input',
           elementConfig: {
             type: 'password',
-            placeholder: 'ckeck password',
+            placeholder: '비밀번호를 한번 더 입력해주세요.',
           },
           value: '',
           validation: {
@@ -66,15 +70,23 @@ class SignUp extends Component {
           touched: false,
         },
       },
-      isSignup: false,
+      signup: true,
     };
   }
 
   onSubmit = e => {
     const { submitHandler } = this.props;
-    const { controls, isSignup } = this.state;
+    const { controls, signup } = this.state;
     e.preventDefault();
-    submitHandler(controls.email.value, controls.password.value, isSignup);
+
+    const authForm = {
+      nickname: controls.nickname.value,
+      email: controls.email.value,
+      password: controls.password.value,
+      signup,
+    };
+
+    submitHandler(authForm);
   };
 
   inputChangedHandler = (event, controlName) => {
@@ -106,7 +118,7 @@ class SignUp extends Component {
     const form = formElementsArray.map(formElement => (
       <Input
         key={formElement.id}
-        label={formElement.id}
+        label={formElement.config.label}
         elementType={formElement.config.elementType}
         elementConfig={formElement.config.elementConfig}
         configType={formElement.config.elementConfig.type}

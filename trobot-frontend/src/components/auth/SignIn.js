@@ -11,6 +11,7 @@ class SignIn extends Component {
     this.state = {
       controls: {
         email: {
+          label: '이메일',
           elementType: 'input',
           elementConfig: {
             type: 'email',
@@ -25,6 +26,7 @@ class SignIn extends Component {
           touched: false,
         },
         password: {
+          label: '비밀번호',
           elementType: 'input',
           elementConfig: {
             type: 'password',
@@ -79,7 +81,7 @@ class SignIn extends Component {
     const form = formElementsArray.map(formElement => (
       <Input
         key={formElement.id}
-        label={formElement.id}
+        label={formElement.config.label}
         elementType={formElement.config.elementType}
         elementConfig={formElement.config.elementConfig}
         configType={formElement.config.elementConfig.type}
