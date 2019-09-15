@@ -123,6 +123,7 @@ const People = () => {
   const personList = personData.map(person => {
     return (
       <Person
+        key={person.email}
         img={person.img}
         nikname={person.nikname}
         email={person.email}

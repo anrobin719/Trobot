@@ -11,9 +11,23 @@ class AuthContainer extends Component {
   };
 
   render() {
-    return <Auth authSubmitHandler={this.authSubmitHandler} />;
+    const { loading, error } = this.props;
+    return (
+      <Auth
+        loading={loading}
+        error={error}
+        authSubmitHandler={this.authSubmitHandler}
+      />
+    );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error,
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -22,6 +36,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(AuthContainer);

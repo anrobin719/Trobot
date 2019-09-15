@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Responsive from '../common/Responsive';
+import Loading from '../ui/Loading';
 
-const Auth = ({ match, authSubmitHandler }) => {
+const Auth = ({ match, authSubmitHandler, loading, error }) => {
   const { authPath } = match.params;
   const isSignup = authPath === 'signup';
   const submitHandler = authForm => {
@@ -18,16 +19,19 @@ const Auth = ({ match, authSubmitHandler }) => {
   };
 
   return (
-    <Wrapper>
-      <AuthBox isSignup={isSignup}>
-        <h2>{isSignup ? '회원가입' : '로그인'}</h2>
-        {isSignup ? (
-          <SignUp submitHandler={submitHandler} />
-        ) : (
-          <SignIn submitHandler={submitHandler} />
-        )}
-      </AuthBox>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <AuthBox isSignup={isSignup}>
+          {loading ? <Loading size="fit" /> : null}
+          <h2>{isSignup ? '회원가입' : '로그인'}</h2>
+          {isSignup ? (
+            <SignUp submitHandler={submitHandler} />
+          ) : (
+            <SignIn submitHandler={submitHandler} />
+          )}
+        </AuthBox>
+      </Wrapper>
+    </>
   );
 };
 
@@ -38,6 +42,7 @@ const Wrapper = styled(Responsive)`
 
 const AuthBox = styled.div`
   position: absolute;
+  z-index: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
