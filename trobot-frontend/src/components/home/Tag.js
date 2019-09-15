@@ -1,17 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
-const Tag = ({ title, emoji }) => {
+const Tag = ({ title, emoji, to }) => {
   return (
     <TagOutBox>
-      <div>
+      <Link to={to}>
         <div>
           <h5>{emoji}</h5>
           <h4>{title}</h4>
         </div>
-      </div>
+      </Link>
     </TagOutBox>
   );
 };
@@ -21,7 +22,7 @@ const TagOutBox = styled.div`
   margin-bottom: 4rem;
   flex: 0 0 25%;
   height: 14rem;
-  > div {
+  > a {
     display: flex;
     justify-content: center;
     align-items: center;

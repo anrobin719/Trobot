@@ -26,10 +26,11 @@ class App extends Component {
     const { isAuthenticated } = this.props;
     let routes = (
       <Switch>
-        <Route component={HomePage} exact path="/" />
-        <Route component={ListPage} path="/list" />
+        <Route exact component={HomePage} path="/" />
+        <Route exact component={ListPage} path="/list" />
+        <Route component={ListPage} path="/list/:tag" />
         <Route component={PeoplePage} path="/people" />
-        <Route component={AuthPage} exact path="/auth/:authPath" />
+        <Route component={AuthPage} path="/auth/:authPath" />
         <Route component={UserPage} path="/user/:userId" />
         <Route component={PostPage} path="/post/:postId" />
         <Redirect to="/" />
@@ -40,10 +41,11 @@ class App extends Component {
     if (isAuthenticated) {
       routes = (
         <Switch>
-          <Route component={HomePage} exact path="/" />
-          <Route component={ListPage} path="/list" />
+          <Route exact component={HomePage} path="/" />
+          <Route exact component={ListPage} path="/list" />
+          <Route component={ListPage} path="/list/:tag" />
           <Route component={PeoplePage} path="/people" />
-          <Route component={Logout} exact path="/logout" />
+          <Route component={Logout} path="/logout" />
           <Route component={UserPage} path="/user/:userId" />
           <Route component={PostPage} path="/post/:postId" />
           <Route component={EditorPage} path="/editor" />

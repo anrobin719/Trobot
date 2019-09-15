@@ -9,6 +9,7 @@ import createSagaMiddleware from 'redux-saga';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import ScrollToTop from './components/common/ScrollToTop';
 import authReducer from './store/reducers/auth';
 
 const composeEnhancers =
@@ -32,7 +33,9 @@ const store = createStore(
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ScrollToTop>
+        <App />
+      </ScrollToTop>
     </BrowserRouter>
   </Provider>
 );

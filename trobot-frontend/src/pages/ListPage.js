@@ -1,15 +1,16 @@
 import React from 'react';
 
-import Header from '../components/common/Header';
-import List from '../components/list/List';
-import Banner from '../components/list/Banner';
+import HeaderContainer from '../containers/list/HeaderContainer';
+import ListContainer from '../containers/list/ListContainer';
+import BannerContainer from '../containers/list/BannerContainer';
 
-const ListPage = ({ listTitle, emoji, list, resource }) => {
+const ListPage = ({ match }) => {
+  const { tag } = match.params;
   return (
     <>
-      <Header emoji="💆🏻‍" title="라이프" />
-      <List />
-      <Banner />
+      <HeaderContainer tag={tag} />
+      <ListContainer tag={tag} />
+      <BannerContainer tag={tag} />
     </>
   );
 };
