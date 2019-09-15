@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
@@ -25,12 +26,19 @@ class Layout extends Component {
   };
 
   render() {
-    const { children } = this.props;
     const { showDrawer } = this.state;
+    const { children, isAuthenticated } = this.props;
     return (
       <>
-        <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} />
-        <SideDrawer show={showDrawer} hide={this.sideDrawerClosedHandler} />
+        <Toolbar
+          isAuthenticated={isAuthenticated}
+          drawerToggleClicked={this.sideDrawerToggleHandler}
+        />
+        <SideDrawer
+          isAuthenticated={isAuthenticated}
+          show={showDrawer}
+          hide={this.sideDrawerClosedHandler}
+        />
         <Main>{children}</Main>
         <Footer />
       </>
@@ -44,4 +52,10 @@ const Main = styled.main`
   color: ${palette.gray[7]};
 `;
 
-export default Layout;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

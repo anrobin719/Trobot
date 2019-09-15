@@ -10,11 +10,12 @@ const initialState = {
   error: false,
 };
 
-const authStart = () => {
-  return {
+const authStart = state => {
+  return updateObject(state, {
     loading: true,
-  };
+  });
 };
+
 const authSuccess = (state, action) => {
   return updateObject(state, {
     token: action.token,
@@ -68,13 +69,13 @@ const authLogout = state => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
-      return authStart(state, action);
+      return authStart(state);
     case actionTypes.AUTH_SUCCESS:
       return authSuccess(state, action);
     case actionTypes.AUTH_FAIL:
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
-      return authLogout(state, action);
+      return authLogout(state);
     default:
       return state;
   }

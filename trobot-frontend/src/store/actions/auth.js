@@ -95,3 +95,26 @@ export const auth = authForm => {
       });
   };
 };
+
+export const checkAuth = () => {
+  return dispatch => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      dispatch(authLogout());
+    } else {
+      const expirationDate = new Date(localStorage.getItem('expirationDate'));
+      if (expirationDate <= new Date()) {
+        dispatch(authLogout());
+      } else {
+        const userId = localStorage.getItem('userId');
+        const email = localStorage.getItem('email');
+        dispatch(authSuccess(token, userId, email));
+        dispatch(
+          checkAuthTimeOut(
+            (expirationDate.getTime() - new Date().getTime()) / 1000,
+          ),
+        );
+      }
+    }
+  };
+};

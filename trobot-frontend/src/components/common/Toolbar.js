@@ -8,11 +8,13 @@ import device from '../../lib/styles/device';
 import Responsive from './Responsive';
 import NavigationItems from './NavigationItems';
 
-const Toolbar = ({ drawerToggleClicked }) => {
+const Toolbar = ({ drawerToggleClicked, isAuthenticated }) => {
   return (
     <>
+      {/* 툴바 */}
       <ToolbarBox>
         <Wrapper>
+          {/* 화면 축소시 메뉴 버튼 */}
           <MenuToggleBtn
             onClick={() => drawerToggleClicked()}
             role="presentation"
@@ -20,14 +22,19 @@ const Toolbar = ({ drawerToggleClicked }) => {
             <NotesIcon />
           </MenuToggleBtn>
 
+          {/* 로고 */}
           <LogoBox>
             <Link to="/">Trobot</Link>
           </LogoBox>
+
+          {/* 글로벌 네비게이션 */}
           <NavigationItemsBox>
-            <NavigationItems />
+            <NavigationItems isAuthenticated={isAuthenticated} />
           </NavigationItemsBox>
         </Wrapper>
       </ToolbarBox>
+
+      {/* 툴바 아래 공간 홀더 */}
       <Spacer />
     </>
   );

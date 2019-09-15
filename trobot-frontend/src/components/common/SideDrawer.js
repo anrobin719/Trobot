@@ -6,7 +6,7 @@ import device from '../../lib/styles/device';
 import BackDrop from './BackDrop';
 import NavigationItems from './NavigationItems';
 
-const SideDrawer = ({ show, hide }) => {
+const SideDrawer = ({ show, hide, isAuthenticated }) => {
   return (
     <>
       <BackDrop show={show} clicked={hide} />
@@ -15,7 +15,7 @@ const SideDrawer = ({ show, hide }) => {
           <span>Trobot</span>
         </NavLink>
         <nav>
-          <NavigationItems />
+          <NavigationItems isAuthenticated={isAuthenticated} />
         </nav>
       </SideDrawerBox>
     </>
