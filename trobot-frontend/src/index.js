@@ -10,10 +10,13 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ScrollToTop from './components/common/ScrollToTop';
-import authReducer from './store/reducers/auth';
-import editorReducer from './store/reducers/editor';
-import postReducer from './store/reducers/post';
-import listReducer from './store/reducers/list';
+import {
+  authReducer,
+  editorReducer,
+  postReducer,
+  listReducer,
+  baseReducer,
+} from './store/reducers/index';
 
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
@@ -25,6 +28,7 @@ const rootReducer = combineReducers({
   editor: editorReducer,
   post: postReducer,
   list: listReducer,
+  base: baseReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

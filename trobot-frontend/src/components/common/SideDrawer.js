@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import styled from 'styled-components';
 import device from '../../lib/styles/device';
-import BackDrop from './BackDrop';
+import BackDrop from '../ui/BackDrop';
 import NavigationItems from './NavigationItems';
 
 const SideDrawer = ({ show, hide, isAuthenticated }) => {

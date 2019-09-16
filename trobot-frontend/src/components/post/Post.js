@@ -2,21 +2,21 @@ import React from 'react';
 
 import styled from 'styled-components';
 import Responsive from '../common/Responsive';
-import BackDrop from '../common/BackDrop';
+import BackDrop from '../ui/BackDrop';
 import PostHeader from './PostHeader';
 import PostContent from './PostContent';
 import PostSide from './PostSide';
 import palette from '../../lib/styles/palette';
 import Loading from '../ui/Loading';
 
-const Post = ({ show, hide, post, loading, updatePostHandler }) => {
+const Post = ({ show, hide, post, loading }) => {
   const {
     title,
-    sub,
+    // sub,
     tag,
     body,
     like,
-    comments,
+    // comments,
     authorNickname,
     publishedDate,
   } = post.toJS();
@@ -37,12 +37,7 @@ const Post = ({ show, hide, post, loading, updatePostHandler }) => {
           />
           {/* 포스트 컨텐츠 */}
           <section>
-            <PostContent
-              body={body}
-              comments={comments}
-              post={post}
-              updatePostHandler={updatePostHandler}
-            />
+            <PostContent body={body} />
             <PostSide like={like} />
           </section>
         </PostBox>

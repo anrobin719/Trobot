@@ -1,21 +1,34 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
-const Idea = ({ title, sub, author, like, body, comments, publishedDate }) => {
+const Idea = ({
+  postId,
+  title,
+  sub,
+  // authorNickname,
+  // authorId,
+  like,
+  // body,
+  // comments,
+  // publishedDate,
+}) => {
   return (
-    <IdeaBox>
-      <ContentBox>
-        <div>
-          <h3>{title}</h3>
-          <h6>{sub}</h6>
-        </div>
-        <div>
-          <span>👍{like}</span>
-        </div>
-      </ContentBox>
-    </IdeaBox>
+    <Link to={`/post/${postId}`}>
+      <IdeaBox>
+        <ContentBox>
+          <div>
+            <h3>{title}</h3>
+            <h6>{sub}</h6>
+          </div>
+          <div>
+            <span>👍{like}</span>
+          </div>
+        </ContentBox>
+      </IdeaBox>
+    </Link>
   );
 };
 

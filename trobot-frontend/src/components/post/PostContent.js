@@ -1,18 +1,14 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import CommentCollection from './CommentCollection';
+import CommentCollectionContainer from '../../containers/post/CommentCollectionContainer';
 
-const PostContent = ({ body, comments, post, updatePostHandler }) => {
+const PostContent = ({ body }) => {
   return (
     <ContentBox>
       <Body>{body}</Body>
       {/* 댓글 관련 컴포넌트 : 댓글 인풋 + 댓글 출력 */}
-      <CommentCollection
-        comments={comments}
-        post={post}
-        updatePostHandler={updatePostHandler}
-      />
+      <CommentCollectionContainer />
     </ContentBox>
   );
 };

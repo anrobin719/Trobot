@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
 import palette from '../../lib/styles/palette';
-import { updateObject } from '../../lib/shared/utility';
+import { updateObject, checkValidity } from '../../lib/shared/utility';
 
 class CommentInput extends Component {
   constructor(props) {
@@ -20,8 +20,8 @@ class CommentInput extends Component {
           value: '',
           validation: {
             required: true,
-            isEmail: true,
           },
+          touched: false,
           vaild: false,
         },
       },
@@ -31,15 +31,25 @@ class CommentInput extends Component {
   // 댓글 인풋 체인지 핸들러
   inputChangeHandler = e => {
     const { controls } = this.state;
-    const updatedFormElement = updateObject(controls.comments, {
-      value: e.target.value,
-    });
+    const { isAuthenticated, showAskSignInModal } = this.props;
+    // 로그인 상태인 경우 정상 작동
+    if (isAuthenticated) {
+      const updatedFormElement = updateObject(controls.comments, {
+        value: e.target.value,
+        valid: checkValidity(e.target.value, controls.comments.validation),
+        touched: true,
+      });
 
-    const updatedForm = updateObject(controls, {
-      comments: updatedFormElement,
-    });
+      const updatedForm = updateObject(controls, {
+        comments: updatedFormElement,
+      });
 
-    this.setState({ controls: updatedForm });
+      this.setState({ controls: updatedForm });
+    }
+    // 아닌 경우 로그인 모달
+    else {
+      showAskSignInModal();
+    }
   };
 
   // 작성시 인풋 값 전송, 인풋 값 초기화
@@ -48,15 +58,26 @@ class CommentInput extends Component {
     const { submitHandler } = this.props;
     const { controls } = this.state;
     const inputVal = controls.comments.value;
-    submitHandler(inputVal);
-    console.log('comment Input submit!', inputVal);
 
-    const clearInputValue = updateObject(controls, {
-      comments: updateObject(controls.comments, {
-        value: '',
-      }),
-    });
-    this.setState({ controls: clearInputValue });
+    if (inputVal) {
+      submitHandler(inputVal);
+      // 댓글 인풋값 초기화
+      const clearInputValue = updateObject(controls, {
+        comments: updateObject(controls.comments, {
+          value: '',
+        }),
+      });
+      this.setState({ controls: clearInputValue });
+    } else {
+      const placeHolderValue = updateObject(controls, {
+        comments: updateObject(controls.comments, {
+          elementConfig: updateObject(controls.comments.elementConfig, {
+            placeholder: '댓글을 입력해주세요',
+          }),
+        }),
+      });
+      this.setState({ controls: placeHolderValue });
+    }
   };
 
   render() {
@@ -75,6 +96,9 @@ class CommentInput extends Component {
             configType={controls.comments.elementConfig.type}
             elementConfig={controls.comments.elementConfig}
             value={controls.comments.value}
+            invalid={!controls.comments.valid}
+            shouldValidate={controls.comments.validation}
+            touched={controls.comments.touched}
             changed={e => this.inputChangeHandler(e)}
           />
           <Button theme="outline" type="submit">

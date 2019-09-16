@@ -14,6 +14,7 @@ import {
   NotFoundPage,
 } from './pages';
 import Logout from './containers/auth/Logout';
+import Base from './containers/common/Base';
 import * as actions from './store/actions/index';
 
 class App extends Component {
@@ -53,7 +54,12 @@ class App extends Component {
       );
     }
 
-    return <Layout>{routes}</Layout>;
+    return (
+      <Layout>
+        <Base />
+        {routes}
+      </Layout>
+    );
   }
 }
 

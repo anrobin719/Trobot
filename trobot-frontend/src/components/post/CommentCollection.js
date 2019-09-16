@@ -6,7 +6,13 @@ import CommentInput from './CommentInput';
 import { updateObject } from '../../lib/shared/utility';
 import palette from '../../lib/styles/palette';
 
-const CommentCollection = ({ post, comments, updatePostHandler }) => {
+const CommentCollection = ({
+  post,
+  comments,
+  isAuthenticated,
+  updatePostHandler,
+  showAskSignInModal,
+}) => {
   // 댓글 작성시
   const submitHandler = inputVal => {
     const whole = post.toJS();
@@ -38,7 +44,7 @@ const CommentCollection = ({ post, comments, updatePostHandler }) => {
   if (comments !== 0) {
     for (const commentId in comments) {
       commentArray.push({
-        commentId: comments[commentId],
+        commentId: comments[commentId].commentId,
         img: comments[commentId].img,
         nickname: comments[commentId].nickname,
         userId: comments[commentId].userId,
@@ -62,7 +68,11 @@ const CommentCollection = ({ post, comments, updatePostHandler }) => {
 
   return (
     <CommentWrapper>
-      <CommentInput submitHandler={submitHandler} />
+      <CommentInput
+        submitHandler={submitHandler}
+        isAuthenticated={isAuthenticated}
+        showAskSignInModal={showAskSignInModal}
+      />
       <CommentList>
         {commentList.length === 0 ? (
           <p>아이디어에 대해 소통해보세요!</p>

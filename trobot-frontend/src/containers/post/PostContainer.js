@@ -23,12 +23,6 @@ class PostContainer extends Component {
     this.setState({ showPost: false });
   };
 
-  // 포스트 업데이트 핸들러
-  updatePostHandler = updatedPost => {
-    const { pnum, onUpdatePost } = this.props;
-    onUpdatePost(pnum, updatedPost);
-  };
-
   render() {
     const { showPost } = this.state;
     const { post, loading } = this.props;
@@ -38,7 +32,6 @@ class PostContainer extends Component {
         hide={this.closedHandler}
         post={post}
         loading={loading}
-        updatePostHandler={this.updatePostHandler}
       />
     );
   }
@@ -55,8 +48,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onGetPost: pnum => dispatch(actions.getPost(pnum)),
-    onUpdatePost: (pnum, updatedPost) =>
-      dispatch(actions.updatePost(pnum, updatedPost)),
   };
 };
 
