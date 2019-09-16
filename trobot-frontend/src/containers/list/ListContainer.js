@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import List from '../../components/list/List';
 import CircleBtns from '../../components/list/CircleBtns';
@@ -12,6 +13,17 @@ class ListContainer extends Component {
       onGetListByTag(tag);
     } else {
       onGetList();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { tag, onGetListByTag, onGetList, location, history } = this.props;
+    if (location !== prevProps.location) {
+      if (tag) {
+        onGetListByTag(tag);
+      } else {
+        onGetList();
+      }
     }
   }
 
@@ -44,4 +56,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ListContainer);
+)(withRouter(ListContainer));
