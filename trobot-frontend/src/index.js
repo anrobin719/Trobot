@@ -13,6 +13,7 @@ import ScrollToTop from './components/common/ScrollToTop';
 import authReducer from './store/reducers/auth';
 import editorReducer from './store/reducers/editor';
 import postReducer from './store/reducers/post';
+import listReducer from './store/reducers/list';
 
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   editor: editorReducer,
   post: postReducer,
+  list: listReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

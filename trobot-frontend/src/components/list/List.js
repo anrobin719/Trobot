@@ -4,20 +4,27 @@ import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import IdeaList from './IdeaList';
 import ResourceList from './ResourceList';
+import Loading from '../ui/Loading';
 
-const List = ({ list, resource }) => {
+const List = ({ list, resource, loading }) => {
   return (
     <Wrapper>
-      {/* 왼쪽 flex box */}
-      <IdeaBox>
-        <h3>아이디어</h3>
-        <IdeaList list={list} />
-      </IdeaBox>
-      {/* 오른쪽 flex box */}
-      <ResourceBox>
-        <h3>자료</h3>
-        <ResourceList />
-      </ResourceBox>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {/* 왼쪽 flex box */}
+          <IdeaBox>
+            <h3>아이디어</h3>
+            <IdeaList list={list} />
+          </IdeaBox>
+          {/* 오른쪽 flex box */}
+          <ResourceBox>
+            <h3>자료</h3>
+            <ResourceList />
+          </ResourceBox>
+        </>
+      )}
     </Wrapper>
   );
 };
@@ -27,6 +34,7 @@ const Wrapper = styled(Responsive)`
   justify-content: space-between;
   padding-top: 4rem;
   padding-bottom: 6rem;
+  min-height: calc(100vh - 22rem);
 `;
 
 const IdeaBox = styled.section`
