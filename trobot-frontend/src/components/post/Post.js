@@ -7,17 +7,43 @@ import PostHeader from './PostHeader';
 import PostContent from './PostContent';
 import PostSide from './PostSide';
 import palette from '../../lib/styles/palette';
+import Loading from '../ui/Loading';
 
-const Post = () => {
+const Post = ({ show, hide, post, loading, updatePostHandler }) => {
+  const {
+    title,
+    sub,
+    tag,
+    body,
+    like,
+    comments,
+    authorNickname,
+    publishedDate,
+  } = post.toJS();
   return (
     <>
-      <BackDrop show="true" />
-      <Wrapper>
+      {/* 백 드롭 */}
+      <BackDrop show={show} clicked={hide} />
+      <Wrapper show={show} clicked={hide}>
+        {loading ? <Loading size="fit" /> : null}
+        {/* 포스트 컨테이너 */}
         <PostBox>
-          <PostHeader />
+          {/* 포스트 제목과 정보 */}
+          <PostHeader
+            title={title}
+            tag={tag}
+            authorNickname={authorNickname}
+            publishedDate={publishedDate}
+          />
+          {/* 포스트 컨텐츠 */}
           <section>
-            <PostContent />
-            <PostSide />
+            <PostContent
+              body={body}
+              comments={comments}
+              post={post}
+              updatePostHandler={updatePostHandler}
+            />
+            <PostSide like={like} />
           </section>
         </PostBox>
       </Wrapper>
@@ -28,6 +54,7 @@ const Post = () => {
 const Wrapper = styled(Responsive)`
   position: relative;
   height: 100vh;
+  display: ${props => !props.show && 'none'};
 `;
 
 const PostBox = styled.div`
@@ -37,8 +64,9 @@ const PostBox = styled.div`
   transform: translateX(-50%);
   z-index: 300;
   width: 100%;
+  min-height: 100vh;
   padding: 4rem 3rem;
-  background: ${palette.gray[2]};
+  background: ${palette.gray[1]};
   border-radius: 1rem;
   > section {
     display: flex;

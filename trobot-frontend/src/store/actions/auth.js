@@ -29,6 +29,8 @@ export const authLogout = () => {
   localStorage.removeItem('userId');
   localStorage.removeItem('email');
   localStorage.removeItem('expirationDate');
+  localStorage.removeItem('nickname');
+  localStorage.removeItem('img');
   return {
     type: actionTypes.AUTH_LOGOUT,
   };
@@ -62,7 +64,6 @@ export const auth = authForm => {
       returnSecureToken: true,
     };
 
-    // 회원가입
     axios
       .post(url, authData)
       .then(res => {
@@ -71,15 +72,30 @@ export const auth = authForm => {
           authSuccess(res.data.idToken, res.data.localId, res.data.email),
         );
 
-        // 회원가입시 user컬렉션에 userId를 key값으로 유저정보 저장
+        // 회원가입시 => user컬렉션에 userId를 key값으로 유저정보 저장 + 유저 정보 localStorage 저장
         if (authForm.signup) {
           const userId = res.data.localId;
           axiosBase
             .put(`/user/${userId}.json`, authForm)
-            .then(() => console.log('Data is saved to user collection'))
+            .then(saveUserInfoRes => {
+              localStorage.setItem('nickname', saveUserInfoRes.data.nickname);
+              localStorage.setItem('img', saveUserInfoRes.data.img);
+            })
+            .catch(err => console.log(err));
+        }
+        // 로그인시 => user컬렉션에서 유저정보 가져오기 + 유저 정보 localStorage 저장
+        else {
+          const userId = res.data.localId;
+          axiosBase
+            .get(`/user/${userId}.json`)
+            .then(getUserInfoRes => {
+              localStorage.setItem('nickname', getUserInfoRes.data.nickname);
+              localStorage.setItem('img', getUserInfoRes.data.img);
+            })
             .catch(err => console.log(err));
         }
 
+        // 유저 토큰, 아이디, 이메일, 만료일 localStorage 저장
         localStorage.setItem('token', res.data.idToken);
         localStorage.setItem('userId', res.data.localId);
         localStorage.setItem('email', res.data.email);

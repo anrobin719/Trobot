@@ -30,7 +30,6 @@ const mapStateToProps = state => {
   return {
     loading: state.editor.loading,
     postId: state.editor.postId,
-    // error: state.editor.error,
   };
 };
 

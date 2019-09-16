@@ -2,24 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
+import moment from 'moment';
 import palette from '../../lib/styles/palette';
 
-const testTitle = 'Hello Trobot!';
-const testSub = '서브 타이틀 입니다.';
-const testAuthor = '트로봇';
-const testLike = '33';
-const testPublishedDate = '2019-09-14';
-
-const PostHeader = () => {
+const PostHeader = ({ title, tag, authorNickname, publishedDate }) => {
   return (
     <ContentBox>
       <div>
-        <h2>{testTitle}</h2>
+        <h2>{title}</h2>
         <p>
-          <Link to={`/user/${testAuthor}`}>@{testAuthor}</Link>
+          <Link to={`/user/${authorNickname}`}>@{authorNickname}</Link>
         </p>
       </div>
-      <span>{testPublishedDate}</span>
+      <span>{moment(publishedDate).format('lll')}</span>
     </ContentBox>
   );
 };

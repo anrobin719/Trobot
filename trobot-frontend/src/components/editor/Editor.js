@@ -85,6 +85,7 @@ class Editor extends Component {
     const { controls } = this.state;
     e.preventDefault();
 
+    const nickname = localStorage.getItem('nickname');
     const userId = localStorage.getItem('userId');
     const newPostpublishedDate = new Date();
     const newPostData = {
@@ -93,6 +94,7 @@ class Editor extends Component {
       tag: controls.tag.value,
       body: controls.body.value,
       publishedDate: newPostpublishedDate,
+      authorNickname: nickname,
       authorId: userId,
       like: 0,
       comment: null,
@@ -116,7 +118,7 @@ class Editor extends Component {
   };
 
   render() {
-    const { pnum, loading } = this.props;
+    const { postId, loading } = this.props;
     const { controls } = this.state;
 
     const formElementsArray = [];
@@ -149,7 +151,7 @@ class Editor extends Component {
         <form onSubmit={this.onSubmit}>
           <EditorBox>{form}</EditorBox>
           <Button theme="basic" size="big" type="submit">
-            {pnum ? '수정' : '작성'}하기
+            {postId ? '수정' : '작성'}하기
           </Button>
         </form>
       </Wrapper>

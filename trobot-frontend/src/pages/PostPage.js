@@ -1,9 +1,10 @@
 import React from 'react';
 
-import Post from '../components/post/Post';
+import PostContainer from '../containers/post/PostContainer';
 
-const PostPage = () => {
-  return <Post />;
+const PostPage = ({ match }) => {
+  const { pnum } = match.params;
+  return <PostContainer pnum={pnum} />;
 };
 
 export default PostPage;

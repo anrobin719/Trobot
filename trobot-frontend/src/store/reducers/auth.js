@@ -21,7 +21,7 @@ const authSuccess = (state, action) => {
     token: action.token,
     userId: action.userId,
     email: action.email,
-    loading: false,
+    // loading: false,
   });
   // const newState = state.set('token', action.token).set('userId', action.userId).set('email', action.email).set('loading', false).set('error', false);
   // return newState;
@@ -53,6 +53,11 @@ const authFail = (state, action) => {
       return updateObject(state, {
         loading: false,
         error: '등록되지 않은 이메일입니다. 회원가입 후에 로그인해주세요.',
+      });
+    case 'MISSING_PASSWORD':
+      return updateObject(state, {
+        loading: false,
+        error: '비밀번호가 입력되지 않았습니다.',
       });
     default:
       return updateObject(state, {
