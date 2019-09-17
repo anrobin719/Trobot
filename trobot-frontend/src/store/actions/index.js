@@ -34,4 +34,9 @@ export {
 } from './list';
 export { showModal, hideModal } from './base';
 export { getUserInfo } from './user';
-export { getPeople } from './people';
+export {
+  getPeople,
+  getPeopleStart,
+  getPeopleSuccess,
+  getPeopleFail,
+} from './people';
