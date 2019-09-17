@@ -6,12 +6,16 @@ import PostModal from '../../components/modal/PostModal';
 import * as actions from '../../store/actions/index';
 
 class PostModalContainer extends Component {
-  // 포스트 출력
   componentDidUpdate(prevProps) {
-    const { show, onGetPost, postId } = this.props;
+    const { show, onGetPost, postId, location, onCancelModal } = this.props;
+    // 포스트 모달이 활성화 됐을 때, 포스트 내용 fetch
     if (show !== prevProps.show) {
       onGetPost(postId);
       console.log('PostModalContainer DID UPDATE!');
+    }
+    // 로그인, 회원가입 버튼 클릭으로 경로가 바뀌었을 때, 포스트 모달 비활성화
+    if (location !== prevProps.location) {
+      onCancelModal('post');
     }
   }
 

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import List from '../../components/list/List';
 import CircleBtns from '../../components/list/CircleBtns';
+import Loading from '../../components/ui/Loading';
 import * as actions from '../../store/actions/index';
 
 class ListContainer extends Component {
@@ -37,13 +38,19 @@ class ListContainer extends Component {
     const { list, resource, loading } = this.props;
     return (
       <>
-        <List
-          list={list}
-          resource={resource}
-          loading={loading}
-          pathHandler={this.pathHandler}
-        />
-        <CircleBtns />
+        {!list ? (
+          <Loading />
+        ) : (
+          <>
+            <List
+              list={list}
+              resource={resource}
+              loading={loading}
+              pathHandler={this.pathHandler}
+            />
+            <CircleBtns />
+          </>
+        )}
       </>
     );
   }

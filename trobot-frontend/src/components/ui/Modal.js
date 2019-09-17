@@ -6,7 +6,7 @@ import Backdrop from './BackDrop';
 
 const Modal = ({ show, isPost, modalClosed, children }) => {
   return show ? (
-    <ModalWrapper>
+    <ModalWrapper isPost={isPost}>
       <Backdrop show={show} clicked={modalClosed} />
       <ModalBox show={show} isPost={isPost}>
         {children}
@@ -16,8 +16,13 @@ const Modal = ({ show, isPost, modalClosed, children }) => {
 };
 
 const ModalWrapper = styled.div`
-  > div:last-child {
-    z-index: 300;
+  // 로그인 모달이 포스트 모달보다 위에 있도록 설정
+  > div:nth-child(1) {
+    z-index: ${props => (props.isPost ? `200;` : `400;`)};
+    position: fixed;
+  }
+  > div:nth-child(2) {
+    z-index: ${props => (props.isPost ? `300;` : `500;`)};
   }
 `;
 
@@ -31,6 +36,7 @@ const slideUp = keyframes`
     opacity: 1;
   }
 `;
+
 const PostSlideUp = keyframes`
 0% {
   transform: translate(-50%, 10%);
@@ -44,12 +50,13 @@ const PostSlideUp = keyframes`
 
 const ModalBox = styled.div`
   min-width: 500px;
-  position: absolute;
+  position: ${props => (props.isPost ? `absolute;` : `fixed;`)}
   left: 50%;
   // 모달이 포스트일 경우 top, transform, animation 값 변화
-  top: ${props => (props.isPost ? `none` : `50%`)}
+  top: ${props => (props.isPost ? `none;` : `50%;`)}
   transform: ${props =>
     props.isPost ? `translate(-50%, 0);` : `translate(-50%, -50%);`}
+  margin-bottom: 6rem;
   background-color: #fff;
   border-radius: 0.4rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.04);

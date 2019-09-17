@@ -1,13 +1,13 @@
 import React from 'react';
 
-import UserProfile from '../components/user/UserProfile';
-import UserContents from '../components/user/UserContents';
+import UserContentsContainer from '../containers/user/UserContentsContainer';
+import UserProfileContainer from '../containers/user/UserProfileContainer';
 
 const UserPage = () => {
   return (
     <>
-      <UserProfile />
-      <UserContents />
+      <UserProfileContainer />
+      <UserContentsContainer />
     </>
   );
 };

@@ -1,15 +1,13 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import Responsive from '../common/Responsive';
-// import BackDrop from '../ui/BackDrop';
 import PostHeader from './PostHeader';
 import PostContent from './PostContent';
 import PostSide from './PostSide';
 import palette from '../../lib/styles/palette';
 import Loading from '../ui/Loading';
 
-const Post = ({ show, hide, post, loading }) => {
+const Post = ({ post, loading }) => {
   const {
     title,
     // sub,
@@ -22,10 +20,6 @@ const Post = ({ show, hide, post, loading }) => {
   } = post.toJS();
   return (
     <>
-      {/* 백 드롭 */}
-      {/* <BackDrop show={show} clicked={hide} />
-      <Wrapper show={show} clicked={hide}> */}
-      {/* <Wrapper> */}
       {loading ? <Loading size="fit" /> : null}
       {/* 포스트 컨테이너 */}
       <PostBox>
@@ -42,16 +36,9 @@ const Post = ({ show, hide, post, loading }) => {
           <PostSide like={like} />
         </section>
       </PostBox>
-      {/* </Wrapper> */}
     </>
   );
 };
-
-const Wrapper = styled(Responsive)`
-  position: relative;
-  height: 100vh;
-  // display: ${props => !props.show && 'none'};
-`;
 
 const PostBox = styled.div`
   // position: absolute;

@@ -6,15 +6,26 @@ import IdeaList from '../list/IdeaList';
 import Button from '../ui/Button';
 import palette from '../../lib/styles/palette';
 
-const UserContents = ({ list }) => {
+const UserContents = ({
+  changeListHandler,
+  isStoredList,
+  storedList,
+  myList,
+  pathHandler,
+}) => {
   return (
     <Wrapper>
       <Ideas>
         <div>
-          <h3>저장 아이디어</h3>
-          <h3>작성 아이디어</h3>
+          <Button onClick={() => changeListHandler('stored')}>
+            저장 아이디어
+          </Button>
+          <Button onClick={() => changeListHandler('my')}>작성 아이디어</Button>
         </div>
-        <IdeaList list={list} />
+        {isStoredList ? null : (
+          // <IdeaList list={storedList} />
+          <IdeaList list={myList} pathHandler={pathHandler} />
+        )}
       </Ideas>
       <MoreInfo>
         <Button theme="basic" size="full">

@@ -49,3 +49,45 @@ export const getList = tag => {
       });
   };
 };
+
+export const getMyListStart = () => {
+  return {
+    type: actionTypes.GET_MY_LIST_START,
+  };
+};
+
+export const getMyListSuccess = myList => {
+  return {
+    type: actionTypes.GET_MY_LIST_SUCCESS,
+    myList,
+  };
+};
+
+export const getMyListFail = () => {
+  return {
+    type: actionTypes.GET_MY_LIST_FAIL,
+  };
+};
+
+export const getMyList = userId => {
+  return dispatch => {
+    dispatch(getMyListStart());
+    axios
+      .get(`/list.json?orderBy="authorId"&equalTo="${userId}"`)
+      .then(res => {
+        const receivedData = [];
+        for (const postId in res.data) {
+          receivedData.push({
+            ...res.data[postId],
+            postId,
+          });
+        }
+        dispatch(getMyListSuccess(receivedData));
+        console.log('GET_MY_LIST_SUCCESS', receivedData);
+      })
+      .catch(err => {
+        console.log('GET_MY_LIST_FAIL', err);
+        dispatch(getMyListFail());
+      });
+  };
+};

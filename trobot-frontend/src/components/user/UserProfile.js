@@ -4,28 +4,26 @@ import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import Button from '../ui/Button';
 
-const UserProfile = ({ nickname, email, img, like, ideas }) => {
+const UserProfile = ({ nickname, email, img, like }) => {
   const editHandler = () => {
     console.log('edit!');
   };
+
   return (
     <ProfileBox>
       <Wrapper>
         <div>
           <ContentBox>
             <ImgBox>
-              <img
-                alt="profile_img"
-                src="https://images.unsplash.com/photo-1557180340-e7910d785b3d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=959&q=80"
-              />
+              <img alt="profile_img" src={img} />
             </ImgBox>
             <div>
-              <h3>트로봇</h3>
-              <p>anrobin@gmail.com</p>
+              <h3>{nickname}</h3>
+              <p>{email}</p>
             </div>
           </ContentBox>
           <NumberBox>
-            <span>👍 36</span>
+            <span>👍 {like}</span>
             <Button type="button" theme="outlineWhite" onClick={editHandler}>
               수정하기
             </Button>
@@ -68,7 +66,7 @@ const ContentBox = styled.div`
   display: flex;
   align-items: center;
   > div {
-    margin-left: 1rem;
+    margin-left: 1.3rem;
   }
   h3 {
     font-size: 1.4rem;

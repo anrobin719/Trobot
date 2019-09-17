@@ -28,10 +28,10 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route exact component={HomePage} path="/" />
+        <Route exact component={UserPage} path="/user/:unum" />
         <Route component={ListPage} path="/list/:tag?" />
         <Route component={PeoplePage} path="/people" />
         <Route component={AuthPage} path="/auth/:authPath" />
-        <Route component={UserPage} path="/user/:unum" />
         <Route component={PostPage} path="/post/:pnum" />
         {/* <Redirect to="/" /> */}
         <Route component={NotFoundPage} />
@@ -42,10 +42,10 @@ class App extends Component {
       routes = (
         <Switch>
           <Route exact component={HomePage} path="/" />
+          <Route component={UserPage} path="/user/:unum" />
           <Route component={ListPage} path="/list/:tag?" />
           <Route component={PeoplePage} path="/people" />
           <Route component={Logout} path="/logout" />
-          <Route component={UserPage} path="/user/:unum" />
           <Route component={PostPage} path="/post/:pnum" />
           <Route component={EditorPage} path="/editor/:pnum?" />
           <Redirect to="/" />
