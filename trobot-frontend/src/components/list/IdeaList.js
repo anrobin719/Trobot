@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Idea from './Idea';
 
-const IdeaList = ({ list }) => {
+const IdeaList = ({ list, pathHandler }) => {
   const ideas = list.map(idea => {
     return (
       <Idea
@@ -17,6 +17,7 @@ const IdeaList = ({ list }) => {
         body={idea.body}
         comments={idea.comments}
         publishedDate={idea.publishedDate}
+        pathHandler={pathHandler}
       />
     );
   });

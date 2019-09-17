@@ -17,7 +17,7 @@ class ListContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { tag, onGetListByTag, onGetList, location, history } = this.props;
+    const { tag, onGetListByTag, onGetList, location } = this.props;
     if (location !== prevProps.location) {
       if (tag) {
         onGetListByTag(tag);
@@ -27,11 +27,22 @@ class ListContainer extends Component {
     }
   }
 
+  pathHandler = postId => {
+    const { onShowModal, onStorePostId } = this.props;
+    onStorePostId(postId);
+    onShowModal('post');
+  };
+
   render() {
     const { list, resource, loading } = this.props;
     return (
       <>
-        <List list={list} resource={resource} loading={loading} />
+        <List
+          list={list}
+          resource={resource}
+          loading={loading}
+          pathHandler={this.pathHandler}
+        />
         <CircleBtns />
       </>
     );
@@ -50,6 +61,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onGetListByTag: tag => dispatch(actions.getList(tag)),
     onGetList: () => dispatch(actions.getList()),
+    onStorePostId: postId => dispatch(actions.storePostId(postId)),
+    onShowModal: modalName => dispatch(actions.showModal(modalName)),
   };
 };
 

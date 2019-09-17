@@ -4,59 +4,58 @@ import styled, { keyframes } from 'styled-components';
 import device from '../../lib/styles/device';
 import Backdrop from './BackDrop';
 
-const Modal = ({ show, modalClosed, children }) => {
+const Modal = ({ show, isPost, modalClosed, children }) => {
   return show ? (
     <ModalWrapper>
       <Backdrop show={show} clicked={modalClosed} />
-      <ModalBox show={show}>{children}</ModalBox>
+      <ModalBox show={show} isPost={isPost}>
+        {children}
+      </ModalBox>
     </ModalWrapper>
   ) : null;
 };
 
 const ModalWrapper = styled.div`
-  > div:first-child {
-    z-index: 500;
-  }
   > div:last-child {
-    z-index: 600;
+    z-index: 300;
   }
 `;
 
 const slideUp = keyframes`
   0% {
-    transform: translateY(-40%);
+    transform: translate(-50%, -40%);
     opacity: 0;
   }
   100% {
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
     opacity: 1;
   }
 `;
-
-const slideDown = keyframes`
+const PostSlideUp = keyframes`
 0% {
-    transform: translateY(-50%);
-    opacity: 1;
+  transform: translate(-50%, 10%);
+  opacity: 0;
 }
 100% {
-    transform: translateY(-40%);
-    opacity: 0;
+  transform: translate(-50%, 0);
+  opacity: 1;
 }
 `;
 
 const ModalBox = styled.div`
-  width: 500px;
-  position: fixed;
-  top: 50%;
-  left: calc(50% - 250px);
-  transform: translateY(-50%);
-  padding: 2rem;
+  min-width: 500px;
+  position: absolute;
+  left: 50%;
+  // 모달이 포스트일 경우 top, transform, animation 값 변화
+  top: ${props => (props.isPost ? `none` : `50%`)}
+  transform: ${props =>
+    props.isPost ? `translate(-50%, 0);` : `translate(-50%, -50%);`}
   background-color: #fff;
   border-radius: 0.4rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
   transition: all 1s ease-in-out;
-  animation: ${props => (props.show ? slideUp : slideDown)} 0.3s ease-out;
+  animation: ${props => (props.isPost ? PostSlideUp : slideUp)} 0.3s ease-out;
 
   @media ${device.tablet} {
     max-width: 70%;

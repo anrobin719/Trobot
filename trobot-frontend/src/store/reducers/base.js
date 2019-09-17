@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = Map({
   modal: Map({
-    askSignIn: false,
+    askSignIn: true,
+    post: false,
   }),
 });
 

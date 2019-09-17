@@ -70,3 +70,10 @@ export const updatePost = (pnum, updatedPost) => {
       });
   };
 };
+
+export const storePostId = postId => {
+  return {
+    type: actionTypes.STORE_POST_ID,
+    postId,
+  };
+};

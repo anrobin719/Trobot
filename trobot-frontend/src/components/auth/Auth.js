@@ -38,7 +38,6 @@ const Wrapper = styled(Responsive)`
 
 const AuthBox = styled.div`
   position: absolute;
-  z-index: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

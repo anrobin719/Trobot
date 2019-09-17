@@ -14,21 +14,22 @@ const Idea = ({
   // body,
   // comments,
   // publishedDate,
+  pathHandler,
 }) => {
   return (
-    <Link to={`/post/${postId}`}>
-      <IdeaBox>
-        <ContentBox>
-          <div>
-            <h3>{title}</h3>
-            <h6>{sub}</h6>
-          </div>
-          <div>
-            <span>👍{like}</span>
-          </div>
-        </ContentBox>
-      </IdeaBox>
-    </Link>
+    // <Link to={`/post/${postId}`}>
+    <IdeaBox onClick={() => pathHandler(postId)}>
+      <ContentBox>
+        <div>
+          <h3>{title}</h3>
+          <h6>{sub}</h6>
+        </div>
+        <div>
+          <span>👍{like}</span>
+        </div>
+      </ContentBox>
+    </IdeaBox>
+    // </Link>
   );
 };
 

@@ -21,3 +21,5 @@ export const GET_LIST_FAIL = 'GET_LIST_FAIL';
 
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
+
+export const STORE_POST_ID = 'STORE_POST_ID';

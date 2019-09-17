@@ -6,7 +6,7 @@ import IdeaList from './IdeaList';
 import ResourceList from './ResourceList';
 import Loading from '../ui/Loading';
 
-const List = ({ list, resource, loading }) => {
+const List = ({ list, resource, loading, pathHandler }) => {
   return (
     <Wrapper>
       {loading ? (
@@ -16,7 +16,7 @@ const List = ({ list, resource, loading }) => {
           {/* 왼쪽 flex box */}
           <IdeaBox>
             <h3>아이디어</h3>
-            <IdeaList list={list} />
+            <IdeaList list={list} pathHandler={pathHandler} />
           </IdeaBox>
           {/* 오른쪽 flex box */}
           <ResourceBox>

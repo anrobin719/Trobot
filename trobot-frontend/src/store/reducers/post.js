@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = Map({
   post: Map({}),
+  postId: null,
   loading: false,
   error: false,
 });
@@ -43,6 +44,11 @@ const updatePostFail = state => {
   return newState;
 };
 
+const storePostId = (state, action) => {
+  const newState = state.set('postId', action.postId);
+  return newState;
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_POST_START:
@@ -57,6 +63,8 @@ const reducer = (state = initialState, action) => {
       return updatePostSuccess(state, action);
     case actionTypes.UPDATE_POST_FAIL:
       return updatePostFail(state);
+    case actionTypes.STORE_POST_ID:
+      return storePostId(state, action);
     default:
       return state;
   }
