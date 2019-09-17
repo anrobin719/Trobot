@@ -22,6 +22,7 @@ export const UPDATE_POST_START = 'UPDATE_POST_START';
 export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS';
 export const UPDATE_POST_FAIL = 'UPDATE_POST_FAIL';
 
+export const GET_LIST = 'GET_LIST';
 export const GET_LIST_START = 'GET_LIST_START';
 export const GET_LIST_SUCCESS = 'GET_LIST_SUCCESS';
 export const GET_LIST_FAIL = 'GET_LIST_FAIL';

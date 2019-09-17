@@ -25,7 +25,13 @@ export {
   updatePostFail,
   storePostId,
 } from './post';
-export { getList, getMyList } from './list';
+export {
+  getList,
+  getListStart,
+  getListSuccess,
+  getListFail,
+  getMyList,
+} from './list';
 export { showModal, hideModal } from './base';
 export { getUserInfo } from './user';
 export { getPeople } from './people';

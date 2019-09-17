@@ -9,6 +9,7 @@ import {
 } from './auth';
 import { getPostSaga, updatePostSaga } from './post';
 import { writePostSaga } from './editor';
+import { getListSaga } from './list';
 
 // eslint-disable-next-line import/prefer-default-export
 export function* watchAuth() {
@@ -27,4 +28,8 @@ export function* watchPost() {
 
 export function* watchEditor() {
   yield all([takeEvery(actionTypes.WRITE_POST, writePostSaga)]);
+}
+
+export function* watchList() {
+  yield all([takeEvery(actionTypes.GET_LIST, getListSaga)]);
 }
