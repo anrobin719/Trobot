@@ -3,6 +3,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import device from '../../lib/styles/device';
 import Backdrop from './BackDrop';
+import shadow from '../../lib/styles/shadow';
 
 const Modal = ({ show, isPost, modalClosed, children }) => {
   return show ? (
@@ -59,7 +60,7 @@ const ModalBox = styled.div`
   margin-bottom: 6rem;
   background-color: #fff;
   border-radius: 0.4rem;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.04);
+  box-shadow: ${shadow.basic[0]};
   box-sizing: border-box;
   transition: all 1s ease-in-out;
   animation: ${props => (props.isPost ? PostSlideUp : slideUp)} 0.3s ease-out;

@@ -6,6 +6,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Responsive from '../common/Responsive';
 import Loading from '../ui/Loading';
+import shadow from '../../lib/styles/shadow';
 
 const Auth = ({ match, authSubmitHandler, loading, error }) => {
   const { authPath } = match.params;
@@ -46,7 +47,7 @@ const AuthBox = styled.div`
   padding: ${props => (props.isSignup ? `3rem 3rem 4rem;` : `4rem 3rem 6rem;`)}
   border-radius: 0.6rem;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: ${shadow.basic[1]};
   > h2 {
     font-size: 1.8rem;
     text-align: center;

@@ -6,6 +6,7 @@ import Input from '../ui/Input';
 import { updateObject, checkValidity } from '../../lib/shared/utility';
 import Button from '../ui/Button';
 import Loading from '../ui/Loading';
+import shadow from '../../lib/styles/shadow';
 
 class Editor extends Component {
   constructor(props) {
@@ -175,7 +176,7 @@ const EditorBox = styled.div`
   margin-bottom: 4rem;
   background: white;
   border-radius: 2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: ${shadow.basic[1]};
   label {
     font-size: 1.3rem;
     margin-top: 2rem;

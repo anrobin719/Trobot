@@ -3,6 +3,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import shadow from '../../lib/styles/shadow';
 
 const btn = ({ children, ...rest }) => (
   <BasicButton {...rest}>{children}</BasicButton>
@@ -27,6 +28,7 @@ const Button = ({ to, onClick, disabled, theme, size, type, children }) => {
   );
 };
 
+// 버튼 테마
 const basic = () => ({ theme }) => {
   if (theme === 'basic') {
     return `
@@ -87,16 +89,27 @@ const circleBtn = ({ theme }) => {
       font-size: 1rem;
       border-radius: 50%;
       background-color: ${palette.point[0]};
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16), 0 6px 8px rgba(0, 0, 0, 0.22);
+      box-shadow: ${shadow.float[2]};
       &:hover {
           transform: translateY(-4px);
-          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.22);
+          box-shadow: ${shadow.float[3]};
         }
     `;
   }
   return null;
 };
 
+const active = () => ({ theme }) => {
+  if (theme === 'active') {
+    return `
+      background: ${palette.gray[0]};
+      color: ${palette.blue[8]};
+    `;
+  }
+  return null;
+};
+
+//  버튼 사이즈
 const full = () => ({ size }) => {
   if (size === 'full') {
     return `
@@ -118,6 +131,7 @@ const big = () => ({ size }) => {
   return null;
 };
 
+// 버튼 비활성화
 const disable = () => ({ disabled }) => {
   if (disabled) {
     return `
@@ -133,11 +147,13 @@ const disable = () => ({ disabled }) => {
   return null;
 };
 
+// 디폴트 버튼 - button 태그
 const BasicButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
     padding: .5rem 1.2rem;
+    color: ${palette.gray[6]};
     font-size: 1rem;
     border: none;
     border-radius: .2rem;
@@ -153,8 +169,10 @@ const BasicButton = styled.button`
     ${full}
     ${big}
     ${disable}
+    ${active}
 `;
 
+// 디폴트 버튼 - a 태그
 const LinkButton = styled.a`
     display: flex;
     justify-content: center;
@@ -175,6 +193,7 @@ const LinkButton = styled.a`
     ${full}
     ${big}
     ${disable}
+    ${active}
 `;
 
 export default Button;

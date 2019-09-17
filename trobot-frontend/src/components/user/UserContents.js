@@ -17,10 +17,18 @@ const UserContents = ({
     <Wrapper>
       <Ideas>
         <div>
-          <Button onClick={() => changeListHandler('stored')}>
+          <Button
+            theme={isStoredList && 'active'}
+            onClick={() => changeListHandler('stored')}
+          >
             저장 아이디어
           </Button>
-          <Button onClick={() => changeListHandler('my')}>작성 아이디어</Button>
+          <Button
+            theme={!isStoredList && 'active'}
+            onClick={() => changeListHandler('my')}
+          >
+            작성 아이디어
+          </Button>
         </div>
         {isStoredList ? null : (
           // <IdeaList list={storedList} />

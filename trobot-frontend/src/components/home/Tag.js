@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import shadow from '../../lib/styles/shadow';
 
 const Tag = ({ title, emoji, to }) => {
   return (
@@ -24,6 +25,8 @@ const TagOutBox = styled.div`
   height: 14rem;
   > a {
     display: flex;
+    position: relative;
+    top: 0;
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -31,8 +34,8 @@ const TagOutBox = styled.div`
     background-color: white;
     border-radius: .6rem;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.1);
-    transition: box-shadow .2s ease-out;
+    box-shadow: ${shadow.basic[1]};
+    transition: all .2s ease-out;
     h5 {
         font-size: 2rem;
     }
@@ -43,7 +46,8 @@ const TagOutBox = styled.div`
     }
     &:hover,
     &:active {
-        box-shadow: 0 16px 24px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.1);
+      top: -4px;
+      box-shadow: ${shadow.float[1]};
   }
 `;
 
