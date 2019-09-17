@@ -1,4 +1,13 @@
-export { auth, authLogout, checkAuth } from './auth';
+export {
+  auth,
+  authStart,
+  authSuccess,
+  authFail,
+  authLogout,
+  logoutSucceed,
+  checkAuth,
+  checkAuthTimeOut,
+} from './auth';
 export { writePost } from './editor';
 export { getPost, updatePost, storePostId } from './post';
 export { getList, getMyList } from './list';
