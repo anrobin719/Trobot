@@ -8,7 +8,12 @@ export {
   checkAuth,
   checkAuthTimeOut,
 } from './auth';
-export { writePost } from './editor';
+export {
+  writePost,
+  writePostStart,
+  writePostSuccess,
+  writePostFail,
+} from './editor';
 export {
   getPost,
   getPostStart,

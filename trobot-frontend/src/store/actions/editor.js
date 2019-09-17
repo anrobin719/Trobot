@@ -22,17 +22,8 @@ export const writePostFail = err => {
 };
 
 export const writePost = newPostData => {
-  return dispatch => {
-    dispatch(writePostStart());
-    axios
-      .post('/list.json', newPostData)
-      .then(res => {
-        console.log('WRITE_POST_SUCCESS');
-        dispatch(writePostSuccess(res.data.name));
-      })
-      .catch(err => {
-        console.log('WRITE_POST_FAIL');
-        dispatch(writePostFail(err));
-      });
+  return {
+    type: actionTypes.WRITE_POST,
+    newPostData,
   };
 };
