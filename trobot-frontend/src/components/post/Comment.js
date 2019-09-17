@@ -1,15 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-const Comment = ({ img, id, comment }) => {
+const Comment = ({ img, id, userId, comment }) => {
   return (
     <CommentBox>
       <ProfileImg>
-        <img src={img} alt={id} />
+        <Link to={`/user/${userId}`}>
+          <img src={img} alt={id} />
+        </Link>
       </ProfileImg>
       <div>
-        <h6>{id}</h6>
+        <Link to={`/user/${userId}`}>
+          <h6>{id}</h6>
+        </Link>
         <p>{comment}</p>
       </div>
     </CommentBox>

@@ -83,7 +83,7 @@ const Intro = styled.section`
 `;
 
 const TagSection = styled.section`
-  background-color: ${palette.ivory[0]};
+  background-color: ${palette.backBlue[0]};
   text-align: center;
 `;
 

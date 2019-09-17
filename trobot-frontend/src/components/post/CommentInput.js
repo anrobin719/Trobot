@@ -82,13 +82,11 @@ class CommentInput extends Component {
 
   render() {
     const { controls } = this.state;
+    const { myImg } = this.props;
     return (
       <CommentInputBox>
         <MyImg>
-          <img
-            src="https://images.unsplash.com/photo-1557180340-e7910d785b3d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=959&q=80"
-            alt="me"
-          />
+          <img src={myImg} alt="me" />
         </MyImg>
         <form onSubmit={this.onSubmit}>
           <Input

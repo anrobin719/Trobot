@@ -19,7 +19,7 @@ const Banner = () => {
 };
 
 const BannerBox = styled.section`
-  background: ${palette.blue[9]};
+  background: ${palette.backBlue[1]};
   height: 30rem;
 `;
 

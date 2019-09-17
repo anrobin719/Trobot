@@ -66,14 +66,25 @@ const CommentCollection = ({
     );
   });
 
+  // 댓글 인풋 옆 디폴트 이미지, 로그인 시 본인 이미지로 설정
+  let myImg =
+    'https://d2x5ku95bkycr3.cloudfront.net/App_Themes/Common/images/profile/0_200.png';
+  if (isAuthenticated) {
+    myImg = localStorage.getItem('img');
+  }
+
   return (
     <CommentWrapper>
+      {/* 코멘트 인풋 */}
       <CommentInput
+        myImg={myImg}
         submitHandler={submitHandler}
         isAuthenticated={isAuthenticated}
         showAskSignInModal={showAskSignInModal}
       />
+      {/* 코멘트 리스트 */}
       <CommentList>
+        {/* 출력할 코멘트가 없을 시, 디폴트 멘트 출력 */}
         {commentList.length === 0 ? (
           <p>아이디어에 대해 소통해보세요!</p>
         ) : (

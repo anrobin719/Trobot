@@ -14,6 +14,10 @@ class UserProfileContainer extends Component {
     }
   }
 
+  editHandler = () => {
+    console.log('edit btn clicked!');
+  };
+
   render() {
     const { isAuthenticated, user, unum, loading } = this.props;
     const userId = localStorage.getItem('userId');
@@ -37,10 +41,12 @@ class UserProfileContainer extends Component {
 
     return (
       <UserProfile
+        myPage={isAuthenticated && unum === userId}
         nickname={nickname}
         email={email}
         img={img}
         loading={loading}
+        editHandler={this.editHandler}
       />
     );
   }

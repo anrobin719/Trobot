@@ -4,11 +4,14 @@ import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import Button from '../ui/Button';
 
-const UserProfile = ({ nickname, email, img, loading }) => {
-  const editHandler = () => {
-    console.log('edit!');
-  };
-
+const UserProfile = ({
+  myPage,
+  nickname,
+  email,
+  img,
+  loading,
+  editHandler,
+}) => {
   return (
     <ProfileBox>
       <Wrapper>
@@ -25,9 +28,16 @@ const UserProfile = ({ nickname, email, img, loading }) => {
             </ContentBox>
 
             <NumberBox>
-              <Button type="button" theme="outlineWhite" onClick={editHandler}>
-                수정하기
-              </Button>
+              {/* 현재 유저 페이지가 자신의 페이지일때, 수정하기 버튼 디스플레이 */}
+              {myPage && (
+                <Button
+                  type="button"
+                  theme="outlineWhite"
+                  onClick={editHandler}
+                >
+                  수정하기
+                </Button>
+              )}
             </NumberBox>
           </div>
         )}
