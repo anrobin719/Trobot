@@ -32,6 +32,7 @@ export const HIDE_MODAL = 'HIDE_MODAL';
 
 export const STORE_POST_ID = 'STORE_POST_ID';
 
+export const GET_MY_LIST = 'GET_MY_LIST';
 export const GET_MY_LIST_START = 'GET_MY_LIST_START';
 export const GET_MY_LIST_SUCCESS = 'GET_MY_LIST_SUCCESS';
 export const GET_MY_LIST_FAIL = 'GET_MY_LIST_FAIL';

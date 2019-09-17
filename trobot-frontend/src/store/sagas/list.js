@@ -31,3 +31,26 @@ export function* getListSaga(action) {
     yield put(actions.getListFail('GET_LIST_FAIL'));
   }
 }
+
+export function* getMyListSaga(action) {
+  const { userId } = action;
+  yield put(actions.getMyListStart());
+
+  try {
+    const res = yield axios.get(
+      `/list.json?orderBy="authorId"&equalTo="${userId}"`,
+    );
+    const receivedData = [];
+    for (const postId in res.data) {
+      receivedData.push({
+        ...res.data[postId],
+        postId,
+      });
+    }
+    yield put(actions.getMyListSuccess(receivedData));
+    console.log('GET_MY_LIST_SUCCESS', receivedData);
+  } catch (err) {
+    console.log('GET_MY_LIST_FAIL', err);
+    yield put(actions.getMyListFail());
+  }
+}
