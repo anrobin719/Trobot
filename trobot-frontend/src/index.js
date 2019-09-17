@@ -19,7 +19,7 @@ import {
   userReducer,
   peopleReducer,
 } from './store/reducers/index';
-import { watchAuth } from './store/sagas';
+import { watchAuth, watchPost } from './store/sagas';
 
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
@@ -44,6 +44,7 @@ const store = createStore(
 );
 
 sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchPost);
 
 const app = (
   <Provider store={store}>

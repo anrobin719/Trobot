@@ -9,7 +9,17 @@ export {
   checkAuthTimeOut,
 } from './auth';
 export { writePost } from './editor';
-export { getPost, updatePost, storePostId } from './post';
+export {
+  getPost,
+  getPostStart,
+  getPostSuccess,
+  getPostFail,
+  updatePost,
+  updatePostStart,
+  updatePostSuccess,
+  updatePostFail,
+  storePostId,
+} from './post';
 export { getList, getMyList } from './list';
 export { showModal, hideModal } from './base';
 export { getUserInfo } from './user';

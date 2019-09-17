@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-import axios from '../../axios-post';
 
 export const getPostStart = () => {
   return {
@@ -21,18 +20,9 @@ export const getPostFail = () => {
 };
 
 export const getPost = pnum => {
-  return dispatch => {
-    dispatch(getPostStart());
-    axios
-      .get(`/list/${pnum}.json`)
-      .then(res => {
-        console.log('GET_POST_SUCCESS', res);
-        dispatch(getPostSuccess(res.data));
-      })
-      .catch(err => {
-        console.log('GET_POST_FAIL', err);
-        dispatch(getPostFail());
-      });
+  return {
+    type: actionTypes.GET_POST,
+    pnum,
   };
 };
 
@@ -56,18 +46,10 @@ export const updatePostFail = () => {
 };
 
 export const updatePost = (pnum, updatedPost) => {
-  return dispatch => {
-    dispatch(updatePostStart());
-    axios
-      .put(`/list/${pnum}.json`, updatedPost)
-      .then(res => {
-        console.log('UPDATE_POST_SUCCESS', res);
-        dispatch(updatePostSuccess(res.data));
-      })
-      .catch(err => {
-        console.log('UPDATE_POST_FAIL', err);
-        dispatch(updatePostFail());
-      });
+  return {
+    type: actionTypes.UPDATE_POST,
+    pnum,
+    updatedPost,
   };
 };
 
