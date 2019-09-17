@@ -16,6 +16,7 @@ import {
   postReducer,
   listReducer,
   baseReducer,
+  userReducer,
 } from './store/reducers/index';
 
 const composeEnhancers =
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   post: postReducer,
   list: listReducer,
   base: baseReducer,
+  user: userReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

@@ -15,6 +15,7 @@ const Post = ({ post, loading }) => {
     body,
     like,
     // comments,
+    authorId,
     authorNickname,
     publishedDate,
   } = post.toJS();
@@ -27,6 +28,7 @@ const Post = ({ post, loading }) => {
         <PostHeader
           title={title}
           tag={tag}
+          authorId={authorId}
           authorNickname={authorNickname}
           publishedDate={publishedDate}
         />

@@ -9,7 +9,7 @@ import palette from '../../lib/styles/palette';
 const UserContents = ({
   changeListHandler,
   isStoredList,
-  storedList,
+  // storedList,
   myList,
   pathHandler,
 }) => {

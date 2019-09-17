@@ -8,7 +8,7 @@ import device from '../../lib/styles/device';
 import Responsive from './Responsive';
 import NavigationItems from './NavigationItems';
 
-const Toolbar = ({ drawerToggleClicked, isAuthenticated }) => {
+const Toolbar = ({ drawerToggleClicked, isAuthenticated, userId }) => {
   return (
     <>
       {/* 툴바 */}
@@ -29,7 +29,10 @@ const Toolbar = ({ drawerToggleClicked, isAuthenticated }) => {
 
           {/* 글로벌 네비게이션 */}
           <NavigationItemsBox>
-            <NavigationItems isAuthenticated={isAuthenticated} />
+            <NavigationItems
+              isAuthenticated={isAuthenticated}
+              userId={userId}
+            />
           </NavigationItemsBox>
         </Wrapper>
       </ToolbarBox>

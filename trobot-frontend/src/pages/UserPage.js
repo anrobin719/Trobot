@@ -3,11 +3,12 @@ import React from 'react';
 import UserContentsContainer from '../containers/user/UserContentsContainer';
 import UserProfileContainer from '../containers/user/UserProfileContainer';
 
-const UserPage = () => {
+const UserPage = ({ match }) => {
+  const { unum } = match.params;
   return (
     <>
-      <UserProfileContainer />
-      <UserContentsContainer />
+      <UserProfileContainer unum={unum} />
+      <UserContentsContainer unum={unum} />
     </>
   );
 };

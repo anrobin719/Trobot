@@ -5,13 +5,19 @@ import styled from 'styled-components';
 import moment from 'moment';
 import palette from '../../lib/styles/palette';
 
-const PostHeader = ({ title, tag, authorNickname, publishedDate }) => {
+const PostHeader = ({
+  title,
+  tag,
+  authorId,
+  authorNickname,
+  publishedDate,
+}) => {
   return (
     <ContentBox>
       <div>
         <h2>{title}</h2>
         <p>
-          <Link to={`/user/${authorNickname}`}>@{authorNickname}</Link>
+          <Link to={`/user/${authorId}`}>@{authorNickname}</Link>
         </p>
       </div>
       <span>{moment(publishedDate).format('lll')}</span>

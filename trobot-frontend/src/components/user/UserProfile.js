@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import Button from '../ui/Button';
 
-const UserProfile = ({ nickname, email, img, like }) => {
+const UserProfile = ({ nickname, email, img, loading }) => {
   const editHandler = () => {
     console.log('edit!');
   };
@@ -12,23 +12,25 @@ const UserProfile = ({ nickname, email, img, like }) => {
   return (
     <ProfileBox>
       <Wrapper>
-        <div>
-          <ContentBox>
-            <ImgBox>
-              <img alt="profile_img" src={img} />
-            </ImgBox>
-            <div>
-              <h3>{nickname}</h3>
-              <p>{email}</p>
-            </div>
-          </ContentBox>
-          <NumberBox>
-            <span>👍 {like}</span>
-            <Button type="button" theme="outlineWhite" onClick={editHandler}>
-              수정하기
-            </Button>
-          </NumberBox>
-        </div>
+        {!loading && (
+          <div>
+            <ContentBox>
+              <ImgBox>
+                <img alt="profile_img" src={img} />
+              </ImgBox>
+              <div>
+                <h3>{nickname}</h3>
+                <p>{email}</p>
+              </div>
+            </ContentBox>
+
+            <NumberBox>
+              <Button type="button" theme="outlineWhite" onClick={editHandler}>
+                수정하기
+              </Button>
+            </NumberBox>
+          </div>
+        )}
       </Wrapper>
     </ProfileBox>
   );
@@ -80,9 +82,6 @@ const ContentBox = styled.div`
 const NumberBox = styled.div`
   display: flex;
   align-items: center;
-  span {
-    margin-right: 1rem;
-  }
 `;
 
 export default UserProfile;

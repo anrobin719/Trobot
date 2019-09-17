@@ -27,15 +27,17 @@ class Layout extends Component {
 
   render() {
     const { showDrawer } = this.state;
-    const { children, isAuthenticated } = this.props;
+    const { children, isAuthenticated, userId } = this.props;
     return (
       <>
         <Toolbar
           isAuthenticated={isAuthenticated}
+          userId={userId}
           drawerToggleClicked={this.sideDrawerToggleHandler}
         />
         <SideDrawer
           isAuthenticated={isAuthenticated}
+          userId={userId}
           show={showDrawer}
           hide={this.sideDrawerClosedHandler}
         />
@@ -55,6 +57,7 @@ const Main = styled.main`
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null,
+    userId: state.auth.userId,
   };
 };
 

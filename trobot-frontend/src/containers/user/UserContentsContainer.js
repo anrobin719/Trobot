@@ -9,14 +9,23 @@ class UserContentsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // 리스트 변경용 상태 저장
       isStoredList: false,
     };
   }
 
   componentDidMount() {
-    const { onGetMyList } = this.props;
-    const userId = localStorage.getItem('userId');
-    onGetMyList(userId);
+    const { unum, onGetMyList } = this.props;
+    onGetMyList(unum);
+    // onGetStoredList(unum);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { unum, onGetMyList } = this.props;
+    if (unum !== prevProps.unum) {
+      onGetMyList(unum);
+      // onGetStoredList(unum);
+    }
   }
 
   changeListHandler = status => {
@@ -42,7 +51,7 @@ class UserContentsContainer extends Component {
     const { storedList, myList, loading } = this.props;
     return (
       <>
-        {!myList ? (
+        {!myList || loading ? (
           <Loading />
         ) : (
           <UserContents
@@ -60,10 +69,11 @@ class UserContentsContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    isAuthenticated: state.auth.token !== null,
+    otherUserId: state.user.getIn(['user', 'userId']),
     storedList: state.list.storedList,
     myList: state.list.myList,
     loading: state.list.loading,
-    // isAuthenticated: state.auth.token !== null,
   };
 };
 

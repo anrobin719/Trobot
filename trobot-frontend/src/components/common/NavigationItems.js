@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import device from '../../lib/styles/device';
 import NavigationItem from './NavigationItem';
 
-const NavigationItems = ({ isAuthenticated }) => {
+const NavigationItems = ({ isAuthenticated, userId }) => {
   let nav = (
     <NavigationList>
       <NavigationItem link="/list" exact>
@@ -33,6 +33,9 @@ const NavigationItems = ({ isAuthenticated }) => {
           함께하는 사람들
         </NavigationItem>
 
+        <NavigationItem link={`/user/${userId}`} exact>
+          마이페이지
+        </NavigationItem>
         <NavigationItem link="/logout" exact>
           로그아웃
         </NavigationItem>
