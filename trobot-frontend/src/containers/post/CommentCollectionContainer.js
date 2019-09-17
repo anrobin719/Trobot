@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import Commentcollection from '../../components/post/CommentCollection';
 import * as actions from '../../store/actions/index';
@@ -8,9 +7,8 @@ import * as actions from '../../store/actions/index';
 class CommentCollectionContainer extends Component {
   // 포스트 업데이트 핸들러
   updatePostHandler = updatedPost => {
-    const { match, onUpdatePost } = this.props;
-    const { pnum } = match.params;
-    onUpdatePost(pnum, updatedPost);
+    const { postId, onUpdatePost } = this.props;
+    onUpdatePost(postId, updatedPost);
   };
 
   ModalHandler = () => {
@@ -46,6 +44,7 @@ class CommentCollectionContainer extends Component {
 const mapStateToProps = state => {
   return {
     post: state.post.get('post'),
+    postId: state.post.get('postId'),
     isAuthenticated: state.auth.token !== null,
   };
 };
@@ -61,4 +60,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withRouter(CommentCollectionContainer));
+)(CommentCollectionContainer);
