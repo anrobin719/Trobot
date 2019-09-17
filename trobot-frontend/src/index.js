@@ -25,6 +25,7 @@ import {
   watchEditor,
   watchList,
   watchPeople,
+  watchUser,
 } from './store/sagas';
 
 const composeEnhancers =
@@ -54,6 +55,7 @@ sagaMiddleware.run(watchPost);
 sagaMiddleware.run(watchEditor);
 sagaMiddleware.run(watchList);
 sagaMiddleware.run(watchPeople);
+sagaMiddleware.run(watchUser);
 
 const app = (
   <Provider store={store}>

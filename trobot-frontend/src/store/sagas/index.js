@@ -11,6 +11,7 @@ import { getPostSaga, updatePostSaga } from './post';
 import { writePostSaga } from './editor';
 import { getListSaga, getMyListSaga } from './list';
 import { getPeopleSaga } from './people';
+import { getUserInfoSaga } from './user';
 
 // eslint-disable-next-line import/prefer-default-export
 export function* watchAuth() {
@@ -23,19 +24,27 @@ export function* watchAuth() {
 }
 
 export function* watchPost() {
-  yield all([takeEvery(actionTypes.GET_POST, getPostSaga)]);
-  yield all([takeEvery(actionTypes.UPDATE_POST, updatePostSaga)]);
+  yield all([
+    takeEvery(actionTypes.GET_POST, getPostSaga),
+    takeEvery(actionTypes.UPDATE_POST, updatePostSaga),
+  ]);
 }
 
 export function* watchEditor() {
-  yield all([takeEvery(actionTypes.WRITE_POST, writePostSaga)]);
+  yield takeEvery(actionTypes.WRITE_POST, writePostSaga);
 }
 
 export function* watchList() {
-  yield all([takeEvery(actionTypes.GET_LIST, getListSaga)]);
-  yield all([takeEvery(actionTypes.GET_MY_LIST, getMyListSaga)]);
+  yield all([
+    takeEvery(actionTypes.GET_LIST, getListSaga),
+    takeEvery(actionTypes.GET_MY_LIST, getMyListSaga),
+  ]);
 }
 
 export function* watchPeople() {
-  yield all([takeEvery(actionTypes.GET_PEOPLE, getPeopleSaga)]);
+  yield takeEvery(actionTypes.GET_PEOPLE, getPeopleSaga);
+}
+
+export function* watchUser() {
+  yield takeEvery(actionTypes.GET_USER_INFO, getUserInfoSaga);
 }

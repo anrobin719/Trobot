@@ -36,7 +36,12 @@ export {
   getMyListFail,
 } from './list';
 export { showModal, hideModal } from './base';
-export { getUserInfo } from './user';
+export {
+  getUserInfo,
+  getUserInfoStart,
+  getUserInfoSuccess,
+  getUserInfoFail,
+} from './user';
 export {
   getPeople,
   getPeopleStart,

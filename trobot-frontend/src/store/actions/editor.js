@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-import axios from '../../axios-post';
 
 export const writePostStart = () => {
   return {
