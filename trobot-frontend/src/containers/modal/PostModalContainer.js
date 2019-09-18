@@ -17,7 +17,7 @@ class PostModalContainer extends Component {
       onCancelModal,
     } = this.props;
     // 포스트 모달이 활성화 됐을 때, 포스트 내용 fetch
-    if (show !== prevProps.show) {
+    if (show !== prevProps.show && show) {
       onGetPost(postId);
       console.log('PostModalContainer DID UPDATE!');
     }
@@ -32,8 +32,9 @@ class PostModalContainer extends Component {
     onCancelModal('post');
   };
 
-  editPostHandler = pnum => {
-    console.log(`IN POST_MODAL_CONATINER : edit btn clicked!`, pnum);
+  editPostHandler = () => {
+    const { history, postId } = this.props;
+    history.push(`/editor/${postId}`);
   };
 
   deleteModalHandler = () => {
@@ -42,14 +43,13 @@ class PostModalContainer extends Component {
   };
 
   render() {
-    const { show, post, postId, postTag, deleted, loading } = this.props;
+    const { show, post, postTag, deleted, loading } = this.props;
     return (
       <>
         {/* 삭제된 상태일 경우, /list/tag로 경로 이동 */}
         {deleted ? <Redirect to={`/list/${postTag}`} /> : null}
         <PostModal
           post={post}
-          postId={postId}
           loading={loading}
           show={show}
           cancelHandler={this.cancelHandler}

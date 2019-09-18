@@ -81,28 +81,72 @@ class Editor extends Component {
     };
   }
 
-  onSubmit = e => {
-    const { submitHandler } = this.props;
-    const { controls } = this.state;
-    e.preventDefault();
+  // 포스트 아이디가 있으면 수정. 기존 포스트 내용 세팅
+  componentDidMount() {
+    const { pnum, post } = this.props;
+    const { title, sub, tag, body } = post.toJS();
+    if (pnum) {
+      const { controls } = this.state;
+      const updateControls = updateObject(controls, {
+        title: updateObject(controls.title, {
+          value: title,
+        }),
+        sub: updateObject(controls.sub, {
+          value: sub,
+        }),
+        tag: updateObject(controls.tag, {
+          value: tag,
+        }),
+        body: updateObject(controls.body, {
+          value: body,
+        }),
+      });
+      this.setState({ controls: updateControls });
+    }
+  }
 
-    const nickname = localStorage.getItem('nickname');
-    const userId = localStorage.getItem('userId');
-    const newPostpublishedDate = new Date();
-    const newPostData = {
+  // 저장시
+  onSubmit = async e => {
+    const { post, pnum, editPostHandler, submitPostHandler } = this.props;
+    const { controls } = this.state;
+    const originPost = post.toJS();
+    e.preventDefault();
+    // 기존 포스트 수정시
+    const editorData = {
       title: controls.title.value,
       sub: controls.sub.value,
       tag: controls.tag.value,
       body: controls.body.value,
+    };
+    const postData = {
+      ...originPost,
+      ...editorData,
+    };
+    // 새로운 포스트 작성시
+    const nickname = localStorage.getItem('nickname');
+    const userId = localStorage.getItem('userId');
+    const newPostpublishedDate = new Date();
+    const newPostData = {
+      ...editorData,
       publishedDate: newPostpublishedDate,
       authorNickname: nickname,
       authorId: userId,
       like: 0,
       comment: null,
     };
-    submitHandler(newPostData);
+    // 수정 or 새포스트 작성에 따른 핸들러 설정
+    try {
+      if (pnum) {
+        await editPostHandler(pnum, postData);
+        return;
+      }
+      await submitPostHandler(newPostData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
+  // 인풋 state 연동해 입력
   inputChangedHandler = (event, controlName) => {
     const { controls } = this.state;
     const updateControls = updateObject(controls, {
@@ -119,7 +163,7 @@ class Editor extends Component {
   };
 
   render() {
-    const { postId, loading } = this.props;
+    const { pnum, loading, postTag } = this.props;
     const { controls } = this.state;
 
     const formElementsArray = [];
@@ -138,6 +182,7 @@ class Editor extends Component {
         elementConfig={formElement.config.elementConfig}
         configType={formElement.config.elementConfig.type}
         value={formElement.config.value}
+        postTag={postTag}
         invalid={!formElement.config.valid}
         dafaultValue={formElement.config.dafaultValue}
         shouldValidate={formElement.config.validation}
@@ -152,7 +197,8 @@ class Editor extends Component {
         <form onSubmit={this.onSubmit}>
           <EditorBox>{form}</EditorBox>
           <Button theme="basic" size="big" type="submit">
-            {postId ? '수정' : '작성'}하기
+            {/* 버튼 내용 - 상태에 따라 다르게 출력 */}
+            {pnum ? '수정' : '작성'}하기
           </Button>
         </form>
       </Wrapper>

@@ -6,7 +6,6 @@ import Post from '../post/Post';
 
 const PostModal = ({
   post,
-  postId,
   loading,
   show,
   cancelHandler,
@@ -17,7 +16,6 @@ const PostModal = ({
     <Modal show={show} isPost modalClosed={cancelHandler}>
       <Post
         post={post}
-        pnum={postId}
         loading={loading}
         editPostHandler={editPostHandler}
         deleteModalHandler={deleteModalHandler}

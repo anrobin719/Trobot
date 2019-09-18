@@ -46,6 +46,7 @@ const updatePostFail = state => {
   return newState;
 };
 
+// 수정, 삭제 관련 상태 설정
 const storePostId = (state, action) => {
   const newState = state
     .set('postId', action.postId)
@@ -58,6 +59,7 @@ const initDelete = state => {
   return newState;
 };
 
+// 포스트 삭제
 const deletePostStart = state => {
   const newState = state.set('loading', true);
   return newState;

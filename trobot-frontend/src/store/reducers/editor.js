@@ -27,6 +27,30 @@ const writePostFail = state => {
   });
 };
 
+const editPostStart = state => {
+  return updateObject(state, {
+    loading: true,
+  });
+};
+
+const editPostSuccess = (state, action) => {
+  return updateObject(state, {
+    loading: false,
+    postId: action.postId,
+  });
+};
+
+const editPostFail = state => {
+  return updateObject(state, {
+    loading: false,
+    error: true,
+  });
+};
+
+const initEdit = () => {
+  return initialState;
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.WRITE_POST_START:
@@ -35,6 +59,14 @@ const reducer = (state = initialState, action) => {
       return writePostSuccess(state, action);
     case actionTypes.WRITE_POST_FAIL:
       return writePostFail(state);
+    case actionTypes.EDIT_POST_START:
+      return editPostStart(state);
+    case actionTypes.EDIT_POST_SUCCESS:
+      return editPostSuccess(state, action);
+    case actionTypes.EDIT_POST_FAIL:
+      return editPostFail(state);
+    case actionTypes.INIT_EDIT:
+      return initEdit(state);
     default:
       return state;
   }

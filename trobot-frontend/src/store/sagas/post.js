@@ -39,6 +39,7 @@ export function* deletePostSaga(action) {
   try {
     const res = yield axios.delete(`/list/${postId}.json`);
     yield put(actions.deletePostSuccess());
+    // 경로이동으로 남겨둔 tag 삭제, deleted 기본 값으로
     yield put(actions.initDelete());
     console.log('DELETE_POST_SUCCESS', res);
   } catch (err) {

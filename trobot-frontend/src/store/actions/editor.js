@@ -26,3 +26,33 @@ export const writePost = newPostData => {
     newPostData,
   };
 };
+
+export const editPostStart = () => {
+  return {
+    type: actionTypes.EDIT_POST_START,
+  };
+};
+export const editPostSuccess = postId => {
+  return {
+    type: actionTypes.EDIT_POST_SUCCESS,
+    postId,
+  };
+};
+export const editPostFail = () => {
+  return {
+    type: actionTypes.EDIT_POST_FAIL,
+  };
+};
+export const editPost = (pnum, postData) => {
+  return {
+    type: actionTypes.EDIT_POST,
+    pnum,
+    postData,
+  };
+};
+
+export const initEdit = () => {
+  return {
+    type: actionTypes.INIT_EDIT,
+  };
+};

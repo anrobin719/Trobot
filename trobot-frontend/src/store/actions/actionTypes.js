@@ -8,12 +8,19 @@ export const AUTH_CHECK_TIMEOUT = 'AUTH_CHECK_TIMEOUT';
 export const AUTH_INITIATE_LOGOUT = 'AUTH_INITIATE_LOGOUT';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
-// POST actionTypes
+// EDITOR actionTypes
 export const WRITE_POST = 'WRITE_POST';
 export const WRITE_POST_START = 'WRITE_POST_START';
 export const WRITE_POST_SUCCESS = 'WRITE_POST_SUCCESS';
 export const WRITE_POST_FAIL = 'WRITE_POST_FAIL';
 
+export const EDIT_POST = 'EDIT_POST';
+export const EDIT_POST_START = 'EDIT_POST_START';
+export const EDIT_POST_SUCCESS = 'EDIT_POST_SUCCESS';
+export const EDIT_POST_FAIL = 'EDIT_POST_FAIL';
+export const INIT_EDIT = 'INIT_EDIT';
+
+// POST actionTypes
 export const GET_POST = 'GET_POST';
 export const GET_POST_START = 'GET_POST_START';
 export const GET_POST_SUCCESS = 'GET_POST_SUCCESS';
@@ -24,11 +31,11 @@ export const UPDATE_POST_START = 'UPDATE_POST_START';
 export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS';
 export const UPDATE_POST_FAIL = 'UPDATE_POST_FAIL';
 
-export const INIT_DELETE = 'INIT_DELETE';
 export const DELETE_POST = 'DELETE_POST';
 export const DELETE_POST_START = 'DELETE_POST_START';
 export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
 export const DELETE_POST_FAIL = 'DELETE_POST_FAIL';
+export const INIT_DELETE = 'INIT_DELETE';
 
 export const STORE_POST_ID = 'STORE_POST_ID';
 

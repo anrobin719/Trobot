@@ -7,7 +7,7 @@ import PostSide from './PostSide';
 import palette from '../../lib/styles/palette';
 import Loading from '../ui/Loading';
 
-const Post = ({ pnum, post, loading, editPostHandler, deleteModalHandler }) => {
+const Post = ({ post, loading, editPostHandler, deleteModalHandler }) => {
   const {
     title,
     // sub,
@@ -35,7 +35,6 @@ const Post = ({ pnum, post, loading, editPostHandler, deleteModalHandler }) => {
         {/* 포스트 컨텐츠 */}
         <section>
           <PostContent
-            pnum={pnum}
             body={body}
             authorId={authorId}
             editPostHandler={editPostHandler}

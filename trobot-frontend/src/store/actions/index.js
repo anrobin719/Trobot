@@ -13,6 +13,11 @@ export {
   writePostStart,
   writePostSuccess,
   writePostFail,
+  editPost,
+  editPostStart,
+  editPostSuccess,
+  editPostFail,
+  initEdit,
 } from './editor';
 export {
   getPost,

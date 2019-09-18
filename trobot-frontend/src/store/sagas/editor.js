@@ -10,10 +10,26 @@ export function* writePostSaga(action) {
 
   try {
     const res = yield axios.post('/list.json', newPostData);
-    console.log('WRITE_POST_SUCCESS');
     yield put(actions.writePostSuccess(res.data.name));
+    console.log('[SAGA] WRITE_POST_SUCCESS', res.data.name);
   } catch (err) {
-    console.log('WRITE_POST_FAIL');
     yield put(actions.writePostFail(err));
+    console.log('[SAGA] WRITE_POST_FAIL');
+  }
+}
+
+export function* editPostSaga(action) {
+  const { pnum, postData } = action;
+  yield put(actions.editPostStart());
+
+  try {
+    const res = yield axios.put(`/list/${pnum}.json`, postData);
+    yield put(actions.editPostSuccess(pnum));
+    // 에디트 state에 저장되어있는 postId 삭제
+    yield put(actions.initEdit());
+    console.log('[SAGA] EDIT_POST_SUCCESS', res);
+  } catch (err) {
+    yield put(actions.editPostFail(err));
+    console.log('[SAGA] EDIT_POST_FAIL');
   }
 }

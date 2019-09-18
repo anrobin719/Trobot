@@ -7,7 +7,6 @@ import CommentCollectionContainer from '../../containers/post/CommentCollectionC
 import palette from '../../lib/styles/palette';
 
 const PostContent = ({
-  pnum,
   body,
   authorId,
   editPostHandler,
@@ -22,10 +21,10 @@ const PostContent = ({
         {/* 로그인 아이디와 작성자 아이디가 같으면, 수정/삭제 버튼 디스플레이 */}
         {userId === authorId ? (
           <EditBtnBox>
-            <span role="presentation" onClick={() => editPostHandler(pnum)}>
+            <span role="presentation" onClick={editPostHandler}>
               <EditIcon />
             </span>
-            <span role="presentation" onClick={() => deletePostHandler(pnum)}>
+            <span role="presentation" onClick={deletePostHandler}>
               <DeleteIcon />
             </span>
           </EditBtnBox>

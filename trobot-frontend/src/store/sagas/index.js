@@ -8,7 +8,7 @@ import {
   checkAuthSaga,
 } from './auth';
 import { getPostSaga, updatePostSaga, deletePostSaga } from './post';
-import { writePostSaga } from './editor';
+import { writePostSaga, editPostSaga } from './editor';
 import { getListSaga, getMyListSaga } from './list';
 import { getPeopleSaga } from './people';
 import { getUserInfoSaga } from './user';
@@ -32,7 +32,10 @@ export function* watchPost() {
 }
 
 export function* watchEditor() {
-  yield takeEvery(actionTypes.WRITE_POST, writePostSaga);
+  yield all([
+    takeEvery(actionTypes.WRITE_POST, writePostSaga),
+    takeEvery(actionTypes.EDIT_POST, editPostSaga),
+  ]);
 }
 
 export function* watchList() {

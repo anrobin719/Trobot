@@ -8,7 +8,7 @@ const EditorPage = ({ match }) => {
   return (
     <>
       <Header title={pnum ? '아이디어 수정' : '아이디어 작성'} emoji="📝" />
-      <EditorContainer postId={pnum} />
+      <EditorContainer pnum={pnum} />
     </>
   );
 };
