@@ -39,8 +39,8 @@ class HeaderContainer extends Component {
           title = '문화';
           emoji = '🌈';
           break;
-        case '기타':
-          title = '그 외 분류';
+        case '기타분류':
+          title = '기타분류';
           emoji = '👀';
           break;
         default:

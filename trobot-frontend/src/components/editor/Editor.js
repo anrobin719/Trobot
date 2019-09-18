@@ -57,7 +57,7 @@ class Editor extends Component {
             '생산성',
             '건강',
             '문화',
-            '그 외 분류',
+            '기타분류',
           ],
           value: '',
           validation: {

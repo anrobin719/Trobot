@@ -37,6 +37,7 @@ const Post = ({ pnum, post, loading, editPostHandler, deleteModalHandler }) => {
           <PostContent
             pnum={pnum}
             body={body}
+            authorId={authorId}
             editPostHandler={editPostHandler}
             deletePostHandler={deleteModalHandler}
           />

@@ -6,19 +6,30 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CommentCollectionContainer from '../../containers/post/CommentCollectionContainer';
 import palette from '../../lib/styles/palette';
 
-const PostContent = ({ pnum, body, editPostHandler, deletePostHandler }) => {
+const PostContent = ({
+  pnum,
+  body,
+  authorId,
+  editPostHandler,
+  deletePostHandler,
+}) => {
+  const userId = localStorage.getItem('userId');
+
   return (
     <ContentBox>
       <Body>
         {body}
-        <EditBtnBox>
-          <span role="presentation" onClick={() => editPostHandler(pnum)}>
-            <EditIcon />
-          </span>
-          <span role="presentation" onClick={() => deletePostHandler(pnum)}>
-            <DeleteIcon />
-          </span>
-        </EditBtnBox>
+        {/* 로그인 아이디와 작성자 아이디가 같으면, 수정/삭제 버튼 디스플레이 */}
+        {userId === authorId ? (
+          <EditBtnBox>
+            <span role="presentation" onClick={() => editPostHandler(pnum)}>
+              <EditIcon />
+            </span>
+            <span role="presentation" onClick={() => deletePostHandler(pnum)}>
+              <DeleteIcon />
+            </span>
+          </EditBtnBox>
+        ) : null}
       </Body>
 
       {/* 댓글 관련 컴포넌트 : 댓글 인풋 + 댓글 출력 */}

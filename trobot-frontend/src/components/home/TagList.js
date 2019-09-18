@@ -11,7 +11,7 @@ const tagData = [
   { title: '생산성', emoji: '📈', link: '/list/생산성' },
   { title: '건강', emoji: '💪', link: '/list/건강' },
   { title: '문화', emoji: '🌈', link: '/list/문화' },
-  { title: '그 외 분류', emoji: '👀', link: '/list/기타' },
+  { title: '기타분류', emoji: '👀', link: '/list/기타분류' },
 ];
 
 const TagList = ({ tagNum }) => {
