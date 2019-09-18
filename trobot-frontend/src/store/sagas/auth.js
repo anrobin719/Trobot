@@ -89,7 +89,7 @@ export function* authUserSaga(action) {
     yield put(actions.checkAuthTimeOut(response.data.expiresIn));
   } catch (error) {
     console.log(`Auth error response!`, error.response);
-    put(actions.authFail(error.response.data.error.message));
+    yield put(actions.authFail(error.response.data.error.message));
   }
 }
 

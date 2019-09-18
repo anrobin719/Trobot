@@ -7,7 +7,7 @@ import {
   checkAuthTimeOutSaga,
   checkAuthSaga,
 } from './auth';
-import { getPostSaga, updatePostSaga } from './post';
+import { getPostSaga, updatePostSaga, deletePostSaga } from './post';
 import { writePostSaga } from './editor';
 import { getListSaga, getMyListSaga } from './list';
 import { getPeopleSaga } from './people';
@@ -27,6 +27,7 @@ export function* watchPost() {
   yield all([
     takeEvery(actionTypes.GET_POST, getPostSaga),
     takeEvery(actionTypes.UPDATE_POST, updatePostSaga),
+    takeEvery(actionTypes.DELETE_POST, deletePostSaga),
   ]);
 }
 

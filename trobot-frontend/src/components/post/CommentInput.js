@@ -21,7 +21,6 @@ class CommentInput extends Component {
           validation: {
             required: true,
           },
-          touched: false,
           vaild: false,
         },
       },
@@ -96,7 +95,6 @@ class CommentInput extends Component {
             value={controls.comments.value}
             invalid={!controls.comments.valid}
             shouldValidate={controls.comments.validation}
-            touched={controls.comments.touched}
             changed={e => this.inputChangeHandler(e)}
           />
           <Button theme="outline" type="submit">

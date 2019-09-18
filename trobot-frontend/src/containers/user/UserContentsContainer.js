@@ -40,9 +40,9 @@ class UserContentsContainer extends Component {
     }
   };
 
-  pathHandler = postId => {
+  pathHandler = (postId, postTag) => {
     const { onShowModal, onStorePostId } = this.props;
-    onStorePostId(postId);
+    onStorePostId(postId, postTag);
     onShowModal('post');
   };
 
@@ -80,7 +80,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onGetMyList: userId => dispatch(actions.getMyList(userId)),
-    onStorePostId: postId => dispatch(actions.storePostId(postId)),
+    onStorePostId: (postId, postTag) =>
+      dispatch(actions.storePostId(postId, postTag)),
     onShowModal: modalName => dispatch(actions.showModal(modalName)),
   };
 };

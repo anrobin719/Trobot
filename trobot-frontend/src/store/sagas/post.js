@@ -10,11 +10,11 @@ export function* getPostSaga(action) {
 
   try {
     const res = yield axios.get(`/list/${pnum}.json`);
-    console.log('GET_POST_SUCCESS', res);
     yield put(actions.getPostSuccess(res.data));
+    console.log('GET_POST_SUCCESS', res);
   } catch (err) {
-    console.log('GET_POST_FAIL', err);
     yield put(actions.getPostFail());
+    console.log('GET_POST_FAIL', err);
   }
 }
 
@@ -24,10 +24,25 @@ export function* updatePostSaga(action) {
 
   try {
     const res = yield axios.put(`/list/${pnum}.json`, updatedPost);
-    console.log('UPDATE_POST_SUCCESS', res);
     yield put(actions.updatePostSuccess(res.data));
+    console.log('UPDATE_POST_SUCCESS', res);
   } catch (err) {
-    console.log('UPDATE_POST_FAIL', err);
     yield put(actions.updatePostFail());
+    console.log('UPDATE_POST_FAIL', err);
+  }
+}
+
+export function* deletePostSaga(action) {
+  const { postId } = action;
+  yield put(actions.deletePostStart());
+
+  try {
+    const res = yield axios.delete(`/list/${postId}.json`);
+    yield put(actions.deletePostSuccess());
+    yield put(actions.initDelete());
+    console.log('DELETE_POST_SUCCESS', res);
+  } catch (err) {
+    yield put(actions.deletePostFail());
+    console.log('DELETE_POST_FAIL', err);
   }
 }

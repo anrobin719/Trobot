@@ -6,29 +6,24 @@ import Modal from '../ui/Modal';
 import Button from '../ui/Button';
 import palette from '../../lib/styles/palette';
 
-const AskSignInModal = ({
-  show,
-  signInSubmit,
-  signUpSubmit,
-  cancelHandler,
-}) => {
+const AskDeleteModal = ({ show, deleteSubmit, cancelHandler }) => {
   return (
     <Modal show={show} modalClosed={cancelHandler}>
       <CloseBtnBox onClick={cancelHandler}>
         <CloseIcon />
       </CloseBtnBox>
       <ContentBox>
-        <span>🙈</span>
-        <h4>로그인 후 이용해주세요.</h4>
-        {/* 로그인, 회원가입 버튼 박스 */}
+        <span>🤷🏻‍♂️</span>
+        <h4>아이디어를 정말 삭제하시겠습니까?</h4>
+        {/* 삭제 버튼 박스 */}
         <BtnBox>
           <div>
-            <Button onClick={signInSubmit} theme="outline">
-              로그인하기
+            <Button onClick={deleteSubmit} theme="outline">
+              삭제하기
             </Button>
           </div>
           <div>
-            <Button onClick={signUpSubmit}>회원가입</Button>
+            <Button onClick={cancelHandler}>취소하기</Button>
           </div>
         </BtnBox>
       </ContentBox>
@@ -75,7 +70,6 @@ const BtnBox = styled.div`
   }
   div:last-child {
     button {
-      font-size: 0.8rem;
       color: ${palette.gray[6]};
     }
     margin-bottom: 3rem;
@@ -85,4 +79,4 @@ const BtnBox = styled.div`
   }
 `;
 
-export default AskSignInModal;
+export default AskDeleteModal;

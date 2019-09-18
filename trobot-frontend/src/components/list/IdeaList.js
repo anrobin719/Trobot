@@ -10,6 +10,7 @@ const IdeaList = ({ list, pathHandler }) => {
       <Idea
         key={idea.postId}
         postId={idea.postId}
+        tag={idea.tag}
         title={idea.title}
         sub={idea.sub}
         authorNickname={idea.authorNickname}

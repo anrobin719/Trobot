@@ -28,9 +28,10 @@ class ListContainer extends Component {
     }
   }
 
-  pathHandler = postId => {
+  pathHandler = (postId, postTag) => {
     const { onShowModal, onStorePostId } = this.props;
-    onStorePostId(postId);
+    // 아이디어 클릭 시, 포스트 아이디와 태그를 저장
+    onStorePostId(postId, postTag);
     onShowModal('post');
   };
 
@@ -68,7 +69,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onGetListByTag: tag => dispatch(actions.getList(tag)),
     onGetList: () => dispatch(actions.getList()),
-    onStorePostId: postId => dispatch(actions.storePostId(postId)),
+    onStorePostId: (postId, postTag) =>
+      dispatch(actions.storePostId(postId, postTag)),
     onShowModal: modalName => dispatch(actions.showModal(modalName)),
   };
 };

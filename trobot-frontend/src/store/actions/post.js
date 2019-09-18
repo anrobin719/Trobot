@@ -53,9 +53,39 @@ export const updatePost = (pnum, updatedPost) => {
   };
 };
 
-export const storePostId = postId => {
+export const storePostId = (postId, postTag) => {
   return {
     type: actionTypes.STORE_POST_ID,
+    postId,
+    postTag,
+  };
+};
+
+export const initDelete = () => {
+  console.log(`INIT DELETE RUN`);
+  return {
+    type: actionTypes.INIT_DELETE,
+  };
+};
+
+export const deletePostStart = () => {
+  return {
+    type: actionTypes.DELETE_POST_START,
+  };
+};
+export const deletePostSuccess = () => {
+  return {
+    type: actionTypes.DELETE_POST_SUCCESS,
+  };
+};
+export const deletePostFail = () => {
+  return {
+    type: actionTypes.DELETE_POST_FAIL,
+  };
+};
+export const deletePost = postId => {
+  return {
+    type: actionTypes.DELETE_POST,
     postId,
   };
 };

@@ -7,7 +7,7 @@ import PostSide from './PostSide';
 import palette from '../../lib/styles/palette';
 import Loading from '../ui/Loading';
 
-const Post = ({ post, loading }) => {
+const Post = ({ pnum, post, loading, editPostHandler, deleteModalHandler }) => {
   const {
     title,
     // sub,
@@ -34,7 +34,12 @@ const Post = ({ post, loading }) => {
         />
         {/* 포스트 컨텐츠 */}
         <section>
-          <PostContent body={body} />
+          <PostContent
+            pnum={pnum}
+            body={body}
+            editPostHandler={editPostHandler}
+            deletePostHandler={deleteModalHandler}
+          />
           <PostSide like={like} />
         </section>
       </PostBox>
@@ -43,14 +48,6 @@ const Post = ({ post, loading }) => {
 };
 
 const PostBox = styled.div`
-  // position: absolute;
-  // top: 0;
-  // left: 50%;
-  // transform: translateX(-50%);
-  // height: 100%;
-  // z-index: 300;
-  // width: 100%;
-
   width: 1024px;
   min-height: 100vh;
   margin: 0 auto; /* 중앙 정렬 */

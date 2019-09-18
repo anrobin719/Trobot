@@ -7,6 +7,7 @@ import palette from '../../lib/styles/palette';
 const Idea = ({
   postId,
   title,
+  tag,
   sub,
   // authorNickname,
   // authorId,
@@ -17,8 +18,7 @@ const Idea = ({
   pathHandler,
 }) => {
   return (
-    // <Link to={`/post/${postId}`}>
-    <IdeaBox onClick={() => pathHandler(postId)}>
+    <IdeaBox onClick={() => pathHandler(postId, tag)}>
       <ContentBox>
         <div>
           <h3>{title}</h3>
@@ -29,7 +29,6 @@ const Idea = ({
         </div>
       </ContentBox>
     </IdeaBox>
-    // </Link>
   );
 };
 

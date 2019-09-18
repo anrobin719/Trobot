@@ -24,6 +24,11 @@ export {
   updatePostSuccess,
   updatePostFail,
   storePostId,
+  initDelete,
+  deletePost,
+  deletePostStart,
+  deletePostSuccess,
+  deletePostFail,
 } from './post';
 export {
   getList,

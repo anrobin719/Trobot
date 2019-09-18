@@ -4,6 +4,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = Map({
   post: Map({}),
   postId: null,
+  postTag: null,
+  deleted: false,
   loading: false,
   error: false,
 });
@@ -45,7 +47,33 @@ const updatePostFail = state => {
 };
 
 const storePostId = (state, action) => {
-  const newState = state.set('postId', action.postId);
+  const newState = state
+    .set('postId', action.postId)
+    .set('postTag', action.postTag);
+  return newState;
+};
+
+const initDelete = state => {
+  const newState = state.set('postTag', null).set('deleted', false);
+  return newState;
+};
+
+const deletePostStart = state => {
+  const newState = state.set('loading', true);
+  return newState;
+};
+
+const deletePostSuccess = state => {
+  const newState = state
+    .set('loading', false)
+    .set('post', Map({}))
+    .set('postId', null)
+    .set('deleted', true);
+  return newState;
+};
+
+const deletePostFail = state => {
+  const newState = state.set('loading', false).set('error', true);
   return newState;
 };
 
@@ -65,6 +93,14 @@ const reducer = (state = initialState, action) => {
       return updatePostFail(state);
     case actionTypes.STORE_POST_ID:
       return storePostId(state, action);
+    case actionTypes.INIT_DELETE:
+      return initDelete(state);
+    case actionTypes.DELETE_POST_START:
+      return deletePostStart(state);
+    case actionTypes.DELETE_POST_SUCCESS:
+      return deletePostSuccess(state);
+    case actionTypes.DELETE_POST_FAIL:
+      return deletePostFail(state);
     default:
       return state;
   }
