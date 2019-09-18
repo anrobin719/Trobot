@@ -47,3 +47,19 @@ export function* deletePostSaga(action) {
     console.log('DELETE_POST_FAIL', err);
   }
 }
+
+export function* deleteCommentSaga(action) {
+  const { postId, commentId } = action;
+  yield put(actions.deleteCommentStart());
+
+  try {
+    const res = yield axios.delete(
+      `/list/${postId}/comments/${commentId}.json`,
+    );
+    yield put(actions.deleteCommentSuccess());
+    console.log('DELETE_COMMENT_SUCCESS', res);
+  } catch (err) {
+    yield put(actions.deleteCommentFail());
+    console.log('DELETE_COMMENT_FAIL', err);
+  }
+}

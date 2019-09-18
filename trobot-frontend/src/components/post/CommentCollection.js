@@ -12,6 +12,7 @@ const CommentCollection = ({
   isAuthenticated,
   updatePostHandler,
   showAskSignInModal,
+  deleteCommentHandler,
 }) => {
   // 댓글 작성시
   const submitHandler = inputVal => {
@@ -58,10 +59,12 @@ const CommentCollection = ({
     return (
       <Comment
         key={com.commentId}
+        commentId={com.commentId}
         img={com.img}
         id={com.nickname}
         userId={com.userId}
         comment={com.comment}
+        deleteCommentHandler={deleteCommentHandler}
       />
     );
   });

@@ -34,6 +34,10 @@ export {
   deletePostStart,
   deletePostSuccess,
   deletePostFail,
+  deleteComment,
+  deleteCommentStart,
+  deleteCommentSuccess,
+  deleteCommentFail,
 } from './post';
 export {
   getList,

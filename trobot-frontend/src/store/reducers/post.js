@@ -6,6 +6,7 @@ const initialState = Map({
   postId: null,
   postTag: null,
   deleted: false,
+  reload: false,
   loading: false,
   error: false,
 });
@@ -19,6 +20,7 @@ const getPostStart = state => {
 const getPostSuccess = (state, action) => {
   const newState = state
     .set('loading', false)
+    .set('reload', false)
     .set('post', Map(action.postData));
   return newState;
 };
@@ -79,6 +81,23 @@ const deletePostFail = state => {
   return newState;
 };
 
+// 코멘트 삭제
+const deleteCommentStart = state => {
+  const newState = state.set('loading', true);
+  return newState;
+};
+
+const deleteCommentSuccess = state => {
+  // 댓글 삭제 후, 즉시 포스트 로드하기 때문에 로딩 유지
+  const newState = state.set('reload', true);
+  return newState;
+};
+
+const deleteCommentFail = state => {
+  const newState = state.set('loading', false).set('error', true);
+  return newState;
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_POST_START:
@@ -103,6 +122,12 @@ const reducer = (state = initialState, action) => {
       return deletePostSuccess(state);
     case actionTypes.DELETE_POST_FAIL:
       return deletePostFail(state);
+    case actionTypes.DELETE_COMMENT_START:
+      return deleteCommentStart(state);
+    case actionTypes.DELETE_COMMENT_SUCCESS:
+      return deleteCommentSuccess(state, action);
+    case actionTypes.DELETE_COMMENT_FAIL:
+      return deleteCommentFail(state);
     default:
       return state;
   }

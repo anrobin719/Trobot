@@ -16,18 +16,14 @@ class CommentCollectionContainer extends Component {
     onShowModal('askSignIn');
   };
 
+  deleteCommentHandler = commentId => {
+    const { postId, onDeleteComment } = this.props;
+    onDeleteComment(postId, commentId);
+  };
+
   render() {
     const { post, isAuthenticated } = this.props;
-    const {
-      //   title,
-      //   sub,
-      //   tag,
-      //   body,
-      //   like,
-      comments,
-      //   authorNickname,
-      //   publishedDate,
-    } = post.toJS();
+    const { comments } = post.toJS();
 
     return (
       <Commentcollection
@@ -36,6 +32,7 @@ class CommentCollectionContainer extends Component {
         isAuthenticated={isAuthenticated}
         updatePostHandler={this.updatePostHandler}
         showAskSignInModal={this.ModalHandler}
+        deleteCommentHandler={this.deleteCommentHandler}
       />
     );
   }
@@ -54,6 +51,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(actions.updatePost(pnum, updatedPost)),
     onCancelModal: modalName => dispatch(actions.hideModal(modalName)),
     onShowModal: modalName => dispatch(actions.showModal(modalName)),
+    onDeleteComment: (postId, commentId) =>
+      dispatch(actions.deleteComment(postId, commentId)),
   };
 };
 

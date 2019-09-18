@@ -7,7 +7,12 @@ import {
   checkAuthTimeOutSaga,
   checkAuthSaga,
 } from './auth';
-import { getPostSaga, updatePostSaga, deletePostSaga } from './post';
+import {
+  getPostSaga,
+  updatePostSaga,
+  deletePostSaga,
+  deleteCommentSaga,
+} from './post';
 import { writePostSaga, editPostSaga } from './editor';
 import { getListSaga, getMyListSaga } from './list';
 import { getPeopleSaga } from './people';
@@ -28,6 +33,7 @@ export function* watchPost() {
     takeEvery(actionTypes.GET_POST, getPostSaga),
     takeEvery(actionTypes.UPDATE_POST, updatePostSaga),
     takeEvery(actionTypes.DELETE_POST, deletePostSaga),
+    takeEvery(actionTypes.DELETE_COMMENT, deleteCommentSaga),
   ]);
 }
 

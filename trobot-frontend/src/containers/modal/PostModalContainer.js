@@ -6,18 +6,23 @@ import PostModal from '../../components/modal/PostModal';
 import * as actions from '../../store/actions/index';
 
 class PostModalContainer extends Component {
+  componentDidMount() {}
+
   componentDidUpdate(prevProps) {
     const {
       show,
       onGetPost,
-      // post,
       postId,
+      reload,
       location,
-      // history,
       onCancelModal,
     } = this.props;
     // 포스트 모달이 활성화 됐을 때, 포스트 내용 fetch
-    if (show !== prevProps.show && show) {
+    // 또는 reload 상태일 때, 포스트 내용 fetch
+    if (
+      (show && show !== prevProps.show) ||
+      (reload && reload !== prevProps.reload)
+    ) {
       onGetPost(postId);
       console.log('PostModalContainer DID UPDATE!');
     }
@@ -68,6 +73,7 @@ const mapStateToProps = state => {
     postTag: state.post.get('postTag'),
     post: state.post.get('post'),
     deleted: state.post.get('deleted'),
+    reload: state.post.get('reload'),
     loading: state.post.get('loading'),
     // isAuthenticated: state.auth.token !== null,
   };

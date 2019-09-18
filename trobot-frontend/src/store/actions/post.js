@@ -62,7 +62,6 @@ export const storePostId = (postId, postTag) => {
 };
 
 export const initDelete = () => {
-  console.log(`INIT DELETE RUN`);
   return {
     type: actionTypes.INIT_DELETE,
   };
@@ -87,5 +86,31 @@ export const deletePost = postId => {
   return {
     type: actionTypes.DELETE_POST,
     postId,
+  };
+};
+
+export const deleteCommentStart = () => {
+  return {
+    type: actionTypes.DELETE_COMMENT_START,
+  };
+};
+
+export const deleteCommentSuccess = () => {
+  return {
+    type: actionTypes.DELETE_COMMENT_SUCCESS,
+  };
+};
+
+export const deleteCommentFail = () => {
+  return {
+    type: actionTypes.DELETE_COMMENT_FAIL,
+  };
+};
+
+export const deleteComment = (postId, commentId) => {
+  return {
+    type: actionTypes.DELETE_COMMENT,
+    postId,
+    commentId,
   };
 };

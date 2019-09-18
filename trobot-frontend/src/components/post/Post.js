@@ -21,27 +21,32 @@ const Post = ({ post, loading, editPostHandler, deleteModalHandler }) => {
   } = post.toJS();
   return (
     <>
-      {loading ? <Loading size="fit" /> : null}
       {/* 포스트 컨테이너 */}
       <PostBox>
-        {/* 포스트 제목과 정보 */}
-        <PostHeader
-          title={title}
-          tag={tag}
-          authorId={authorId}
-          authorNickname={authorNickname}
-          publishedDate={publishedDate}
-        />
-        {/* 포스트 컨텐츠 */}
-        <section>
-          <PostContent
-            body={body}
-            authorId={authorId}
-            editPostHandler={editPostHandler}
-            deletePostHandler={deleteModalHandler}
-          />
-          <PostSide like={like} />
-        </section>
+        {loading ? (
+          <Loading size="fit" />
+        ) : (
+          <>
+            {/* 포스트 제목과 정보 */}
+            <PostHeader
+              title={title}
+              tag={tag}
+              authorId={authorId}
+              authorNickname={authorNickname}
+              publishedDate={publishedDate}
+            />
+            {/* 포스트 컨텐츠 */}
+            <section>
+              <PostContent
+                body={body}
+                authorId={authorId}
+                editPostHandler={editPostHandler}
+                deletePostHandler={deleteModalHandler}
+              />
+              <PostSide like={like} />
+            </section>
+          </>
+        )}
       </PostBox>
     </>
   );
