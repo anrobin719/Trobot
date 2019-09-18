@@ -6,6 +6,8 @@ import {
   logoutSaga,
   checkAuthTimeOutSaga,
   checkAuthSaga,
+  followSaga,
+  reloadFollowSaga,
 } from './auth';
 import {
   getPostSaga,
@@ -25,6 +27,8 @@ export function* watchAuth() {
     takeEvery(actionTypes.AUTH_INITIATE_LOGOUT, logoutSaga),
     takeEvery(actionTypes.AUTH_CHECK_TIMEOUT, checkAuthTimeOutSaga),
     takeEvery(actionTypes.AUTH_CHECK, checkAuthSaga),
+    takeEvery(actionTypes.FOLLOW, followSaga),
+    takeEvery(actionTypes.RELOAD_FOLLOW, reloadFollowSaga),
   ]);
 }
 

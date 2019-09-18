@@ -47,8 +47,20 @@ class PostModalContainer extends Component {
     onShowModal('askDelete');
   };
 
+  followHanlder = () => {
+    const { onFollow, post } = this.props;
+    const { authorId, authorNickname, authorEmail, authorImg } = post.toJS();
+    const followData = {
+      userId: authorId,
+      nickname: authorNickname,
+      email: authorEmail,
+      img: authorImg,
+    };
+    onFollow(authorId, followData);
+  };
+
   render() {
-    const { show, post, postTag, deleted, loading } = this.props;
+    const { show, post, postTag, deleted, loading, following } = this.props;
     return (
       <>
         {/* 삭제된 상태일 경우, /list/tag로 경로 이동 */}
@@ -57,9 +69,11 @@ class PostModalContainer extends Component {
           post={post}
           loading={loading}
           show={show}
+          following={following}
           cancelHandler={this.cancelHandler}
           editPostHandler={this.editPostHandler}
           deleteModalHandler={this.deleteModalHandler}
+          followHanlder={this.followHanlder}
         />
       </>
     );
@@ -75,6 +89,7 @@ const mapStateToProps = state => {
     deleted: state.post.get('deleted'),
     reload: state.post.get('reload'),
     loading: state.post.get('loading'),
+    following: state.auth.following,
     // isAuthenticated: state.auth.token !== null,
   };
 };
@@ -84,6 +99,8 @@ const mapDispatchToProps = dispatch => {
     onGetPost: pnum => dispatch(actions.getPost(pnum)),
     onShowModal: modalName => dispatch(actions.showModal(modalName)),
     onCancelModal: modalName => dispatch(actions.hideModal(modalName)),
+    onFollow: (authorId, followData) =>
+      dispatch(actions.follow(authorId, followData)),
   };
 };
 

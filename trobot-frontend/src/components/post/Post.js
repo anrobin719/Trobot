@@ -7,7 +7,15 @@ import PostSide from './PostSide';
 import palette from '../../lib/styles/palette';
 import Loading from '../ui/Loading';
 
-const Post = ({ post, loading, editPostHandler, deleteModalHandler }) => {
+const Post = ({
+  post,
+  loading,
+  following,
+  editPostHandler,
+  deleteModalHandler,
+  followHanlder,
+}) => {
+  // 포스트 할당
   const {
     title,
     // sub,
@@ -17,8 +25,11 @@ const Post = ({ post, loading, editPostHandler, deleteModalHandler }) => {
     // comments,
     authorId,
     authorNickname,
+    // authorEmail,
+    // authorImg,
     publishedDate,
   } = post.toJS();
+
   return (
     <>
       {/* 포스트 컨테이너 */}
@@ -43,7 +54,12 @@ const Post = ({ post, loading, editPostHandler, deleteModalHandler }) => {
                 editPostHandler={editPostHandler}
                 deletePostHandler={deleteModalHandler}
               />
-              <PostSide like={like} />
+              <PostSide
+                like={like}
+                authorId={authorId}
+                following={following}
+                followHanlder={followHanlder}
+              />
             </section>
           </>
         )}

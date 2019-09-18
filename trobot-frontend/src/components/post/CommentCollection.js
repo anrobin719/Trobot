@@ -20,7 +20,7 @@ const CommentCollection = ({
     const userId = localStorage.getItem('userId');
     const nickname = localStorage.getItem('nickname');
     const img = localStorage.getItem('img');
-    const generatedId = userId + Math.floor(Math.random() * 9999);
+    const generatedId = userId + new Date().getTime();
 
     // 기존 댓글들에 새로운 키값으로 새 댓글 추가
     const updatedComments = updateObject(comments, {

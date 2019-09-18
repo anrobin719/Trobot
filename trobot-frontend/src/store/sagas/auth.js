@@ -38,6 +38,7 @@ export function* authUserSaga(action) {
   };
 
   try {
+    // 로그인, 회원가입 요청
     const response = yield axios.post(url, authData);
     console.log(response);
     yield put(
@@ -71,6 +72,12 @@ export function* authUserSaga(action) {
         const getUserInfoRes = yield axiosBase.get(`/user/${userId}.json`);
         yield localStorage.setItem('nickname', getUserInfoRes.data.nickname);
         yield localStorage.setItem('img', getUserInfoRes.data.img);
+        yield put(
+          actions.authSaveFollow(
+            getUserInfoRes.data.following,
+            getUserInfoRes.data.follower,
+          ),
+        );
         console.log(
           `Sign In user info(nickname, img) get! and setted in local storage!`,
         );
@@ -95,6 +102,7 @@ export function* authUserSaga(action) {
 
 export function* checkAuthSaga() {
   const token = yield localStorage.getItem('token');
+  const userId = yield localStorage.getItem('userId');
 
   if (!token) {
     yield put(actions.authLogout());
@@ -114,5 +122,69 @@ export function* checkAuthSaga() {
         ),
       );
     }
+    // 로그인 되어 있을 때, 팔로우 정보 저장
+    yield put(actions.reloadFollow(userId));
+  }
+}
+
+export function* followSaga(action) {
+  const { authorId, followingData } = action;
+  const userId = yield localStorage.getItem('userId');
+  const nickname = yield localStorage.getItem('nickname');
+  const email = yield localStorage.getItem('email');
+  const img = yield localStorage.getItem('img');
+  const followerData = {
+    userId,
+    nickname,
+    email,
+    img,
+  };
+  // 내 팔로잉에 상대 정보 저장
+  try {
+    const res = yield axiosBase.put(
+      `/user/${userId}/following/${authorId}.json`,
+      followingData,
+    );
+    console.log(`FOLLOWING`, res.data);
+    // 상대 유저 팔로워에 내정보 저장
+    try {
+      const saveOtherSideRes = yield axiosBase.put(
+        `/user/${authorId}/follower/${userId}.json`,
+        followerData,
+      );
+      console.log(`FOLLOWER`, saveOtherSideRes.data);
+    } catch (e) {
+      console.log('FOLLOWER_ERROR', e);
+    }
+    // 팔로잉, 팔로워 유저 저장 뒤, 리로드
+    yield put(actions.reloadFollow(userId));
+  } catch (err) {
+    console.log('FOLLOWING_ERROR', err);
+  }
+}
+
+// 팔로우 데이터 리로드
+export function* reloadFollowSaga(action) {
+  const { userId } = action;
+
+  try {
+    const getUserInfoRes = yield axiosBase.get(`/user/${userId}.json`);
+    // 팔로잉 유저 목록
+    const followingArray = [];
+    for (const followingId in getUserInfoRes.data.following) {
+      followingArray.push({
+        ...getUserInfoRes.data.following[followingId],
+      });
+    }
+    // 팔로워 유저 목록
+    const followerArray = [];
+    for (const followerId in getUserInfoRes.data.follower) {
+      followerArray.push({
+        ...getUserInfoRes.data.follower[followerId],
+      });
+    }
+    yield put(actions.authSaveFollow(followingArray, followerArray));
+  } catch (err) {
+    console.log(err);
   }
 }

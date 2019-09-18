@@ -5,6 +5,8 @@ const initialState = {
   token: null,
   userId: null,
   email: null,
+  following: null,
+  follower: null,
   loading: false,
   error: false,
 };
@@ -21,6 +23,13 @@ const authSuccess = (state, action) => {
     userId: action.userId,
     email: action.email,
     loading: false,
+  });
+};
+
+const authSaveFollow = (state, action) => {
+  return updateObject(state, {
+    following: action.following,
+    follower: action.follower,
   });
 };
 
@@ -74,6 +83,8 @@ const reducer = (state = initialState, action) => {
       return authStart(state);
     case actionTypes.AUTH_SUCCESS:
       return authSuccess(state, action);
+    case actionTypes.AUTH_SAVE_FOLLOW:
+      return authSaveFollow(state, action);
     case actionTypes.AUTH_FAIL:
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:

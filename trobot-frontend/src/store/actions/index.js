@@ -2,11 +2,14 @@ export {
   auth,
   authStart,
   authSuccess,
+  authSaveFollow,
   authFail,
   authLogout,
   logoutSucceed,
   checkAuth,
   checkAuthTimeOut,
+  follow,
+  reloadFollow, // followingSucceess, // followerSucceess,
 } from './auth';
 export {
   writePost,

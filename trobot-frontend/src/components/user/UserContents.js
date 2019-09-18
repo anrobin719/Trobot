@@ -7,12 +7,23 @@ import Button from '../ui/Button';
 import palette from '../../lib/styles/palette';
 
 const UserContents = ({
-  changeListHandler,
+  myPage,
+  unum,
+  following,
   isStoredList,
   // storedList,
   myList,
+  changeListHandler,
   pathHandler,
 }) => {
+  // 팔로잉 유저 중 현재 페이지 유저와 일치하는 경우가 있는지 확인
+  let isFollow;
+  if (following) {
+    isFollow = following.find(f => {
+      return f.userId === unum;
+    });
+  }
+
   return (
     <Wrapper>
       <Ideas>
@@ -36,9 +47,12 @@ const UserContents = ({
         )}
       </Ideas>
       <MoreInfo>
-        <Button theme="basic" size="full">
-          Follow
-        </Button>
+        {/* 현재 유저 페이지가 자신의 페이지일때, 팔로우 버튼 디스플레이 */}
+        {!myPage && (
+          <Button theme="basic" disabled={isFollow} size="full">
+            {isFollow ? `Following ✓` : 'Follow'}
+          </Button>
+        )}
       </MoreInfo>
     </Wrapper>
   );

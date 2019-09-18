@@ -48,17 +48,28 @@ class UserContentsContainer extends Component {
 
   render() {
     const { isStoredList } = this.state;
-    const { storedList, myList, loading } = this.props;
+    const {
+      isAuthenticated,
+      unum,
+      following,
+      storedList,
+      myList,
+      loading,
+    } = this.props;
+    const userId = localStorage.getItem('userId');
     return (
       <>
         {!myList || loading ? (
           <Loading />
         ) : (
           <UserContents
-            changeListHandler={this.changeListHandler}
+            myPage={isAuthenticated && unum === userId}
+            unum={unum}
+            following={following}
             isStoredList={isStoredList}
             // storedList={storedList}
             myList={myList}
+            changeListHandler={this.changeListHandler}
             pathHandler={this.pathHandler}
           />
         )}
@@ -74,6 +85,7 @@ const mapStateToProps = state => {
     storedList: state.list.storedList,
     myList: state.list.myList,
     loading: state.list.loading,
+    following: state.auth.following,
   };
 };
 

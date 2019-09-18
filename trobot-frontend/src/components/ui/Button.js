@@ -136,7 +136,7 @@ const disable = () => ({ disabled }) => {
   if (disabled) {
     return `
     background-color: ${palette.gray[3]};
-    color: ${palette.gray[5]};
+    color: ${palette.gray[6]};
     cursor: default;
     &:hover, &:active {
         box-shadow: none;

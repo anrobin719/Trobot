@@ -109,6 +109,8 @@ class Editor extends Component {
   onSubmit = async e => {
     const { post, pnum, editPostHandler, submitPostHandler } = this.props;
     const { controls } = this.state;
+    const nickname = localStorage.getItem('nickname');
+    const img = localStorage.getItem('img');
     const originPost = post.toJS();
     e.preventDefault();
     // 기존 포스트 수정시
@@ -117,20 +119,22 @@ class Editor extends Component {
       sub: controls.sub.value,
       tag: controls.tag.value,
       body: controls.body.value,
+      authorNickname: nickname,
+      authorImg: img,
     };
     const postData = {
       ...originPost,
       ...editorData,
     };
     // 새로운 포스트 작성시
-    const nickname = localStorage.getItem('nickname');
     const userId = localStorage.getItem('userId');
+    const email = localStorage.getItem('email');
     const newPostpublishedDate = new Date();
     const newPostData = {
       ...editorData,
       publishedDate: newPostpublishedDate,
-      authorNickname: nickname,
       authorId: userId,
+      authorEmail: email,
       like: 0,
       comment: null,
     };

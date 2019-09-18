@@ -53,3 +53,27 @@ export const checkAuth = () => {
     type: actionTypes.AUTH_CHECK,
   };
 };
+
+// 팔로우 관련 액션
+export const authSaveFollow = (following, follower) => {
+  return {
+    type: actionTypes.AUTH_SAVE_FOLLOW,
+    following,
+    follower,
+  };
+};
+
+export const follow = (authorId, followingData) => {
+  return {
+    type: actionTypes.FOLLOW,
+    authorId,
+    followingData,
+  };
+};
+
+export const reloadFollow = userId => {
+  return {
+    type: actionTypes.RELOAD_FOLLOW,
+    userId,
+  };
+};
