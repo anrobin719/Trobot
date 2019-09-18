@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Button from '../ui/Button';
 
 const PostSide = ({ authorId, following, followHanlder }) => {
+  const userId = localStorage.getItem('userId');
+
   // 팔로잉 유저 중 포스트 작성자와 일치하는 경우가 있는지 확인
   let isFollow;
   if (following) {
@@ -18,15 +20,18 @@ const PostSide = ({ authorId, following, followHanlder }) => {
       <Button theme="point" size="full" type="button">
         Like
       </Button>
-      <Button
-        theme="basic"
-        disabled={isFollow}
-        size="full"
-        type="button"
-        onClick={followHanlder}
-      >
-        {isFollow ? `Following ✓` : 'Follow'}
-      </Button>
+      {/* 로그인 되어있지 않거나, 현재 포스트가 자신의 포스트가 아닐 때, 팔로우 버튼 디스플레이 */}
+      {authorId !== userId && (
+        <Button
+          theme="basic"
+          disabled={isFollow}
+          size="full"
+          type="button"
+          onClick={followHanlder}
+        >
+          {isFollow ? `Following ✓` : 'Follow'}
+        </Button>
+      )}
     </ContentBox>
   );
 };

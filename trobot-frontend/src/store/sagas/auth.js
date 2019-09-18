@@ -72,12 +72,22 @@ export function* authUserSaga(action) {
         const getUserInfoRes = yield axiosBase.get(`/user/${userId}.json`);
         yield localStorage.setItem('nickname', getUserInfoRes.data.nickname);
         yield localStorage.setItem('img', getUserInfoRes.data.img);
-        yield put(
-          actions.authSaveFollow(
-            getUserInfoRes.data.following,
-            getUserInfoRes.data.follower,
-          ),
-        );
+
+        // 팔로잉 유저 목록
+        const followingArray = [];
+        for (const followingId in getUserInfoRes.data.following) {
+          followingArray.push({
+            ...getUserInfoRes.data.following[followingId],
+          });
+        }
+        // 팔로워 유저 목록
+        const followerArray = [];
+        for (const followerId in getUserInfoRes.data.follower) {
+          followerArray.push({
+            ...getUserInfoRes.data.follower[followerId],
+          });
+        }
+        yield put(actions.authSaveFollow(followingArray, followerArray));
         console.log(
           `Sign In user info(nickname, img) get! and setted in local storage!`,
         );
