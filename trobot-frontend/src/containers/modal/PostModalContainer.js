@@ -64,6 +64,11 @@ class PostModalContainer extends Component {
     onLikePost(postId);
   };
 
+  ModalHandler = () => {
+    const { onShowModal } = this.props;
+    onShowModal('askSignIn');
+  };
+
   render() {
     const {
       show,
@@ -91,6 +96,7 @@ class PostModalContainer extends Component {
           deleteModalHandler={this.deleteModalHandler}
           followHanlder={this.followHanlder}
           likeHandler={this.likeHandler}
+          showAskSignInModal={this.ModalHandler}
         />
       </>
     );

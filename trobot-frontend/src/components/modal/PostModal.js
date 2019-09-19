@@ -16,6 +16,7 @@ const PostModal = ({
   deleteModalHandler,
   followHanlder,
   likeHandler,
+  showAskSignInModal,
 }) => {
   return (
     <Modal show={show} isPost modalClosed={cancelHandler}>
@@ -29,6 +30,7 @@ const PostModal = ({
         deleteModalHandler={deleteModalHandler}
         followHanlder={followHanlder}
         likeHandler={likeHandler}
+        showAskSignInModal={showAskSignInModal}
       />
     </Modal>
   );

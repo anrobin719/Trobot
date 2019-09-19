@@ -115,6 +115,7 @@ export const deleteComment = (postId, commentId) => {
   };
 };
 
+// 포스트의 좋아요 클릭 시 실행
 export const likePost = postId => {
   return {
     type: actionTypes.LIKE_POST,
@@ -122,6 +123,7 @@ export const likePost = postId => {
   };
 };
 
+// 좋아요 클릭 시, 로그인 시 실행
 export const reloadLike = userId => {
   return {
     type: actionTypes.RELOAD_LIKE,
@@ -129,6 +131,7 @@ export const reloadLike = userId => {
   };
 };
 
+// 좋아요 목록 스토어에 저장
 export const saveLike = likePostArray => {
   return {
     type: actionTypes.SAVE_LIKE,

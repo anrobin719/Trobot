@@ -71,12 +71,12 @@ export function* likePostSaga(action) {
   const likeData = { name: userId };
 
   try {
-    // 포스트에 좋아요 저장
+    // 포스트에 좋아요 저장 - 유저 아이디를 key 값으로
     const res = yield axios.put(
       `/list/${postId}/like/${userId}.json`,
       likeData,
     );
-    // 내 데이터에 좋아요 정보 저장
+    // 내 데이터에 좋아요 정보 저장 - 포스트 아이디를 key 값으로
     try {
       const saveMySideRes = yield axios.put(
         `/user/${userId}/likePost/${postId}.json`,
@@ -87,6 +87,7 @@ export function* likePostSaga(action) {
       console.log(`SAVE_LIKE_TO_MY_DATA_ERROR`, e);
     }
     console.log('LIKE_POST_SUCCESS', res);
+    // 성공시 리로드
     yield put(actions.reloadLike(userId));
   } catch (err) {
     console.log('LIKE_POST_FAIL', err);
@@ -97,15 +98,17 @@ export function* likePostSaga(action) {
 export function* reloadLikeSaga(action) {
   const { userId } = action;
   try {
+    // 유저의 좋아요 포스트 정보 가져오기
     const getlikePostRes = yield axios.get(`/user/${userId}/likePost.json`);
-    // 좋아요 포스트 목록
+    // array 목록을 만들어 저장
     const likePostArray = [];
     for (const likePostId in getlikePostRes.data) {
       likePostArray.push({
-        ...getlikePostRes.data[likePostId],
+        // ...getlikePostRes.data[likePostId],
         likePostId,
       });
     }
+    // 가져온 데이터 스토어에 저장
     yield put(actions.saveLike(likePostArray));
   } catch (err) {
     console.log(err);

@@ -11,10 +11,26 @@ const PostSide = ({
   postId,
   followHanlder,
   likeHandler,
+  showAskSignInModal,
 }) => {
   const userId = localStorage.getItem('userId');
 
-  // 팔로잉 유저 중 포스트 작성자와 일치하는 경우가 있는지 확인
+  const onClickBtn = btnName => {
+    // 로그인 상태인 경우 정상 작동
+    if (userId && btnName === 'like') {
+      likeHandler();
+      console.log(`like btn clicked!`);
+    } else if (userId && btnName === 'follow') {
+      followHanlder();
+      console.log(`follow btn clicked!`);
+    }
+    // 아닌 경우 로그인 모달
+    else {
+      showAskSignInModal();
+    }
+  };
+
+  // 팔로잉 유저 중, 포스트 작성자와 일치하는 경우가 있는지 확인
   let isFollow;
   if (following) {
     isFollow = following.find(f => {
@@ -22,6 +38,7 @@ const PostSide = ({
     });
   }
 
+  // 좋아요한 포스트 중, 현재 포스트와 일치하는 경우가 있는지 확인
   let isLike;
   if (likePost) {
     isLike = likePost.find(f => {
@@ -29,6 +46,7 @@ const PostSide = ({
     });
   }
 
+  // 현재 포스트 좋아요 숫자 계산. 좋아요가 없을 경우 0 반환
   let likeNum = 0;
   if (like) {
     likeNum = Object.keys(like).length;
@@ -42,7 +60,7 @@ const PostSide = ({
         disabled={isLike}
         size="full"
         type="button"
-        onClick={likeHandler}
+        onClick={() => onClickBtn('like')}
       >
         Like {likeNum}
       </Button>
@@ -53,7 +71,7 @@ const PostSide = ({
           disabled={isFollow}
           size="full"
           type="button"
-          onClick={followHanlder}
+          onClick={() => onClickBtn('follow')}
         >
           {isFollow ? `Following ✓` : 'Follow'}
         </Button>

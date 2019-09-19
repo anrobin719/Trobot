@@ -38,16 +38,9 @@ export function* authUserSaga(action) {
   };
 
   try {
-    // 로그인, 회원가입 요청
+    // 인증 요청
     const response = yield axios.post(url, authData);
-    console.log(response);
-    yield put(
-      actions.authSuccess(
-        response.data.idToken,
-        response.data.localId,
-        response.data.email,
-      ),
-    );
+
     // 회원가입시 => user컬렉션에 userId를 key값으로 유저정보 저장 + 유저 정보 localStorage 저장
     if (action.authForm.signup) {
       const userId = response.data.localId;
@@ -58,11 +51,9 @@ export function* authUserSaga(action) {
         );
         yield localStorage.setItem('nickname', saveUserInfoRes.data.nickname);
         yield localStorage.setItem('img', saveUserInfoRes.data.img);
-        console.log(
-          `Sign Up user info(nickname, img) is saved! and setted in local storage!`,
-        );
+        console.log(`[SUCCESS] SIGN_UP USER INFO SET`);
       } catch (error) {
-        console.log(`Sign Up user info save fail :(`, error);
+        console.log(`[FAIL] SIGN_UP USER INFO SET`, error);
       }
     }
     // 로그인시 => user컬렉션에서 유저정보 가져오기 + 유저 정보 localStorage 저장
@@ -87,15 +78,27 @@ export function* authUserSaga(action) {
             ...getUserInfoRes.data.follower[followerId],
           });
         }
+
+        // 좋아요 포스트 목록
+        const likePostArray = [];
+        for (const likePostId in getUserInfoRes.data.likePost) {
+          likePostArray.push({
+            // ...getlikePostRes.data[likePostId],
+            likePostId,
+          });
+        }
+
+        // 팔로우 목록 스토어에 저장
         yield put(actions.authSaveFollow(followingArray, followerArray));
-        console.log(
-          `Sign In user info(nickname, img) get! and setted in local storage!`,
-        );
+        // 좋아요 목록 스토어에 저장
+        yield put(actions.saveLike(likePostArray));
+        console.log(`[SUCCESS] SIGN_IN USER INFO SET`);
       } catch (error) {
-        console.log(`Sign In user info save fail :(`, error);
+        console.log(`[FAIL] SIGN_IN USER INFO SET`, error);
       }
     }
-    // 유저 토큰, 아이디, 이메일, 만료일 localStorage 저장
+
+    // 회원가입, 로그인 공통 : 유저 토큰, 아이디, 이메일, 만료일 localStorage 저장
     yield localStorage.setItem('token', response.data.idToken);
     yield localStorage.setItem('userId', response.data.localId);
     yield localStorage.setItem('email', response.data.email);
@@ -104,9 +107,18 @@ export function* authUserSaga(action) {
     );
     yield localStorage.setItem('expirationDate', expirationDate);
     yield put(actions.checkAuthTimeOut(response.data.expiresIn));
+    yield put(
+      actions.authSuccess(
+        response.data.idToken,
+        response.data.localId,
+        response.data.email,
+      ),
+    );
+    console.log(`[SUCCESS] AUTH`);
   } catch (error) {
-    console.log(`Auth error response!`, error.response);
+    // 인증 실패시 오류 메세지 반환
     yield put(actions.authFail(error.response.data.error.message));
+    console.log(`[FAIL] AUTH`, error.response);
   }
 }
 

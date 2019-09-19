@@ -17,6 +17,7 @@ const Post = ({
   deleteModalHandler,
   followHanlder,
   likeHandler,
+  showAskSignInModal,
 }) => {
   // 포스트 할당
   const {
@@ -65,6 +66,7 @@ const Post = ({
                 postId={postId}
                 followHanlder={followHanlder}
                 likeHandler={likeHandler}
+                showAskSignInModal={showAskSignInModal}
               />
             </section>
           </>
