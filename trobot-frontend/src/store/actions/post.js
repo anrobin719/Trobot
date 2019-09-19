@@ -114,3 +114,24 @@ export const deleteComment = (postId, commentId) => {
     commentId,
   };
 };
+
+export const likePost = postId => {
+  return {
+    type: actionTypes.LIKE_POST,
+    postId,
+  };
+};
+
+export const reloadLike = userId => {
+  return {
+    type: actionTypes.RELOAD_LIKE,
+    userId,
+  };
+};
+
+export const saveLike = likePostArray => {
+  return {
+    type: actionTypes.SAVE_LIKE,
+    likePostArray,
+  };
+};

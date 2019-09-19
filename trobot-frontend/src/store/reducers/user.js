@@ -3,7 +3,6 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = Map({
   user: Map({}),
-  likePost: null,
   loading: false,
   error: false,
 });

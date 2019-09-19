@@ -7,6 +7,7 @@ const initialState = {
   email: null,
   following: null,
   follower: null,
+  likePost: null,
   loading: false,
   error: false,
 };
@@ -30,6 +31,12 @@ const authSaveFollow = (state, action) => {
   return updateObject(state, {
     following: action.following,
     follower: action.follower,
+  });
+};
+
+const saveLike = (state, action) => {
+  return updateObject(state, {
+    likePost: action.likePostArray,
   });
 };
 
@@ -85,6 +92,8 @@ const reducer = (state = initialState, action) => {
       return authSuccess(state, action);
     case actionTypes.AUTH_SAVE_FOLLOW:
       return authSaveFollow(state, action);
+    case actionTypes.SAVE_LIKE:
+      return saveLike(state, action);
     case actionTypes.AUTH_FAIL:
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:

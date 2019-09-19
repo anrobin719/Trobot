@@ -12,8 +12,6 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
 export const FOLLOW = 'FOLLOW';
 export const RELOAD_FOLLOW = 'RELOAD_FOLLOW';
-// export const FOLLOWING_SUCCESS = 'FOLLOWING_SUCCESS';
-// export const FOLLOWER_SUCCESS = 'FOLLOWER_SUCCESS';
 
 // EDITOR actionTypes
 export const WRITE_POST = 'WRITE_POST';
@@ -50,6 +48,10 @@ export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
 export const DELETE_COMMENT_FAIL = 'DELETE_COMMENT_FAIL';
 
 export const STORE_POST_ID = 'STORE_POST_ID';
+
+export const LIKE_POST = 'LIKE_POST';
+export const RELOAD_LIKE = 'RELOAD_LIKE';
+export const SAVE_LIKE = 'SAVE_LIKE';
 
 // LIST actionTypes
 export const GET_LIST = 'GET_LIST';

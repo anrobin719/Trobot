@@ -14,6 +14,8 @@ import {
   updatePostSaga,
   deletePostSaga,
   deleteCommentSaga,
+  likePostSaga,
+  reloadLikeSaga,
 } from './post';
 import { writePostSaga, editPostSaga } from './editor';
 import { getListSaga, getMyListSaga } from './list';
@@ -38,6 +40,8 @@ export function* watchPost() {
     takeEvery(actionTypes.UPDATE_POST, updatePostSaga),
     takeEvery(actionTypes.DELETE_POST, deletePostSaga),
     takeEvery(actionTypes.DELETE_COMMENT, deleteCommentSaga),
+    takeEvery(actionTypes.LIKE_POST, likePostSaga),
+    takeEvery(actionTypes.RELOAD_LIKE, reloadLikeSaga),
   ]);
 }
 

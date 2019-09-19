@@ -63,3 +63,51 @@ export function* deleteCommentSaga(action) {
     console.log('DELETE_COMMENT_FAIL', err);
   }
 }
+
+// 좋아요 저장
+export function* likePostSaga(action) {
+  const { postId } = action;
+  const userId = localStorage.getItem('userId');
+  const likeData = { name: userId };
+
+  try {
+    // 포스트에 좋아요 저장
+    const res = yield axios.put(
+      `/list/${postId}/like/${userId}.json`,
+      likeData,
+    );
+    // 내 데이터에 좋아요 정보 저장
+    try {
+      const saveMySideRes = yield axios.put(
+        `/user/${userId}/likePost/${postId}.json`,
+        likeData,
+      );
+      console.log(`SAVE_LIKE_TO_MY_DATA`, saveMySideRes.data);
+    } catch (e) {
+      console.log(`SAVE_LIKE_TO_MY_DATA_ERROR`, e);
+    }
+    console.log('LIKE_POST_SUCCESS', res);
+    yield put(actions.reloadLike(userId));
+  } catch (err) {
+    console.log('LIKE_POST_FAIL', err);
+  }
+}
+
+// 좋아요 데이터 리로드
+export function* reloadLikeSaga(action) {
+  const { userId } = action;
+  try {
+    const getlikePostRes = yield axios.get(`/user/${userId}/likePost.json`);
+    // 좋아요 포스트 목록
+    const likePostArray = [];
+    for (const likePostId in getlikePostRes.data) {
+      likePostArray.push({
+        ...getlikePostRes.data[likePostId],
+        likePostId,
+      });
+    }
+    yield put(actions.saveLike(likePostArray));
+  } catch (err) {
+    console.log(err);
+  }
+}

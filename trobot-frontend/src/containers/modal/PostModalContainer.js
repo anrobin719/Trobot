@@ -59,8 +59,22 @@ class PostModalContainer extends Component {
     onFollow(authorId, followData);
   };
 
+  likeHandler = () => {
+    const { onLikePost, postId } = this.props;
+    onLikePost(postId);
+  };
+
   render() {
-    const { show, post, postTag, deleted, loading, following } = this.props;
+    const {
+      show,
+      post,
+      postId,
+      postTag,
+      deleted,
+      loading,
+      following,
+      likePost,
+    } = this.props;
     return (
       <>
         {/* 삭제된 상태일 경우, /list/tag로 경로 이동 */}
@@ -70,10 +84,13 @@ class PostModalContainer extends Component {
           loading={loading}
           show={show}
           following={following}
+          likePost={likePost}
+          postId={postId}
           cancelHandler={this.cancelHandler}
           editPostHandler={this.editPostHandler}
           deleteModalHandler={this.deleteModalHandler}
           followHanlder={this.followHanlder}
+          likeHandler={this.likeHandler}
         />
       </>
     );
@@ -90,6 +107,7 @@ const mapStateToProps = state => {
     reload: state.post.get('reload'),
     loading: state.post.get('loading'),
     following: state.auth.following,
+    likePost: state.auth.likePost,
     // isAuthenticated: state.auth.token !== null,
   };
 };
@@ -101,6 +119,7 @@ const mapDispatchToProps = dispatch => {
     onCancelModal: modalName => dispatch(actions.hideModal(modalName)),
     onFollow: (authorId, followData) =>
       dispatch(actions.follow(authorId, followData)),
+    onLikePost: postId => dispatch(actions.likePost(postId)),
   };
 };
 

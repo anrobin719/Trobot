@@ -41,6 +41,9 @@ export {
   deleteCommentStart,
   deleteCommentSuccess,
   deleteCommentFail,
+  likePost,
+  reloadLike,
+  saveLike,
 } from './post';
 export {
   getList,

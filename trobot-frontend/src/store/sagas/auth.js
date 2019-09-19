@@ -132,8 +132,9 @@ export function* checkAuthSaga() {
         ),
       );
     }
-    // 로그인 되어 있을 때, 팔로우 정보 저장
+    // 로그인 되어 있을 때, 팔로우 정보, 좋아요 정보 저장
     yield put(actions.reloadFollow(userId));
+    yield put(actions.reloadLike(userId));
   }
 }
 

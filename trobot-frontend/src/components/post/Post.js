@@ -9,11 +9,14 @@ import Loading from '../ui/Loading';
 
 const Post = ({
   post,
+  postId,
   loading,
   following,
+  likePost,
   editPostHandler,
   deleteModalHandler,
   followHanlder,
+  likeHandler,
 }) => {
   // 포스트 할당
   const {
@@ -58,7 +61,10 @@ const Post = ({
                 like={like}
                 authorId={authorId}
                 following={following}
+                likePost={likePost}
+                postId={postId}
                 followHanlder={followHanlder}
+                likeHandler={likeHandler}
               />
             </section>
           </>
