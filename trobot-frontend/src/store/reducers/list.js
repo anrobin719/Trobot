@@ -3,8 +3,8 @@ import { updateObject } from '../../lib/shared/utility';
 
 const initialState = {
   list: null,
-  storedList: null,
   myList: null,
+  likeList: null,
   loading: true,
   error: false,
 };
@@ -26,7 +26,7 @@ const getListFail = state => {
     error: true,
   });
 };
-
+// 작성한 아이디어 저장
 const getMyListStart = state => {
   return updateObject(state, {
     loading: true,
@@ -39,6 +39,25 @@ const getMyListSuccess = (state, action) => {
   });
 };
 const getMyListFail = state => {
+  return updateObject(state, {
+    loading: false,
+    error: true,
+  });
+};
+
+// 좋아요 아이디어 저장
+const getLikeListStart = state => {
+  return updateObject(state, {
+    loading: true,
+  });
+};
+const getLikeListSuccess = (state, action) => {
+  return updateObject(state, {
+    likeList: action.likeList,
+    loading: false,
+  });
+};
+const getLikeListFail = state => {
   return updateObject(state, {
     loading: false,
     error: true,
@@ -59,6 +78,12 @@ const reducer = (state = initialState, action) => {
       return getMyListSuccess(state, action);
     case actionTypes.GET_MY_LIST_FAIL:
       return getMyListFail(state);
+    case actionTypes.GET_LIKE_LIST_START:
+      return getLikeListStart(state);
+    case actionTypes.GET_LIKE_LIST_SUCCESS:
+      return getLikeListSuccess(state, action);
+    case actionTypes.GET_LIKE_LIST_FAIL:
+      return getLikeListFail(state);
     default:
       return state;
   }

@@ -18,7 +18,7 @@ import {
   reloadLikeSaga,
 } from './post';
 import { writePostSaga, editPostSaga } from './editor';
-import { getListSaga, getMyListSaga } from './list';
+import { getListSaga, getMyListSaga, getLikeListSaga } from './list';
 import { getPeopleSaga } from './people';
 import { getUserInfoSaga } from './user';
 
@@ -56,6 +56,7 @@ export function* watchList() {
   yield all([
     takeEvery(actionTypes.GET_LIST, getListSaga),
     takeEvery(actionTypes.GET_MY_LIST, getMyListSaga),
+    takeEvery(actionTypes.GET_LIKE_LIST, getLikeListSaga),
   ]);
 }
 

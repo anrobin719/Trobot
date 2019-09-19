@@ -60,8 +60,8 @@ class PostModalContainer extends Component {
   };
 
   likeHandler = () => {
-    const { onLikePost, postId } = this.props;
-    onLikePost(postId);
+    const { onLikePost, postId, post } = this.props;
+    onLikePost(postId, post);
   };
 
   ModalHandler = () => {
@@ -125,7 +125,7 @@ const mapDispatchToProps = dispatch => {
     onCancelModal: modalName => dispatch(actions.hideModal(modalName)),
     onFollow: (authorId, followData) =>
       dispatch(actions.follow(authorId, followData)),
-    onLikePost: postId => dispatch(actions.likePost(postId)),
+    onLikePost: (postId, post) => dispatch(actions.likePost(postId, post)),
   };
 };
 

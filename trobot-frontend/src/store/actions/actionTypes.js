@@ -64,6 +64,11 @@ export const GET_MY_LIST_START = 'GET_MY_LIST_START';
 export const GET_MY_LIST_SUCCESS = 'GET_MY_LIST_SUCCESS';
 export const GET_MY_LIST_FAIL = 'GET_MY_LIST_FAIL';
 
+export const GET_LIKE_LIST = 'GET_LIKE_LIST';
+export const GET_LIKE_LIST_START = 'GET_LIKE_LIST_START';
+export const GET_LIKE_LIST_SUCCESS = 'GET_LIKE_LIST_SUCCESS';
+export const GET_LIKE_LIST_FAIL = 'GET_LIKE_LIST_FAIL';
+
 // BASE actionTypes
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';

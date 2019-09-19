@@ -10,32 +10,32 @@ class UserContentsContainer extends Component {
     super(props);
     this.state = {
       // 리스트 변경용 상태 저장
-      isStoredList: false,
+      isLikeList: false,
     };
   }
 
   componentDidMount() {
-    const { unum, onGetMyList } = this.props;
+    const { unum, onGetMyList, onGetLikeList } = this.props;
     onGetMyList(unum);
-    // onGetStoredList(unum);
+    onGetLikeList(unum);
   }
 
   componentDidUpdate(prevProps) {
-    const { unum, onGetMyList } = this.props;
+    const { unum, onGetMyList, onGetLikeList } = this.props;
     if (unum !== prevProps.unum) {
       onGetMyList(unum);
-      // onGetStoredList(unum);
+      onGetLikeList(unum);
     }
   }
 
   changeListHandler = status => {
-    if (status === 'stored') {
+    if (status === 'like') {
       this.setState({
-        isStoredList: true,
+        isLikeList: true,
       });
     } else {
       this.setState({
-        isStoredList: false,
+        isLikeList: false,
       });
     }
   };
@@ -47,12 +47,13 @@ class UserContentsContainer extends Component {
   };
 
   render() {
-    const { isStoredList } = this.state;
+    const { isLikeList } = this.state;
     const {
       isAuthenticated,
       unum,
       following,
-      storedList,
+      likeList,
+      likePost,
       myList,
       loading,
     } = this.props;
@@ -66,9 +67,13 @@ class UserContentsContainer extends Component {
             myPage={isAuthenticated && unum === userId}
             unum={unum}
             following={following}
-            isStoredList={isStoredList}
-            // storedList={storedList}
+            isLikeList={isLikeList}
+            // 저장한 아이디어 리스트
             myList={myList}
+            // 좋아요한 아이디어 리스트 - 로그인한 유저 용
+            likeList={likeList}
+            // 좋아요한 아이디어 리스트 - 다른 유저용
+            likePost={likePost}
             changeListHandler={this.changeListHandler}
             pathHandler={this.pathHandler}
           />
@@ -82,16 +87,18 @@ const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null,
     otherUserId: state.user.getIn(['user', 'userId']),
-    storedList: state.list.storedList,
     myList: state.list.myList,
+    likeList: state.list.likeList,
     loading: state.list.loading,
     following: state.auth.following,
+    likePost: state.auth.likePost,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onGetMyList: userId => dispatch(actions.getMyList(userId)),
+    onGetLikeList: userId => dispatch(actions.getLikeList(userId)),
     onStorePostId: (postId, postTag) =>
       dispatch(actions.storePostId(postId, postTag)),
     onShowModal: modalName => dispatch(actions.showModal(modalName)),

@@ -32,6 +32,7 @@ export function* getListSaga(action) {
   }
 }
 
+// 작성한 아이디어 요청
 export function* getMyListSaga(action) {
   const { userId } = action;
   yield put(actions.getMyListStart());
@@ -52,5 +53,27 @@ export function* getMyListSaga(action) {
   } catch (err) {
     console.log('GET_MY_LIST_FAIL', err);
     yield put(actions.getMyListFail());
+  }
+}
+
+// 작성한 아이디어 요청
+export function* getLikeListSaga(action) {
+  const { userId } = action;
+  yield put(actions.getLikeListStart());
+
+  try {
+    const res = yield axios.get(`/user/${userId}/likePost.json`);
+    const receivedData = [];
+    for (const postId in res.data) {
+      receivedData.push({
+        ...res.data[postId],
+        postId,
+      });
+    }
+    yield put(actions.getLikeListSuccess(receivedData));
+    console.log('GET_LIKE_LIST_SUCCESS', receivedData);
+  } catch (err) {
+    console.log('GET_LIKE_LIST_FAIL', err);
+    yield put(actions.getLikeListFail());
   }
 }

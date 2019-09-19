@@ -116,10 +116,11 @@ export const deleteComment = (postId, commentId) => {
 };
 
 // 포스트의 좋아요 클릭 시 실행
-export const likePost = postId => {
+export const likePost = (postId, post) => {
   return {
     type: actionTypes.LIKE_POST,
     postId,
+    post,
   };
 };
 

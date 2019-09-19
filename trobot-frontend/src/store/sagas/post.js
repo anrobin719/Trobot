@@ -66,9 +66,9 @@ export function* deleteCommentSaga(action) {
 
 // 좋아요 저장
 export function* likePostSaga(action) {
-  const { postId } = action;
+  const { postId, post } = action;
   const userId = localStorage.getItem('userId');
-  const likeData = { name: userId };
+  const likeData = { userId };
 
   try {
     // 포스트에 좋아요 저장 - 유저 아이디를 key 값으로
@@ -80,7 +80,7 @@ export function* likePostSaga(action) {
     try {
       const saveMySideRes = yield axios.put(
         `/user/${userId}/likePost/${postId}.json`,
-        likeData,
+        post,
       );
       console.log(`SAVE_LIKE_TO_MY_DATA`, saveMySideRes.data);
     } catch (e) {
@@ -102,10 +102,10 @@ export function* reloadLikeSaga(action) {
     const getlikePostRes = yield axios.get(`/user/${userId}/likePost.json`);
     // array 목록을 만들어 저장
     const likePostArray = [];
-    for (const likePostId in getlikePostRes.data) {
+    for (const postId in getlikePostRes.data) {
       likePostArray.push({
-        // ...getlikePostRes.data[likePostId],
-        likePostId,
+        ...getlikePostRes.data[postId],
+        postId,
       });
     }
     // 가져온 데이터 스토어에 저장

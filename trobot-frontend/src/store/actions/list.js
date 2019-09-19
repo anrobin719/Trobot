@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 
+// 글로벌 목록 관련
 export const getListStart = () => {
   return {
     type: actionTypes.GET_LIST_START,
@@ -26,6 +27,7 @@ export const getList = tag => {
   };
 };
 
+// 작성 목록 관련
 export const getMyListStart = () => {
   return {
     type: actionTypes.GET_MY_LIST_START,
@@ -48,6 +50,33 @@ export const getMyListFail = () => {
 export const getMyList = userId => {
   return {
     type: actionTypes.GET_MY_LIST,
+    userId,
+  };
+};
+
+// 본인 페이지가 아닐 경우, 유저 좋아요 목록 가져오기
+export const getLikeListStart = () => {
+  return {
+    type: actionTypes.GET_LIKE_LIST_START,
+  };
+};
+
+export const getLikeListSuccess = likeList => {
+  return {
+    type: actionTypes.GET_LIKE_LIST_SUCCESS,
+    likeList,
+  };
+};
+
+export const getLikeListFail = () => {
+  return {
+    type: actionTypes.GET_LIKE_LIST_FAIL,
+  };
+};
+
+export const getLikeList = userId => {
+  return {
+    type: actionTypes.GET_LIKE_LIST,
     userId,
   };
 };

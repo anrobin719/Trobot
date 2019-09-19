@@ -10,9 +10,13 @@ const UserContents = ({
   myPage,
   unum,
   following,
-  isStoredList,
-  // storedList,
+  isLikeList,
+  // 저장한 아이디어 리스트
   myList,
+  // 좋아요한 아이디어 리스트 - 로그인한 유저 용
+  likeList,
+  // 좋아요한 아이디어 리스트 - 다른 유저용
+  likePost,
   changeListHandler,
   pathHandler,
 }) => {
@@ -29,25 +33,28 @@ const UserContents = ({
       <Ideas>
         <div>
           <Button
-            theme={isStoredList && 'active'}
-            onClick={() => changeListHandler('stored')}
+            theme={isLikeList && 'active'}
+            onClick={() => changeListHandler('like')}
           >
-            저장 아이디어
+            좋아요한 아이디어
           </Button>
           <Button
-            theme={!isStoredList && 'active'}
+            theme={!isLikeList && 'active'}
             onClick={() => changeListHandler('my')}
           >
-            작성 아이디어
+            작성한 아이디어
           </Button>
         </div>
-        {isStoredList ? null : (
-          // <IdeaList list={storedList} />
+        {/* 좋아요한 아이디어, 작성한 아이디어 스위치 버튼 */}
+        {isLikeList ? (
+          // 내 페이지 일 때, 다른 유저 페이지 일 때 구분
+          <IdeaList list={myPage ? likePost : likeList} />
+        ) : (
           <IdeaList list={myList} pathHandler={pathHandler} />
         )}
       </Ideas>
       <MoreInfo>
-        {/* 현재 유저 페이지가 자신의 페이지일때, 팔로우 버튼 디스플레이 */}
+        {/* 현재 유저 페이지가 자신의 페이지가 아닐 때, 팔로우 버튼 디스플레이 */}
         {!myPage && (
           <Button theme="basic" disabled={isFollow} size="full">
             {isFollow ? `Following ✓` : 'Follow'}
@@ -61,14 +68,12 @@ const UserContents = ({
 const Wrapper = styled(Responsive)`
   display: flex;
   justify-content: space-between;
-  //   outline: 1px solid red;
   padding-top: 3rem;
   padding-bottom: 6rem;
 `;
 
 const Ideas = styled.section`
   flex: 0 0 60%;
-  //   outline: 1px solid red;
   > div {
     display: flex;
     margin-bottom: 1rem;
@@ -89,7 +94,6 @@ const Ideas = styled.section`
 const MoreInfo = styled.section`
   padding-top: 2rem;
   flex: 0 0 36%;
-  //   outline: 1px solid red;
 `;
 
 export default UserContents;
