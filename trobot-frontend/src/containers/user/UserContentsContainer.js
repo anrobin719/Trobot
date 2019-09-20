@@ -48,6 +48,23 @@ class UserContentsContainer extends Component {
     onShowModal('post');
   };
 
+  followHanlder = () => {
+    const { onFollow, unum, user } = this.props;
+    const { email, nickname, img } = user.toJS();
+    const followData = {
+      userId: unum,
+      nickname,
+      email,
+      img,
+    };
+    onFollow(unum, followData);
+  };
+
+  showAskSignInModal = () => {
+    const { onShowModal } = this.props;
+    onShowModal('askSignIn');
+  };
+
   render() {
     const { isLikeList } = this.state;
     const {
@@ -82,6 +99,8 @@ class UserContentsContainer extends Component {
             followerList={followerList}
             changeListHandler={this.changeListHandler}
             pathHandler={this.pathHandler}
+            followHanlder={this.followHanlder}
+            showAskSignInModal={this.showAskSignInModal}
           />
         )}
       </>
@@ -100,6 +119,7 @@ const mapStateToProps = state => {
     followingList: state.list.followingList,
     followerList: state.list.followerList,
     loading: state.list.loading,
+    user: state.user.get('user'),
   };
 };
 
@@ -111,6 +131,8 @@ const mapDispatchToProps = dispatch => {
     onStorePostId: (postId, postTag) =>
       dispatch(actions.storePostId(postId, postTag)),
     onShowModal: modalName => dispatch(actions.showModal(modalName)),
+    onFollow: (authorId, followData) =>
+      dispatch(actions.follow(authorId, followData)),
   };
 };
 

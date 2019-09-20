@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import IdeaList from '../list/IdeaList';
 import Button from '../ui/Button';
@@ -21,6 +21,20 @@ class UserContents extends Component {
     this.setState({
       toggle: !toggle,
     });
+  };
+
+  onClickBtn = () => {
+    const { followHanlder, showAskSignInModal } = this.props;
+    const userId = localStorage.getItem('userId');
+    // 로그인 상태인 경우 정상 작동
+    if (userId) {
+      followHanlder();
+      console.log(`follow btn clicked!`);
+    }
+    // 아닌 경우 로그인 모달
+    else {
+      showAskSignInModal();
+    }
   };
 
   render() {
@@ -86,7 +100,12 @@ class UserContents extends Component {
         <MoreInfo>
           {/* 현재 유저 페이지가 자신의 페이지가 아닐 때, 팔로우 버튼 디스플레이 */}
           {!myPage && (
-            <Button theme="basic" disabled={isFollow} size="full">
+            <Button
+              theme="basic"
+              disabled={isFollow}
+              size="full"
+              onClick={this.onClickBtn}
+            >
               {isFollow ? `Following ✓` : 'Follow'}
             </Button>
           )}
