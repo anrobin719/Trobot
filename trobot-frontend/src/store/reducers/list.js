@@ -5,6 +5,8 @@ const initialState = {
   list: null,
   myList: null,
   likeList: null,
+  followingList: null,
+  followerList: null,
   loading: true,
   error: false,
 };
@@ -26,7 +28,7 @@ const getListFail = state => {
     error: true,
   });
 };
-// 작성한 아이디어 저장
+// 작성한 아이디어 목록 저장
 const getMyListStart = state => {
   return updateObject(state, {
     loading: true,
@@ -45,7 +47,7 @@ const getMyListFail = state => {
   });
 };
 
-// 좋아요 아이디어 저장
+// 좋아요한 아이디어 목록 저장
 const getLikeListStart = state => {
   return updateObject(state, {
     loading: true,
@@ -58,6 +60,26 @@ const getLikeListSuccess = (state, action) => {
   });
 };
 const getLikeListFail = state => {
+  return updateObject(state, {
+    loading: false,
+    error: true,
+  });
+};
+
+// 팔로잉, 팔로워 목록 저장
+const getFollowListStart = state => {
+  return updateObject(state, {
+    loading: true,
+  });
+};
+const getFollowListSuccess = (state, action) => {
+  return updateObject(state, {
+    followingList: action.followingList,
+    followerList: action.followerList,
+    loading: false,
+  });
+};
+const getFollowListFail = state => {
   return updateObject(state, {
     loading: false,
     error: true,
@@ -84,6 +106,12 @@ const reducer = (state = initialState, action) => {
       return getLikeListSuccess(state, action);
     case actionTypes.GET_LIKE_LIST_FAIL:
       return getLikeListFail(state);
+    case actionTypes.GET_FOLLOW_LIST_START:
+      return getFollowListStart(state);
+    case actionTypes.GET_FOLLOW_LIST_SUCCESS:
+      return getFollowListSuccess(state, action);
+    case actionTypes.GET_FOLLOW_LIST_FAIL:
+      return getFollowListFail(state);
     default:
       return state;
   }

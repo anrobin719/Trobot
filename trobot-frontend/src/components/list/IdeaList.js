@@ -1,8 +1,7 @@
 import React from 'react';
 
-import styled from 'styled-components';
 import Idea from './Idea';
-import shadow from '../../lib/styles/shadow';
+import ListBox from './ListBox';
 
 const IdeaList = ({ list, pathHandler }) => {
   // const { like } = list.toJS();
@@ -25,17 +24,7 @@ const IdeaList = ({ list, pathHandler }) => {
     );
   });
 
-  return <IdeaListBox>{ideas}</IdeaListBox>;
+  return <ListBox>{ideas}</ListBox>;
 };
-
-const IdeaListBox = styled.div`
-  display: flex;
-  flex-flow: column;
-  width: 100%;
-  background: white;
-  border-radius: .6rem;
-  overflow-hidden;
-  box-shadow: ${shadow.basic[0]};
-`;
 
 export default IdeaList;

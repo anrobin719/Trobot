@@ -58,6 +58,10 @@ export {
   getLikeListStart,
   getLikeListSuccess,
   getLikeListFail,
+  getFollowList,
+  getFollowListStart,
+  getFollowListSuccess,
+  getFollowListFail,
 } from './list';
 export { showModal, hideModal } from './base';
 export {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import CloseIcon from '@material-ui/icons/Close';
+import ProfileImg from '../ui/ProfileImg';
 import palette from '../../lib/styles/palette';
 
 const Comment = ({
@@ -18,11 +19,7 @@ const Comment = ({
   return (
     <CommentBox>
       {/* 프로필 이미지 */}
-      <ProfileImg>
-        <Link to={`/user/${userId}`}>
-          <img src={img} alt={id} />
-        </Link>
-      </ProfileImg>
+      <ProfileImg img={img} userId={userId} />
       {/* 유저 닉네임, 댓글 내용 */}
       <Contents>
         <Link to={`/user/${userId}`}>
@@ -54,18 +51,6 @@ const CommentBox = styled.div`
 
 const Contents = styled.div`
   margin-left: 1rem;
-`;
-
-const ProfileImg = styled.div`
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  overflow: hidden;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 `;
 
 const DeleteBtnBox = styled.div`

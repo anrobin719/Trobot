@@ -15,16 +15,18 @@ class UserContentsContainer extends Component {
   }
 
   componentDidMount() {
-    const { unum, onGetMyList, onGetLikeList } = this.props;
+    const { unum, onGetMyList, onGetLikeList, onGetFollowList } = this.props;
     onGetMyList(unum);
     onGetLikeList(unum);
+    onGetFollowList(unum);
   }
 
   componentDidUpdate(prevProps) {
-    const { unum, onGetMyList, onGetLikeList } = this.props;
+    const { unum, onGetMyList, onGetLikeList, onGetFollowList } = this.props;
     if (unum !== prevProps.unum) {
       onGetMyList(unum);
       onGetLikeList(unum);
+      onGetFollowList(unum);
     }
   }
 
@@ -51,10 +53,12 @@ class UserContentsContainer extends Component {
     const {
       isAuthenticated,
       unum,
-      following,
-      likeList,
-      likePost,
       myList,
+      likePost,
+      likeList,
+      following,
+      followingList,
+      followerList,
       loading,
     } = this.props;
     const userId = localStorage.getItem('userId');
@@ -66,7 +70,6 @@ class UserContentsContainer extends Component {
           <UserContents
             myPage={isAuthenticated && unum === userId}
             unum={unum}
-            following={following}
             isLikeList={isLikeList}
             // 저장한 아이디어 리스트
             myList={myList}
@@ -74,6 +77,9 @@ class UserContentsContainer extends Component {
             likeList={likeList}
             // 좋아요한 아이디어 리스트 - 다른 유저용
             likePost={likePost}
+            following={following}
+            followingList={followingList}
+            followerList={followerList}
             changeListHandler={this.changeListHandler}
             pathHandler={this.pathHandler}
           />
@@ -88,10 +94,12 @@ const mapStateToProps = state => {
     isAuthenticated: state.auth.token !== null,
     otherUserId: state.user.getIn(['user', 'userId']),
     myList: state.list.myList,
-    likeList: state.list.likeList,
-    loading: state.list.loading,
-    following: state.auth.following,
     likePost: state.auth.likePost,
+    likeList: state.list.likeList,
+    following: state.auth.following,
+    followingList: state.list.followingList,
+    followerList: state.list.followerList,
+    loading: state.list.loading,
   };
 };
 
@@ -99,6 +107,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onGetMyList: userId => dispatch(actions.getMyList(userId)),
     onGetLikeList: userId => dispatch(actions.getLikeList(userId)),
+    onGetFollowList: userId => dispatch(actions.getFollowList(userId)),
     onStorePostId: (postId, postTag) =>
       dispatch(actions.storePostId(postId, postTag)),
     onShowModal: modalName => dispatch(actions.showModal(modalName)),

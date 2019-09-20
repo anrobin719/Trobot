@@ -56,7 +56,7 @@ export function* getMyListSaga(action) {
   }
 }
 
-// 작성한 아이디어 요청
+// 좋아요한 아이디어 요청
 export function* getLikeListSaga(action) {
   const { userId } = action;
   yield put(actions.getLikeListStart());
@@ -75,5 +75,43 @@ export function* getLikeListSaga(action) {
   } catch (err) {
     console.log('GET_LIKE_LIST_FAIL', err);
     yield put(actions.getLikeListFail());
+  }
+}
+
+// 팔로우 관련 유저목록 요청
+export function* getFollowListSaga(action) {
+  const { userId } = action;
+  yield put(actions.getFollowListStart());
+
+  try {
+    const followingList = [];
+    const followerList = [];
+
+    // 팔로잉 리스트 요성
+    const followingRes = yield axios.get(`/user/${userId}/following.json`);
+    for (const userId in followingRes.data) {
+      followingList.push({
+        ...followingRes.data[userId],
+      });
+    }
+
+    // 팔로워 리스트 요청
+    try {
+      const followerRes = yield axios.get(`/user/${userId}/follower.json`);
+      for (const userId in followerRes.data) {
+        followerList.push({
+          ...followerRes.data[userId],
+        });
+      }
+    } catch (err) {
+      console.log('GET_FOLLOWER_LIST_FAIL', err);
+    }
+
+    // 팔로잉, 팔로워 리스트 저장
+    yield put(actions.getFollowListSuccess(followingList, followerList));
+    console.log('GET_FOLLOW_LIST_SUCCESS', followingList, followerList);
+  } catch (err) {
+    yield put(actions.getFollowListFail());
+    console.log('GET_FOLLOW_LIST_FAIL', err);
   }
 }

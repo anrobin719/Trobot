@@ -11,6 +11,16 @@ class UserProfileContainer extends Component {
     // 마이페이지가 아닌 다른 유저 페이지 방문시에만 유저 정보 get
     if (userId !== unum) {
       onGetUserInfo(unum);
+      console.log('MOUNT');
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { onGetUserInfo, unum } = this.props;
+    // 다른 유저 페이지로 전환시 유저 정보 get
+    if (unum !== prevProps.unum) {
+      onGetUserInfo(unum);
+      console.log('UPDATE');
     }
   }
 

@@ -81,10 +81,10 @@ export function* authUserSaga(action) {
 
         // 좋아요 포스트 목록
         const likePostArray = [];
-        for (const likePostId in getUserInfoRes.data.likePost) {
+        for (const postId in getUserInfoRes.data.likePost) {
           likePostArray.push({
-            // ...getlikePostRes.data[likePostId],
-            likePostId,
+            ...getUserInfoRes.data.likePost[postId],
+            postId,
           });
         }
 

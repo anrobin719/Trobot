@@ -80,3 +80,31 @@ export const getLikeList = userId => {
     userId,
   };
 };
+
+// 팔로우 리스트 가져오기
+export const getFollowListStart = () => {
+  return {
+    type: actionTypes.GET_FOLLOW_LIST_START,
+  };
+};
+
+export const getFollowListSuccess = (followingList, followerList) => {
+  return {
+    type: actionTypes.GET_FOLLOW_LIST_SUCCESS,
+    followingList,
+    followerList,
+  };
+};
+
+export const getFollowListFail = () => {
+  return {
+    type: actionTypes.GET_FOLLOW_LIST_FAIL,
+  };
+};
+
+export const getFollowList = userId => {
+  return {
+    type: actionTypes.GET_FOLLOW_LIST,
+    userId,
+  };
+};
