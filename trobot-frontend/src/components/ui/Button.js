@@ -66,6 +66,17 @@ const outline = () => ({ theme }) => {
   return null;
 };
 
+const outlinePoint = () => ({ theme }) => {
+  if (theme === 'outlinePoint') {
+    return `
+      color: ${palette.point[2]};
+      background-color: transparent;
+      border: 1px solid ${palette.point[2]};
+      `;
+  }
+  return null;
+};
+
 const outlineWhite = () => ({ theme }) => {
   if (theme === 'outlineWhite') {
     return `
@@ -135,12 +146,12 @@ const big = () => ({ size }) => {
 const disable = () => ({ disabled }) => {
   if (disabled) {
     return `
-    background-color: ${palette.gray[3]};
-    color: ${palette.gray[6]};
+    // background-color: ${palette.gray[3]};
+    // color: ${palette.gray[6]};
     cursor: default;
     &:hover, &:active {
         box-shadow: none;
-        background-color: ${palette.gray[3]};
+        // background-color: ${palette.gray[3]};
     }
       `;
   }
@@ -164,6 +175,7 @@ const BasicButton = styled.button`
     ${basic}
     ${point}
     ${outline}
+    ${outlinePoint}
     ${outlineWhite}
     ${circleBtn}
     ${full}
@@ -188,6 +200,7 @@ const LinkButton = styled.a`
     ${basic}
     ${point}
     ${outline}
+    ${outlinePoint}
     ${outlineWhite}
     ${circleBtn}
     ${full}

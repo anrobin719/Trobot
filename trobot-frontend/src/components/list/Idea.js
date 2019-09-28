@@ -45,10 +45,12 @@ const ContentBox = styled.div`
   align-items: center;
   h3 {
     font-size: 1rem;
+    margin-bottom: 0.3rem;
   }
   h6 {
     font-size: 0.8rem;
     font-weight: 400;
+    color: ${palette.gray[6]};
   }
 `;
 

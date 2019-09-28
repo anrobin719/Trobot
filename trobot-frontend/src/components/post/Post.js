@@ -25,7 +25,7 @@ const Post = ({
     // sub,
     tag,
     body,
-    like,
+    // like,
     // comments,
     authorId,
     authorNickname,
@@ -59,7 +59,6 @@ const Post = ({
                 deletePostHandler={deleteModalHandler}
               />
               <PostSide
-                like={like}
                 authorId={authorId}
                 following={following}
                 likePost={likePost}

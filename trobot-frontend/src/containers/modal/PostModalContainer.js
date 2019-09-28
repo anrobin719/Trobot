@@ -10,6 +10,7 @@ class PostModalContainer extends Component {
 
   componentDidUpdate(prevProps) {
     const {
+      post,
       show,
       onGetPost,
       postId,
@@ -114,7 +115,6 @@ const mapStateToProps = state => {
     loading: state.post.get('loading'),
     following: state.auth.following,
     likePost: state.auth.likePost,
-    // isAuthenticated: state.auth.token !== null,
   };
 };
 

@@ -15,12 +15,12 @@ class SignUp extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: '6자 이내의 닉네임을 입력하세요.',
+            placeholder: '10자 이내의 닉네임을 입력하세요.',
           },
           value: '',
           validation: {
             required: true,
-            maxLength: 6,
+            maxLength: 10,
           },
           vaild: false,
           touched: false,
@@ -45,12 +45,12 @@ class SignUp extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'password',
-            placeholder: '8자 이상의 비밀번호를 설정하세요.',
+            placeholder: '6자 이상의 비밀번호를 설정하세요.',
           },
           value: '',
           validation: {
             required: true,
-            minLength: 8,
+            minLength: 6,
           },
           valid: false,
           touched: false,

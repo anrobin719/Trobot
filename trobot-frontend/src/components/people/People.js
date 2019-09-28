@@ -7,7 +7,7 @@ import Loading from '../ui/Loading';
 import palette from '../../lib/styles/palette';
 import shadow from '../../lib/styles/shadow';
 
-const Person = ({ userId, img, nickname, email, like }) => {
+const Person = ({ userId, img, nickname, email }) => {
   return (
     <PersonOutBox>
       <Link to={`/user/${userId}`}>
@@ -18,8 +18,6 @@ const Person = ({ userId, img, nickname, email, like }) => {
           </ImgBox>
           <h6>{nickname}</h6>
           <p>{email}</p>
-          <span>👍 32</span>
-          {/* <span>👍 {like}</span> */}
         </div>
       </Link>
     </PersonOutBox>
@@ -37,7 +35,6 @@ const People = ({ people, loading }) => {
           img={person.img}
           nickname={person.nickname}
           email={person.email}
-          like={person.like}
         />
       );
     });
@@ -96,13 +93,14 @@ const PersonOutBox = styled.div`
     box-shadow: ${shadow.basic[0]};
   }
   h6 {
+    font-weight: 500;
     margin-top: 5rem;
     margin-bottom: 0.3rem;
-    font-weight: 400;
   }
   p {
     font-size: 0.8rem;
     font-weight: 300;
+    color: ${palette.gray[6]};
     font-family: 'Heebo', sans-serif;
     margin-bottom: 0.6rem;
   }

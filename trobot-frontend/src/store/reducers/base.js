@@ -6,6 +6,7 @@ const initialState = Map({
     askSignIn: false,
     askDelete: false,
     post: false,
+    editProfile: false,
   }),
 });
 

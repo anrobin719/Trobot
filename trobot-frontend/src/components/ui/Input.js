@@ -28,7 +28,6 @@ const Input = ({
                 <input
                   type="radio"
                   name="tags"
-                  checked={val === postTag}
                   value={val}
                   onChange={changed}
                 />

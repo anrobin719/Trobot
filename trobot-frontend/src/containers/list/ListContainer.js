@@ -35,8 +35,13 @@ class ListContainer extends Component {
     onShowModal('post');
   };
 
+  editHandler = () => {
+    const { onShowModal } = this.props;
+    onShowModal('askSignIn');
+  };
+
   render() {
-    const { list, resource, loading } = this.props;
+    const { list, resource, loading, isAuthenticated } = this.props;
     return (
       <>
         {!list ? (
@@ -49,7 +54,10 @@ class ListContainer extends Component {
               loading={loading}
               pathHandler={this.pathHandler}
             />
-            <CircleBtns />
+            <CircleBtns
+              isAuthenticated={isAuthenticated}
+              editHandler={this.editHandler}
+            />
           </>
         )}
       </>
@@ -62,6 +70,7 @@ const mapStateToProps = state => {
     list: state.list.list,
     loading: state.list.loading,
     error: state.list.error,
+    isAuthenticated: state.auth.token !== null,
   };
 };
 

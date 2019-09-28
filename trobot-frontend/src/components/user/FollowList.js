@@ -26,30 +26,28 @@ const FollowList = ({ list }) => {
 };
 
 const FollowBox = styled.article`
-  //   outline: 1px solid red;
   width: 100%;
   padding: 1rem;
-  border-bottom: 1px solid ${palette.gray[1]};
   cursor: pointer;
 `;
 
 const ContentBox = styled.div`
-  //   outline: 1px solid red;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
 const UserInfo = styled.div`
-  //   outline: 1px solid red;
   flex: 1;
   margin-left: 1rem;
   h3 {
-    font-size: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
   }
   h6 {
     font-size: 0.8rem;
-    font-weight: 400;
+    font-weight: 500;
+    color: ${palette.gray[5]};
   }
 `;
 

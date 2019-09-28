@@ -5,23 +5,23 @@ import * as actions from '../../store/actions/index';
 import EditProfileModal from '../../components/modal/EditProfileModal';
 
 class EditProfileModalContainer extends Component {
-  deleteSubmit = () => {
-    const { onDeletePost, postId } = this.props;
-    onDeletePost(postId);
+  profileSubmit = () => {
+    const { onEditProfile, postId } = this.props;
+    onEditProfile(postId);
     this.cancelHandler();
   };
 
   cancelHandler = () => {
     const { onCancelModal } = this.props;
-    onCancelModal('askDelete');
+    onCancelModal('editProfile');
   };
 
   render() {
     const { show } = this.props;
     return (
       <EditProfileModal
-        show="true"
-        deleteSubmit={this.deleteSubmit}
+        show={show}
+        profileSubmit={this.profileSubmit}
         cancelHandler={this.cancelHandler}
       />
     );
@@ -30,7 +30,7 @@ class EditProfileModalContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    show: state.base.getIn(['modal', 'askDelete']),
+    show: state.base.getIn(['modal', 'editProfile']),
     postId: state.post.get('postId'),
   };
 };
@@ -38,7 +38,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onCancelModal: modalName => dispatch(actions.hideModal(modalName)),
-    onDeletePost: postId => dispatch(actions.deletePost(postId)),
+    // onEditProfile: postId => dispatch(actions.editProfile(postId)),
   };
 };
 

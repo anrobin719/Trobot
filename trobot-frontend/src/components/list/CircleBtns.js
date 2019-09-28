@@ -5,7 +5,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '../ui/Button';
 
-const CircleBtns = () => {
+const CircleBtns = ({ isAuthenticated, editHandler }) => {
   const moveToTopHandler = () => {
     window.scrollTo(0, 0);
   };
@@ -15,9 +15,15 @@ const CircleBtns = () => {
       <Button theme="circleBtn" onClick={moveToTopHandler}>
         <ArrowUpwardIcon />
       </Button>
-      <Button theme="circleBtn" to="/editor">
-        <AddIcon />
-      </Button>
+      {isAuthenticated ? (
+        <Button theme="circleBtn" to="/editor">
+          <AddIcon />
+        </Button>
+      ) : (
+        <Button theme="circleBtn" onClick={editHandler}>
+          <AddIcon />
+        </Button>
+      )}
     </FloatBox>
   );
 };

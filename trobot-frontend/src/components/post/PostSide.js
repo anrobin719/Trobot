@@ -4,11 +4,10 @@ import styled from 'styled-components';
 import Button from '../ui/Button';
 
 const PostSide = ({
-  like,
   authorId,
+  postId,
   following,
   likePost,
-  postId,
   followHanlder,
   likeHandler,
   showAskSignInModal,
@@ -42,32 +41,26 @@ const PostSide = ({
   let isLike;
   if (likePost) {
     isLike = likePost.find(f => {
-      return f.likePostId === postId;
+      return f.postId === postId;
     });
-  }
-
-  // 현재 포스트 좋아요 숫자 계산. 좋아요가 없을 경우 0 반환
-  let likeNum = 0;
-  if (like) {
-    likeNum = Object.keys(like).length;
   }
 
   return (
     // 일치할 경우, 다른 값 출력
     <ContentBox>
       <Button
-        theme="point"
+        theme={isLike ? 'outlinePoint' : 'point'}
         disabled={isLike}
         size="full"
         type="button"
         onClick={() => onClickBtn('like')}
       >
-        Like {likeNum}
+        {isLike ? `Like ✓` : 'Like'}
       </Button>
       {/* 로그인 되어있지 않거나, 현재 포스트가 자신의 포스트가 아닐 때, 팔로우 버튼 디스플레이 */}
       {authorId !== userId && (
         <Button
-          theme="basic"
+          theme={isFollow ? 'outline' : 'basic'}
           disabled={isFollow}
           size="full"
           type="button"

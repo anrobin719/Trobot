@@ -26,7 +26,7 @@ const palette = {
   ],
   ivory: ['#f6f3ef'],
   backBlue: ['#edf4f8', '#3f5162'],
-  point: ['#08d4c3', '#13dbcb'],
+  point: ['#08d4c3', '#13dbcb', '#06b1b1'],
 };
 
 export default palette;

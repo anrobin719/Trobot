@@ -23,7 +23,6 @@ class Editor extends Component {
           value: '',
           validation: {
             required: true,
-            maxLength: 20,
           },
           vaild: false,
           touched: false,
@@ -38,7 +37,6 @@ class Editor extends Component {
           value: '',
           validation: {
             required: true,
-            maxLength: 40,
           },
           vaild: false,
           touched: false,
