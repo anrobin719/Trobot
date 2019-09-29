@@ -6,14 +6,20 @@ import PostModal from '../../components/modal/PostModal';
 import * as actions from '../../store/actions/index';
 
 class PostModalContainer extends Component {
-  componentDidMount() {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      // 버튼 테마 설정입니다. true = 활성화, false = 비활성화
+      likeBtn: null,
+    };
+  }
 
   componentDidUpdate(prevProps) {
     const {
-      post,
       show,
       onGetPost,
       postId,
+      likePost,
       reload,
       location,
       onCancelModal,
@@ -26,6 +32,16 @@ class PostModalContainer extends Component {
     ) {
       onGetPost(postId);
       console.log('PostModalContainer DID UPDATE!');
+
+      // 좋아요한 포스트 중, 현재 포스트와 일치하는 경우가 있는지 확인
+      let isLike;
+      if (likePost) {
+        isLike = likePost.find(f => {
+          return f.postId === postId;
+        });
+      }
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ likeBtn: isLike !== undefined });
     }
     // 로그인, 회원가입 버튼 클릭으로 경로가 바뀌었을 때, 포스트 모달 비활성화
     if (location !== prevProps.location) {
@@ -60,9 +76,31 @@ class PostModalContainer extends Component {
     onFollow(authorId, followData);
   };
 
+  // 좋아요 버튼을 클릭할 때 이벤트 핸들러 입니다.
   likeHandler = () => {
-    const { onLikePost, postId, post } = this.props;
-    onLikePost(postId, post);
+    const { onLikePost, postId, likePost, post } = this.props;
+    const { likeBtn } = this.state;
+    // 좋아요한 포스트 중, 현재 포스트와 일치하는 경우가 있는지 확인합니다.
+    let isLike;
+    if (likePost) {
+      isLike = likePost.find(f => {
+        return f.postId === postId;
+      });
+    }
+    // 현재 포스트가 좋아요한 포스트라면, (또는 현재 좋아요 버튼이 활성화 된 상태라면)
+    if (likeBtn || (isLike !== undefined && likeBtn)) {
+      // 좋아요 버튼 상태 '취소(false)'로 전환합니다.
+      this.setState({ likeBtn: false });
+      console.log('to false');
+    }
+    // 좋아요한 포스트가 아니라면,
+    else {
+      // 좋아요 버튼 상태 '좋아요(true)'로 전환합니다.
+      this.setState({ likeBtn: true });
+      console.log('to true');
+    }
+    // 포스트 아이디, 포스트, 좋아요 버튼의 활성 상태를 액션으로 보냅니다.
+    onLikePost(postId, post, likeBtn);
   };
 
   ModalHandler = () => {
@@ -71,16 +109,9 @@ class PostModalContainer extends Component {
   };
 
   render() {
-    const {
-      show,
-      post,
-      postId,
-      postTag,
-      deleted,
-      loading,
-      following,
-      likePost,
-    } = this.props;
+    const { show, post, postTag, deleted, loading, following } = this.props;
+    const { likeBtn } = this.state;
+
     return (
       <>
         {/* 삭제된 상태일 경우, /list/tag로 경로 이동 */}
@@ -90,13 +121,12 @@ class PostModalContainer extends Component {
           loading={loading}
           show={show}
           following={following}
-          likePost={likePost}
-          postId={postId}
           cancelHandler={this.cancelHandler}
           editPostHandler={this.editPostHandler}
           deleteModalHandler={this.deleteModalHandler}
           followHanlder={this.followHanlder}
           likeHandler={this.likeHandler}
+          likeBtn={likeBtn}
           showAskSignInModal={this.ModalHandler}
         />
       </>
@@ -125,7 +155,8 @@ const mapDispatchToProps = dispatch => {
     onCancelModal: modalName => dispatch(actions.hideModal(modalName)),
     onFollow: (authorId, followData) =>
       dispatch(actions.follow(authorId, followData)),
-    onLikePost: (postId, post) => dispatch(actions.likePost(postId, post)),
+    onLikePost: (postId, post, likeBtn) =>
+      dispatch(actions.likePost(postId, post, likeBtn)),
   };
 };
 

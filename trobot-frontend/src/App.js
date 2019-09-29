@@ -20,6 +20,7 @@ import * as actions from './store/actions/index';
 class App extends Component {
   componentDidMount() {
     const { onCheckAuth } = this.props;
+    // 로그인 상태를 확인합니다. 로그인 되어 있을 때, 팔로우 정보, 좋아요 정보 저장합니다.
     onCheckAuth();
   }
 

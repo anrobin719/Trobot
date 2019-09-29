@@ -5,11 +5,10 @@ import Button from '../ui/Button';
 
 const PostSide = ({
   authorId,
-  postId,
   following,
-  likePost,
   followHanlder,
   likeHandler,
+  likeBtn,
   showAskSignInModal,
 }) => {
   const userId = localStorage.getItem('userId');
@@ -37,25 +36,16 @@ const PostSide = ({
     });
   }
 
-  // 좋아요한 포스트 중, 현재 포스트와 일치하는 경우가 있는지 확인
-  let isLike;
-  if (likePost) {
-    isLike = likePost.find(f => {
-      return f.postId === postId;
-    });
-  }
-
   return (
     // 일치할 경우, 다른 값 출력
     <ContentBox>
       <Button
-        theme={isLike ? 'outlinePoint' : 'point'}
-        disabled={isLike}
+        theme={likeBtn ? 'outlinePoint' : 'point'}
         size="full"
         type="button"
         onClick={() => onClickBtn('like')}
       >
-        {isLike ? `Like ✓` : 'Like'}
+        {likeBtn ? `Like ✓` : 'Like'}
       </Button>
       {/* 로그인 되어있지 않거나, 현재 포스트가 자신의 포스트가 아닐 때, 팔로우 버튼 디스플레이 */}
       {authorId !== userId && (

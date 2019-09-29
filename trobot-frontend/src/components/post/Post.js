@@ -9,14 +9,13 @@ import Loading from '../ui/Loading';
 
 const Post = ({
   post,
-  postId,
   loading,
   following,
-  likePost,
   editPostHandler,
   deleteModalHandler,
   followHanlder,
   likeHandler,
+  likeBtn,
   showAskSignInModal,
 }) => {
   // 포스트 할당
@@ -61,10 +60,9 @@ const Post = ({
               <PostSide
                 authorId={authorId}
                 following={following}
-                likePost={likePost}
-                postId={postId}
                 followHanlder={followHanlder}
                 likeHandler={likeHandler}
+                likeBtn={likeBtn}
                 showAskSignInModal={showAskSignInModal}
               />
             </section>
