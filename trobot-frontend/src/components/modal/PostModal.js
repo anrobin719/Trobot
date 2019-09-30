@@ -8,13 +8,13 @@ const PostModal = ({
   post,
   loading,
   show,
-  following,
   cancelHandler,
   editPostHandler,
   deleteModalHandler,
   followHanlder,
   likeHandler,
   likeBtn,
+  followBtn,
   showAskSignInModal,
 }) => {
   return (
@@ -22,12 +22,12 @@ const PostModal = ({
       <Post
         post={post}
         loading={loading}
-        following={following}
         editPostHandler={editPostHandler}
         deleteModalHandler={deleteModalHandler}
         followHanlder={followHanlder}
         likeHandler={likeHandler}
         likeBtn={likeBtn}
+        followBtn={followBtn}
         showAskSignInModal={showAskSignInModal}
       />
     </Modal>

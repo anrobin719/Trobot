@@ -11,25 +11,31 @@ class PostModalContainer extends Component {
     this.state = {
       // 버튼 테마 설정입니다. true = 활성화, false = 비활성화
       likeBtn: null,
+      followBtn: null,
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const {
       show,
       onGetPost,
+      post,
       postId,
       likePost,
+      following,
       reload,
       location,
       onCancelModal,
     } = this.props;
-    // 포스트 모달이 활성화 됐을 때, 포스트 내용 fetch
-    // 또는 reload 상태일 때, 포스트 내용 fetch
+    const { authorId } = post.toJS();
+    const { followBtn } = this.state;
+
+    // 포스트 모달이 활성화 됐을 때, 또는 reload 상태일 때,
     if (
       (show && show !== prevProps.show) ||
       (reload && reload !== prevProps.reload)
     ) {
+      // 포스트 내용 fetch
       onGetPost(postId);
       console.log('PostModalContainer DID UPDATE!');
 
@@ -40,8 +46,20 @@ class PostModalContainer extends Component {
           return f.postId === postId;
         });
       }
+      console.log(isLike !== undefined);
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ likeBtn: isLike !== undefined });
+
+      // 팔로잉 유저 중, 포스트 작성자와 일치하는 경우가 있는지 확인합니다.
+      let isFollow;
+      if (following && post) {
+        isFollow = following.find(f => {
+          return f.userId === authorId;
+        });
+      }
+      console.log(isFollow);
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ followBtn: isFollow !== undefined });
     }
     // 로그인, 회원가입 버튼 클릭으로 경로가 바뀌었을 때, 포스트 모달 비활성화
     if (location !== prevProps.location) {
@@ -64,8 +82,9 @@ class PostModalContainer extends Component {
     onShowModal('askDelete');
   };
 
+  // 팔로우 버튼을 클릭할 때 이벤트 핸들러 입니다.
   followHanlder = () => {
-    const { onFollow, post } = this.props;
+    const { onFollow, following, post } = this.props;
     const { authorId, authorNickname, authorEmail, authorImg } = post.toJS();
     const followData = {
       userId: authorId,
@@ -73,7 +92,30 @@ class PostModalContainer extends Component {
       email: authorEmail,
       img: authorImg,
     };
-    onFollow(authorId, followData);
+    const { followBtn } = this.state;
+
+    // 팔로잉 유저 중, 포스트 작성자와 일치하는 경우가 있는지 확인합니다.
+    let isFollow;
+    if (following) {
+      isFollow = following.find(f => {
+        return f.userId === authorId;
+      });
+    }
+    // 현재 포스트 작성자가 팔로우하는 유저라면, (또는 현재 팔로우 버튼이 활성화 된 상태라면)
+    if (followBtn || (isFollow !== undefined && followBtn)) {
+      // 팔로우 버튼 상태 '팔로우 취소(false)'로 전환합니다.
+      this.setState({ followBtn: false });
+      console.log('follow to false');
+    }
+    // 팔로우 한 유저가 아니라면,
+    else {
+      // 팔로우 버튼 상태 '팔로우 하기(true)'로 전환합니다.
+      this.setState({ followBtn: true });
+      console.log('follow to true');
+    }
+
+    // 포스트 작성자 아이디, 포스트 데이터, 팔로우 버튼의 활성 상태를 액션으로 보냅니다.
+    onFollow(authorId, followData, followBtn);
   };
 
   // 좋아요 버튼을 클릭할 때 이벤트 핸들러 입니다.
@@ -109,8 +151,8 @@ class PostModalContainer extends Component {
   };
 
   render() {
-    const { show, post, postTag, deleted, loading, following } = this.props;
-    const { likeBtn } = this.state;
+    const { show, post, postTag, deleted, loading } = this.props;
+    const { likeBtn, followBtn } = this.state;
 
     return (
       <>
@@ -120,13 +162,13 @@ class PostModalContainer extends Component {
           post={post}
           loading={loading}
           show={show}
-          following={following}
           cancelHandler={this.cancelHandler}
           editPostHandler={this.editPostHandler}
           deleteModalHandler={this.deleteModalHandler}
           followHanlder={this.followHanlder}
           likeHandler={this.likeHandler}
           likeBtn={likeBtn}
+          followBtn={followBtn}
           showAskSignInModal={this.ModalHandler}
         />
       </>
@@ -153,10 +195,10 @@ const mapDispatchToProps = dispatch => {
     onGetPost: pnum => dispatch(actions.getPost(pnum)),
     onShowModal: modalName => dispatch(actions.showModal(modalName)),
     onCancelModal: modalName => dispatch(actions.hideModal(modalName)),
-    onFollow: (authorId, followData) =>
-      dispatch(actions.follow(authorId, followData)),
     onLikePost: (postId, post, likeBtn) =>
       dispatch(actions.likePost(postId, post, likeBtn)),
+    onFollow: (authorId, followData, followBtn) =>
+      dispatch(actions.follow(authorId, followData, followBtn)),
   };
 };
 

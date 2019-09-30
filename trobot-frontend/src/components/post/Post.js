@@ -10,26 +10,21 @@ import Loading from '../ui/Loading';
 const Post = ({
   post,
   loading,
-  following,
   editPostHandler,
   deleteModalHandler,
   followHanlder,
   likeHandler,
   likeBtn,
+  followBtn,
   showAskSignInModal,
 }) => {
   // 포스트 할당
   const {
     title,
-    // sub,
     tag,
     body,
-    // like,
-    // comments,
     authorId,
     authorNickname,
-    // authorEmail,
-    // authorImg,
     publishedDate,
   } = post.toJS();
 
@@ -59,10 +54,10 @@ const Post = ({
               />
               <PostSide
                 authorId={authorId}
-                following={following}
                 followHanlder={followHanlder}
                 likeHandler={likeHandler}
                 likeBtn={likeBtn}
+                followBtn={followBtn}
                 showAskSignInModal={showAskSignInModal}
               />
             </section>

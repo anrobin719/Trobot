@@ -64,11 +64,12 @@ export const authSaveFollow = (following, follower) => {
   };
 };
 
-export const follow = (authorId, followingData) => {
+export const follow = (authorId, followingData, followBtn) => {
   return {
     type: actionTypes.FOLLOW,
     authorId,
     followingData,
+    followBtn,
   };
 };
 

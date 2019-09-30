@@ -151,7 +151,7 @@ export function* checkAuthSaga() {
 }
 
 export function* followSaga(action) {
-  const { authorId, followingData } = action;
+  const { authorId, followingData, followBtn } = action;
   const userId = yield localStorage.getItem('userId');
   const nickname = yield localStorage.getItem('nickname');
   const email = yield localStorage.getItem('email');
@@ -162,27 +162,54 @@ export function* followSaga(action) {
     email,
     img,
   };
-  // 내 팔로잉에 상대 정보 저장
-  try {
-    const res = yield axiosBase.put(
-      `/user/${userId}/following/${authorId}.json`,
-      followingData,
-    );
-    console.log(`FOLLOWING`, res.data);
-    // 상대 유저 팔로워에 내정보 저장
+
+  // 포스트 팔로우를 클릭했을 때 실행합니다.
+  if (!followBtn) {
+    // 내 팔로잉에 상대 정보를 저장합니다.
     try {
-      const saveOtherSideRes = yield axiosBase.put(
-        `/user/${authorId}/follower/${userId}.json`,
-        followerData,
+      const res = yield axiosBase.put(
+        `/user/${userId}/following/${authorId}.json`,
+        followingData,
       );
-      console.log(`FOLLOWER`, saveOtherSideRes.data);
-    } catch (e) {
-      console.log('FOLLOWER_ERROR', e);
+      console.log(`FOLLOWING  - MY SIDE`, res.data);
+      // 상대 유저 팔로워에 내정보를 저장합니다.
+      try {
+        const saveOtherSideRes = yield axiosBase.put(
+          `/user/${authorId}/follower/${userId}.json`,
+          followerData,
+        );
+        console.log(`FOLLOWER - OTHER SIDE`, saveOtherSideRes.data);
+      } catch (e) {
+        console.log('FOLLOWER ERROR - OTHER SIDE', e);
+      }
+      // 팔로잉, 팔로워 유저 저장 뒤, 리로드합니다.
+      yield put(actions.reloadFollow(userId));
+    } catch (err) {
+      console.log('FOLLOWING ERROR', err);
     }
-    // 팔로잉, 팔로워 유저 저장 뒤, 리로드
-    yield put(actions.reloadFollow(userId));
-  } catch (err) {
-    console.log('FOLLOWING_ERROR', err);
+  }
+  // 팔로우를 취소했을 때 실행합니다.
+  else {
+    // 내 팔로잉에 상대 정보를 삭제합니다.
+    try {
+      const res = yield axiosBase.delete(
+        `/user/${userId}/following/${authorId}.json`,
+      );
+      console.log(`DELETE FOLLOWING - MY SIDE`, res.data);
+      // 상대 유저 팔로워에 내정보를 삭제합니다.
+      try {
+        const deleteOtherSideRes = yield axiosBase.delete(
+          `/user/${authorId}/follower/${userId}.json`,
+        );
+        console.log(`DELETE FOLLOWER - OTHER SIDE`, deleteOtherSideRes.data);
+      } catch (e) {
+        console.log('DELETE FOLLOWER ERROR - OTHER SIDE', e);
+      }
+      // 팔로잉, 팔로워 유저 저장 뒤, 리로드합니다.
+      yield put(actions.reloadFollow(userId));
+    } catch (err) {
+      console.log('DELETE FOLLOWING ERROR', err);
+    }
   }
 }
 

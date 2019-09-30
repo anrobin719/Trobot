@@ -9,13 +9,6 @@ import palette from '../../lib/styles/palette';
 import FollowList from './FollowList';
 
 class UserContents extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toggle: false,
-    };
-  }
-
   toggleFollow = () => {
     const { toggle } = this.state;
     this.setState({
@@ -54,18 +47,19 @@ class UserContents extends Component {
       followingList,
       // 팔로워 리스트
       followerList,
+      // 팔로우 버튼 활성화 상태
+      followBtn,
       changeListHandler,
       pathHandler,
     } = this.props;
-    const { toggle } = this.state;
 
     // 팔로잉 유저 중 현재 페이지 유저와 일치하는 경우가 있는지 확인
-    let isFollow;
-    if (following) {
-      isFollow = following.find(f => {
-        return f.userId === unum;
-      });
-    }
+    // let isFollow;
+    // if (following) {
+    //   isFollow = following.find(f => {
+    //     return f.userId === unum;
+    //   });
+    // }
 
     return (
       <Wrapper>
@@ -100,20 +94,13 @@ class UserContents extends Component {
         <MoreInfo>
           {/* 현재 유저 페이지가 자신의 페이지가 아닐 때, 팔로우 버튼 디스플레이 */}
           {!myPage && (
-            <Button
-              theme="basic"
-              disabled={isFollow}
-              size="full"
-              onClick={this.onClickBtn}
-            >
-              {isFollow ? `Following ✓` : 'Follow'}
+            <Button theme="basic" size="full" onClick={this.onClickBtn}>
+              {followBtn ? `Following ✓` : 'Follow'}
             </Button>
           )}
           <ListBoxWrapper>
-            <List toggle={toggle}>
-              <FollowListLabel onClick={() => this.toggleFollow()}>
-                Following
-              </FollowListLabel>
+            <List>
+              <FollowListLabel>Following</FollowListLabel>
               {followingList && <FollowList list={followingList} />}
             </List>
             <List>
@@ -167,20 +154,7 @@ const ListBoxWrapper = styled.div`
   }
 `;
 
-// const openList = keyframes`
-//   0% {
-//     height: 56px;
-//   }
-//   100% {
-//     height: auto;
-//   }
-// `;
-
-const List = styled(ListBox)`
-  // height: 56px;
-  // overflow: hidden;
-  // transition: all 1s linear;
-`;
+const List = styled(ListBox)``;
 
 const FollowListLabel = styled.div`
   padding: 1rem;
