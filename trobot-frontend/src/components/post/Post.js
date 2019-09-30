@@ -28,10 +28,14 @@ const Post = ({
     publishedDate,
   } = post.toJS();
 
+  const stoppropagation = e => {
+    e.stopPropagation();
+  };
+
   return (
     <>
       {/* 포스트 컨테이너 */}
-      <PostBox>
+      <PostBox onClick={stoppropagation}>
         {loading ? (
           <Loading size="fit" />
         ) : (
@@ -69,9 +73,9 @@ const Post = ({
 };
 
 const PostBox = styled.div`
-  width: 1024px;
+  width: 100%;
   min-height: 100vh;
-  margin: 0 auto; /* 중앙 정렬 */
+  // margin: 0 auto; /* 중앙 정렬 */
 
   /* 브라우저 크기에 따라 가로 사이즈 변경 */
   @media (max-width: 1024px) {

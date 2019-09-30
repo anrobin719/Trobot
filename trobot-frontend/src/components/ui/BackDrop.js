@@ -1,8 +1,12 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const backdrop = ({ show, clicked }) =>
-  show ? <BackDrop show={show} onClick={clicked} /> : null;
+const backdrop = ({ show, clicked, children }) =>
+  show ? (
+    <BackDrop show={show} onClick={clicked}>
+      {children}
+    </BackDrop>
+  ) : null;
 
 const fadeIn = keyframes`
   0% {

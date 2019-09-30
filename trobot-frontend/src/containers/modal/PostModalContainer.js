@@ -15,7 +15,7 @@ class PostModalContainer extends Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const {
       show,
       onGetPost,
@@ -28,8 +28,6 @@ class PostModalContainer extends Component {
       onCancelModal,
     } = this.props;
     const { authorId } = post.toJS();
-    const { followBtn } = this.state;
-
     // 포스트 모달이 활성화 됐을 때, 또는 reload 상태일 때,
     if (
       (show && show !== prevProps.show) ||
@@ -38,7 +36,6 @@ class PostModalContainer extends Component {
       // 포스트 내용 fetch
       onGetPost(postId);
       console.log('PostModalContainer DID UPDATE!');
-
       // 좋아요한 포스트 중, 현재 포스트와 일치하는 경우가 있는지 확인
       let isLike;
       if (likePost) {
@@ -49,7 +46,6 @@ class PostModalContainer extends Component {
       console.log(isLike !== undefined);
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ likeBtn: isLike !== undefined });
-
       // 팔로잉 유저 중, 포스트 작성자와 일치하는 경우가 있는지 확인합니다.
       let isFollow;
       if (following && post) {
@@ -93,7 +89,6 @@ class PostModalContainer extends Component {
       img: authorImg,
     };
     const { followBtn } = this.state;
-
     // 팔로잉 유저 중, 포스트 작성자와 일치하는 경우가 있는지 확인합니다.
     let isFollow;
     if (following) {
@@ -113,7 +108,6 @@ class PostModalContainer extends Component {
       this.setState({ followBtn: true });
       console.log('follow to true');
     }
-
     // 포스트 작성자 아이디, 포스트 데이터, 팔로우 버튼의 활성 상태를 액션으로 보냅니다.
     onFollow(authorId, followData, followBtn);
   };
