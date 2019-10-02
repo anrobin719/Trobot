@@ -5,6 +5,7 @@ import Responsive from '../common/Responsive';
 import IdeaList from './IdeaList';
 import ResourceList from './ResourceList';
 import Loading from '../ui/Loading';
+import device from '../../lib/styles/device';
 
 const List = ({ list, resource, loading, pathHandler }) => {
   return (
@@ -42,11 +43,20 @@ const IdeaBox = styled.section`
   > h3 {
     margin-bottom: 1rem;
   }
+  @media ${device.tablet} {
+    flex: 0 0 100%;
+    > h3 {
+      display: none;
+    }
+  }
 `;
 const ResourceBox = styled.section`
   flex: 0 0 36%;
   > h3 {
     margin-bottom: 1rem;
+  }
+  @media ${device.tablet} {
+    display: none;
   }
 `;
 

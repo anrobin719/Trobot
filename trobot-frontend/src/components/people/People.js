@@ -6,6 +6,7 @@ import Responsive from '../common/Responsive';
 import Loading from '../ui/Loading';
 import palette from '../../lib/styles/palette';
 import shadow from '../../lib/styles/shadow';
+import device from '../../lib/styles/device';
 
 const Person = ({ userId, img, nickname, email }) => {
   return (
@@ -17,7 +18,7 @@ const Person = ({ userId, img, nickname, email }) => {
             <img src={img} alt={nickname} />
           </ImgBox>
           <h6>{nickname}</h6>
-          <p>{email}</p>
+          <span>{email}</span>
         </div>
       </Link>
     </PersonOutBox>
@@ -65,6 +66,9 @@ const Wrapper = styled.div`
 const PeopleBox = styled(Responsive)`
   padding-top: 6rem;
   padding-bottom: 6rem;
+  @media ${device.tablet} {
+    padding-top: 3rem;
+  }
 `;
 
 const PersonListBox = styled.section`
@@ -79,35 +83,54 @@ const PersonOutBox = styled.div`
   margin-bottom: 4rem;
   flex: 0 0 20%;
   height: 14rem;
-  > a > div {
-    position: relative;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
-    background-color: white;
-    border-radius: 0.3rem;
-    cursor: pointer;
-    box-shadow: ${shadow.basic[0]};
+  > a {
+    width: 100%;
+    > div {
+      position: relative;
+      padding: 0.5rem;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%
+      text-align: center;
+      background-color: white;
+      border-radius: 0.3rem;
+      cursor: pointer;
+      box-shadow: ${shadow.basic[0]};
+      h6 {
+        font-weight: 500;
+        margin-top: 5rem;
+        margin-bottom: 0.3rem;
+      }
+      span {
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: ${palette.gray[6]};
+        font-family: 'Heebo', sans-serif;
+        margin-bottom: 0.6rem;
+      }
+    }
   }
-  h6 {
-    font-weight: 500;
-    margin-top: 5rem;
-    margin-bottom: 0.3rem;
+
+  @media ${device.laptop} {
+    flex: 0 0 25%;
   }
-  p {
-    font-size: 0.8rem;
-    font-weight: 300;
-    color: ${palette.gray[6]};
-    font-family: 'Heebo', sans-serif;
-    margin-bottom: 0.6rem;
+  @media ${device.tablet} {
+    height: 12rem;
+    margin-bottom: 3rem;
+    span {
+      display: none;
+    }
   }
-  span {
-    font-size: 0.8rem;
-    font-weight: 300;
-    font-family: 'Heebo', sans-serif;
+  @media (max-width: 600px) {
+    flex: 0 0 33.3%;
+    height: 10rem;
+    margin-bottom: 2rem;
+    h6 {
+      font-size: .8rem;
+    }
   }
 `;
 

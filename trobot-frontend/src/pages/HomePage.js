@@ -1,10 +1,10 @@
 import React from 'react';
 
 import styled from 'styled-components';
-
 import palette from '../lib/styles/palette';
 import Responsive from '../components/common/Responsive';
 import TagList from '../components/home/TagList';
+import device from '../lib/styles/device';
 
 const HomePage = () => {
   return (
@@ -30,7 +30,7 @@ const HomePage = () => {
       <InfoSection>
         <Wrapper>
           <h3>아이디어를 쉽게 저장하세요</h3>
-          <p>카테고리별로 정리되어 편하게 기록을 확인할 수 있습니다.</p>
+          <p>좋아요를 클릭해 아이디어를 저장할 수 있습니다.</p>
           <ImgBox />
 
           <h3>푸쉬 알림이 곧 찾아옵니다!</h3>
@@ -52,7 +52,7 @@ const HomePage = () => {
 
 const Wrapper = styled(Responsive)`
   height: 100%;
-  padding: 6rem 0;
+  padding: 6rem 1rem;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -64,6 +64,7 @@ const Wrapper = styled(Responsive)`
   }
   p {
     margin-top: 0.3rem;
+    margin-bottom: 3rem;
     color: ${palette.gray[6]};
   }
 `;
@@ -80,6 +81,22 @@ const Intro = styled.section`
   p {
     font-size: 1.2rem;
   }
+
+  @media ${device.tablet} {
+    h1 {
+      font-size: 4.6rem;
+      line-height: 6rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+  @media ${device.mobileL} {
+    h1 {
+      font-size: 3.6rem;
+      line-height: 4.6rem;
+    }
+  }
 `;
 
 const TagSection = styled.section`
@@ -92,22 +109,27 @@ const InfoSection = styled.section`
 `;
 
 const ImgBox = styled.div`
-  position: static;
   background-color: ${palette.gray[1]};
-  width: 70%;
-  height: 400px;
-  margin: 3rem 0;
+  width: 100%;
+  padding-bottom: 46%;
+  margin-bottom: 6rem;
+
+  @media ${device.tablet} {
+    width: 90%;
+    padding-bottom: 60%;
+  }
 `;
 
 const ContactSection = styled.section`
   background: ${palette.blue[9]};
-  padding: 3rem;
+  padding: 3rem 0;
   h2 {
     color: white;
     font-size: 2rem;
   }
   p {
     color: white;
+    margin-bottom: 0;
   }
 `;
 

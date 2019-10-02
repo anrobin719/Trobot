@@ -1,24 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import device from '../../lib/styles/device';
 
 const Responsive = ({ children, ...rest }) => {
-  // style, className, onClick, onMouseMove 등의 props를 사용할 수 있도록
-  // ...rest를 사용하여 ResponsiveBlock에게 전달
+  // style, className, onClick, onMouseMove 등의 props를 사용할 수 있도록 ...rest를 사용합니다.
   return <ResponsiveBlock {...rest}>{children}</ResponsiveBlock>;
 };
 
 const ResponsiveBlock = styled.div`
   width: 1024px;
   height: 100%;
-  margin: 0 auto; /* 중앙 정렬 */
+  margin: 0 auto;
   padding-right: 1rem;
   padding-left: 1rem;
 
-  /* 브라우저 크기에 따라 가로 사이즈 변경 */
-  @media (max-width: 1024px) {
+  @media ${device.laptop} {
     width: 768px;
   }
-  @media (max-width: 768px) {
+  @media ${device.tablet} {
     width: 100%;
   }
 `;

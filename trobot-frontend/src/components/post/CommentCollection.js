@@ -5,6 +5,7 @@ import Comment from './Comment';
 import CommentInput from './CommentInput';
 import { updateObject } from '../../lib/shared/utility';
 import palette from '../../lib/styles/palette';
+import device from '../../lib/styles/device';
 
 const CommentCollection = ({
   post,
@@ -99,8 +100,12 @@ const CommentCollection = ({
 };
 
 const CommentWrapper = styled.div`
+  flex: 0 0 60%;
   background: white;
   border-radius: 0.2rem;
+  @media ${device.tablet} {
+    flex: 0 0 100%;
+  }
 `;
 
 const CommentList = styled.div`

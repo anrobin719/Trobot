@@ -7,6 +7,7 @@ import { updateObject, checkValidity } from '../../lib/shared/utility';
 import Button from '../ui/Button';
 import Loading from '../ui/Loading';
 import shadow from '../../lib/styles/shadow';
+import device from '../../lib/styles/device';
 
 class Editor extends Component {
   constructor(props) {
@@ -230,6 +231,15 @@ const EditorBox = styled.div`
     margin-top: 2rem;
     margin-left: 0.3rem;
     margin-bottom: 0.6rem;
+  }
+
+  @media ${device.tablet} {
+    padding: 1rem 2rem 6rem;
+  }
+  @media ${device.mobileL} {
+    margin-top: 2rem;
+    padding: 0rem 1rem 4rem;
+    border-radius: 1rem;
   }
 `;
 

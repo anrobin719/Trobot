@@ -13,8 +13,6 @@ const Modal = ({ show, isPost, modalClosed, children }) => {
           {children}
         </ModalBox>
       </Backdrop>
-      {/* <ModalBoxWrapper> */}
-      {/* </ModalBoxWrapper> */}
     </ModalWrapper>
   ) : null;
 };
@@ -32,8 +30,22 @@ const ModalWrapper = styled.div`
       z-index: ${props => (props.isPost ? `300` : `500`)};
     }
   }
+
+  @media ${device.tablet} {
+    // Backdrop
+    > div {
+      padding: ${props => (props.isPost ? `4rem 2rem` : `0`)};
+    }
+  }
+  @media ${device.mobileL} {
+    // Backdrop
+    > div {
+      padding: ${props => (props.isPost ? `4rem 1rem` : `0`)};
+    }
+  }
 `;
 
+// 기본 모달 슬라이드 애니메이션입니다.
 const slideUp = keyframes`
   0% {
     transform: translate(-50%, -40%);
@@ -45,6 +57,7 @@ const slideUp = keyframes`
   }
 `;
 
+// 포스트 모달 슬라이드 애니메이션입니다.
 const PostSlideUp = keyframes`
 0% {
   transform: translate(-50%, 10%);
@@ -57,7 +70,7 @@ const PostSlideUp = keyframes`
 `;
 
 const ModalBox = styled.div`
-  min-width: 500px;
+  width: ${props => (props.isPost ? `1024px` : `500px`)};
   margin: 0 auto 6rem;
   overflow: scroll;
   border-radius: 0.4rem;
@@ -72,17 +85,11 @@ const ModalBox = styled.div`
   background: ${props => (props.isPost ? `none` : `white`)};
   box-shadow: ${props => (props.isPost ? `none` : `${shadow.basic[0]}`)};
   animation: ${props => (props.isPost ? PostSlideUp : slideUp)} 0.3s ease-out;
-
-  @media ${device.tablet} {
-    max-width: 70%;
-    left: calc(50% - 35%);
-    padding: 2rem 1.6rem;
+  @media ${device.laptop} {
+    width: ${props => (props.isPost ? `768px` : `500px`)};
   }
-
-  @media ${device.mobileL} {
-    max-width: 90%;
-    left: calc(50% - 45%);
-    padding: 2rem 1rem;
+  @media ${device.tablet} {
+    max-width: ${props => (props.isPost ? `100%` : `90%`)};
   }
 `;
 

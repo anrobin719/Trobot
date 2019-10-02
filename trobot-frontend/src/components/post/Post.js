@@ -6,6 +6,8 @@ import PostContent from './PostContent';
 import PostSide from './PostSide';
 import palette from '../../lib/styles/palette';
 import Loading from '../ui/Loading';
+import device from '../../lib/styles/device';
+import CommentCollectionContainer from '../../containers/post/CommentCollectionContainer';
 
 const Post = ({
   post,
@@ -64,6 +66,9 @@ const Post = ({
                 followBtn={followBtn}
                 showAskSignInModal={showAskSignInModal}
               />
+
+              {/* 댓글 관련 컴포넌트 : 댓글 인풋 + 댓글 출력 */}
+              <CommentCollectionContainer />
             </section>
           </>
         )}
@@ -75,24 +80,24 @@ const Post = ({
 const PostBox = styled.div`
   width: 100%;
   min-height: 100vh;
-  // margin: 0 auto; /* 중앙 정렬 */
-
-  /* 브라우저 크기에 따라 가로 사이즈 변경 */
-  @media (max-width: 1024px) {
-    width: 768px;
-  }
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-
   padding: 4rem 3rem;
   background: ${palette.gray[1]};
   border-radius: 1rem;
   > section {
     display: flex;
+    flex-flow: row wrap;
     justify-content: space-between;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+
+  @media ${device.tablet} {
+    padding: 3rem 2rem;
+    > section {
+      display: block;
+    }
+  }
+  @media ${device.mobileL} {
+    padding: 2rem 1rem;
   }
 `;
 

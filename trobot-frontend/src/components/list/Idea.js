@@ -52,6 +52,11 @@ const ContentBox = styled.div`
     font-weight: 400;
     color: ${palette.gray[6]};
   }
+  span {
+    display: inline-block;
+    width: 2rem;
+    margin-left: 1rem;
+  }
 `;
 
 export default Idea;

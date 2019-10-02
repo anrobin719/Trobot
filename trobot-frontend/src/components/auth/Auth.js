@@ -7,6 +7,7 @@ import SignUp from './SignUp';
 import Responsive from '../common/Responsive';
 import Loading from '../ui/Loading';
 import shadow from '../../lib/styles/shadow';
+import device from '../../lib/styles/device';
 
 const Auth = ({ match, authSubmitHandler, loading, error }) => {
   const { authPath } = match.params;
@@ -52,6 +53,15 @@ const AuthBox = styled.div`
     font-size: 1.8rem;
     text-align: center;
     margin-bottom: 1rem;
+  }
+
+  @media ${device.tablet} {
+    padding: ${props =>
+      props.isSignup ? `3rem 2rem 4rem;` : `4rem 2rem 6rem;`}
+  }
+  @media ${device.mobileL} {
+    padding: ${props =>
+      props.isSignup ? `3rem 1rem 4rem;` : `4rem 1rem 6rem;`}
   }
 `;
 

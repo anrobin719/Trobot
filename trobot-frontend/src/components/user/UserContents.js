@@ -7,6 +7,7 @@ import Button from '../ui/Button';
 import ListBox from '../list/ListBox';
 import palette from '../../lib/styles/palette';
 import FollowList from './FollowList';
+import device from '../../lib/styles/device';
 
 class UserContents extends Component {
   toggleFollow = () => {
@@ -53,16 +54,28 @@ class UserContents extends Component {
       pathHandler,
     } = this.props;
 
-    // 팔로잉 유저 중 현재 페이지 유저와 일치하는 경우가 있는지 확인
-    // let isFollow;
-    // if (following) {
-    //   isFollow = following.find(f => {
-    //     return f.userId === unum;
-    //   });
-    // }
-
     return (
       <Wrapper>
+        {/* 오른쪽 버튼 + 팔로우 정보 */}
+        <MoreInfo>
+          {/* 현재 유저 페이지가 자신의 페이지가 아닐 때, 팔로우 버튼 디스플레이 */}
+          {!myPage && (
+            <Button theme="basic" size="full" onClick={this.onClickBtn}>
+              {followBtn ? `Following ✓` : 'Follow'}
+            </Button>
+          )}
+          <ListBoxWrapper>
+            <List>
+              <FollowListLabel>Following</FollowListLabel>
+              {followingList && <FollowList list={followingList} />}
+            </List>
+            <List>
+              <FollowListLabel>Follower</FollowListLabel>
+              {followerList && <FollowList list={followerList} />}
+            </List>
+          </ListBoxWrapper>
+        </MoreInfo>
+
         <Ideas>
           <div>
             <Button
@@ -89,26 +102,6 @@ class UserContents extends Component {
             <IdeaList list={myList} pathHandler={pathHandler} />
           )}
         </Ideas>
-
-        {/* 오른쪽 버튼 + 팔로우 정보 */}
-        <MoreInfo>
-          {/* 현재 유저 페이지가 자신의 페이지가 아닐 때, 팔로우 버튼 디스플레이 */}
-          {!myPage && (
-            <Button theme="basic" size="full" onClick={this.onClickBtn}>
-              {followBtn ? `Following ✓` : 'Follow'}
-            </Button>
-          )}
-          <ListBoxWrapper>
-            <List>
-              <FollowListLabel>Following</FollowListLabel>
-              {followingList && <FollowList list={followingList} />}
-            </List>
-            <List>
-              <FollowListLabel>Follower</FollowListLabel>
-              {followerList && <FollowList list={followerList} />}
-            </List>
-          </ListBoxWrapper>
-        </MoreInfo>
       </Wrapper>
     );
   }
@@ -116,9 +109,58 @@ class UserContents extends Component {
 
 const Wrapper = styled(Responsive)`
   display: flex;
+  flex-flow: row-reverse wrap;
   justify-content: space-between;
   padding-top: 3rem;
   padding-bottom: 6rem;
+
+  @media ${device.tablet} {
+    display: block;
+  }
+`;
+
+const MoreInfo = styled.section`
+  padding-top: 52px;
+  flex: 0 0 36%;
+  > button {
+    margin-bottom: 1rem;
+  }
+
+  @media ${device.tablet} {
+    flex: none;
+    padding-top: 1rem;
+  }
+  @media ${device.mobileL} {
+    padding-top: 0;
+  }
+`;
+
+const ListBoxWrapper = styled.div`
+  > div:nth-child(1) {
+    margin-bottom: 1rem;
+  }
+
+  @media ${device.tablet} {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    > div {
+      flex: 0 0 49%;
+    }
+  }
+  @media ${device.mobileL} {
+    display: none;
+  }
+`;
+
+const List = styled(ListBox)``;
+
+const FollowListLabel = styled.div`
+  padding: 1rem;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 600;
+  color: ${palette.point[0]};
+  border-bottom: 1px solid ${palette.gray[3]};
 `;
 
 const Ideas = styled.section`
@@ -138,30 +180,13 @@ const Ideas = styled.section`
       }
     }
   }
-`;
 
-const MoreInfo = styled.section`
-  padding-top: 52px;
-  flex: 0 0 36%;
-  > button {
-    margin-bottom: 1rem;
+  @media ${device.tablet} {
+    flex: none;
+    > div > button {
+      flex: 1;
+    }
   }
-`;
-
-const ListBoxWrapper = styled.div`
-  > div:nth-child(1) {
-    margin-bottom: 1rem;
-  }
-`;
-
-const List = styled(ListBox)``;
-
-const FollowListLabel = styled.div`
-  padding: 1rem;
-  font-family: 'Heebo', sans-serif;
-  font-weight: 600;
-  color: ${palette.point[0]};
-  border-bottom: 1px solid ${palette.gray[3]};
 `;
 
 export default UserContents;

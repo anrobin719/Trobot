@@ -33,7 +33,6 @@ const TagListBox = styled.div`
   display: flex;
   flex-flow: wrap;
   width: 100%;
-  margin-top: 3rem;
 `;
 
 export default TagList;

@@ -2,6 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 import Button from '../ui/Button';
+import device from '../../lib/styles/device';
 
 const PostSide = ({
   authorId,
@@ -56,8 +57,17 @@ const PostSide = ({
 
 const ContentBox = styled.div`
   flex: 0 0 36%;
-  button {
+  > button {
     margin-bottom: 1rem;
+  }
+  @media ${device.tablet} {
+    flex: none;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    > button {
+      flex: 0 0 48%;
+    }
   }
 `;
 

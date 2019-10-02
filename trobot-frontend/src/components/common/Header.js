@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Responsive from './Responsive';
+import device from '../../lib/styles/device';
 
 const Header = ({ title, emoji }) => {
   return (
@@ -35,6 +36,14 @@ const HeaderBox = styled.section`
     font-size: 3rem;
     font-weight: 800;
     font-family: 'Heebo', sans-serif;
+  }
+  @media ${device.mobileL} {
+    h3 {
+      font-size: 3rem;
+    }
+    h2 {
+      font-size: 2rem;
+    }
   }
 `;
 
