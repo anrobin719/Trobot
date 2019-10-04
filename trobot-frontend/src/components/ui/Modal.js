@@ -22,9 +22,9 @@ const ModalWrapper = styled.div`
   // Backdrop
   > div {
     z-index: ${props => (props.isPost ? `200` : `400`)};
-    padding: ${props => (props.isPost ? `4rem 10rem` : `0`)};
     overflow: scroll;
     height: 100vh;
+    margin: 0 auto;
     // ModalBox
     > div {
       z-index: ${props => (props.isPost ? `300` : `500`)};
@@ -34,13 +34,13 @@ const ModalWrapper = styled.div`
   @media ${device.tablet} {
     // Backdrop
     > div {
-      padding: ${props => (props.isPost ? `4rem 2rem` : `0`)};
+      padding: ${props => (props.isPost ? `0 2rem` : `0`)};
     }
   }
   @media ${device.mobileL} {
     // Backdrop
     > div {
-      padding: ${props => (props.isPost ? `4rem 1rem` : `0`)};
+      padding: ${props => (props.isPost ? `0 1rem` : `0`)};
     }
   }
 `;
@@ -71,7 +71,7 @@ const PostSlideUp = keyframes`
 
 const ModalBox = styled.div`
   width: ${props => (props.isPost ? `1024px` : `500px`)};
-  margin: 0 auto 6rem;
+  margin-top: 4rem;
   overflow: scroll;
   border-radius: 0.4rem;
   box-sizing: border-box;

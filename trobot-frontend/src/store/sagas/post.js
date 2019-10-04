@@ -4,8 +4,7 @@ import axios from '../../axios-post';
 import * as actions from '../actions/index';
 
 // eslint-disable-next-line import/prefer-default-export
-export function* getPostSaga(action) {
-  const { pnum } = action;
+export function* getPostSaga({ payload: pnum }) {
   yield put(actions.getPostStart());
 
   try {
@@ -18,8 +17,7 @@ export function* getPostSaga(action) {
   }
 }
 
-export function* updatePostSaga(action) {
-  const { pnum, updatedPost } = action;
+export function* updatePostSaga({ payload: { pnum, updatedPost } }) {
   yield put(actions.updatePostStart());
 
   try {
@@ -32,8 +30,7 @@ export function* updatePostSaga(action) {
   }
 }
 
-export function* deletePostSaga(action) {
-  const { postId } = action;
+export function* deletePostSaga({ payload: postId }) {
   yield put(actions.deletePostStart());
 
   try {
@@ -48,8 +45,7 @@ export function* deletePostSaga(action) {
   }
 }
 
-export function* deleteCommentSaga(action) {
-  const { postId, commentId } = action;
+export function* deleteCommentSaga({ payload: { postId, commentId } }) {
   yield put(actions.deleteCommentStart());
 
   try {
@@ -65,8 +61,7 @@ export function* deleteCommentSaga(action) {
 }
 
 // 포스트의 좋아요 클릭 시 실행
-export function* likePostSaga(action) {
-  const { postId, post, likeBtn } = action;
+export function* likePostSaga({ payload: { postId, post, likeBtn } }) {
   const userId = localStorage.getItem('userId');
   const likeData = { userId };
 
@@ -119,8 +114,7 @@ export function* likePostSaga(action) {
 }
 
 // 좋아요 데이터 리로드
-export function* reloadLikeSaga(action) {
-  const { userId } = action;
+export function* reloadLikeSaga({ payload: userId }) {
   try {
     // 유저의 좋아요 포스트 정보 가져오기
     const getlikePostRes = yield axios.get(`/user/${userId}/likePost.json`);

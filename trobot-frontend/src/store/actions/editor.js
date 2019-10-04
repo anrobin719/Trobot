@@ -1,58 +1,28 @@
+import { createAction } from 'redux-actions';
 import * as actionTypes from './actionTypes';
 
-export const writePostStart = () => {
-  return {
-    type: actionTypes.WRITE_POST_START,
-  };
-};
+// 포스트 작성시 실행합니다.
+export const writePostStart = createAction(actionTypes.WRITE_POST_START);
+export const writePostSuccess = createAction(
+  actionTypes.WRITE_POST_SUCCESS,
+  postId => postId,
+);
+export const writePostFail = createAction(actionTypes.WRITE_POST_FAIL);
+export const writePost = createAction(
+  actionTypes.WRITE_POST,
+  newPostData => newPostData,
+);
 
-export const writePostSuccess = postId => {
-  return {
-    type: actionTypes.WRITE_POST_SUCCESS,
-    postId,
-  };
-};
+// 포스트 수정시 실행합니다.
+export const editPostStart = createAction(actionTypes.EDIT_POST_START);
+export const editPostSuccess = createAction(
+  actionTypes.EDIT_POST_SUCCESS,
+  postId => postId,
+);
+export const editPostFail = createAction(actionTypes.EDIT_POST_FAIL);
+export const editPost = createAction(
+  actionTypes.EDIT_POST,
+  (pnum, postData) => ({ pnum, postData }),
+);
 
-export const writePostFail = err => {
-  return {
-    type: actionTypes.WRITE_POST_FAIL,
-    error: err,
-  };
-};
-
-export const writePost = newPostData => {
-  return {
-    type: actionTypes.WRITE_POST,
-    newPostData,
-  };
-};
-
-export const editPostStart = () => {
-  return {
-    type: actionTypes.EDIT_POST_START,
-  };
-};
-export const editPostSuccess = postId => {
-  return {
-    type: actionTypes.EDIT_POST_SUCCESS,
-    postId,
-  };
-};
-export const editPostFail = () => {
-  return {
-    type: actionTypes.EDIT_POST_FAIL,
-  };
-};
-export const editPost = (pnum, postData) => {
-  return {
-    type: actionTypes.EDIT_POST,
-    pnum,
-    postData,
-  };
-};
-
-export const initEdit = () => {
-  return {
-    type: actionTypes.INIT_EDIT,
-  };
-};
+export const initEdit = createAction(actionTypes.INIT_EDIT);

@@ -4,8 +4,7 @@ import axios from '../../axios-post';
 import * as actions from '../actions/index';
 
 // eslint-disable-next-line import/prefer-default-export
-export function* getUserInfoSaga(action) {
-  const { userId } = action;
+export function* getUserInfoSaga({ payload: userId }) {
   yield put(actions.getUserInfoStart());
 
   try {

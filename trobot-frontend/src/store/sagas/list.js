@@ -4,8 +4,7 @@ import axios from '../../axios-post';
 import * as actions from '../actions/index';
 
 // eslint-disable-next-line import/prefer-default-export
-export function* getListSaga(action) {
-  const { tag } = action;
+export function* getListSaga({ payload: tag }) {
   yield put(actions.getListStart());
 
   let url;
@@ -33,8 +32,7 @@ export function* getListSaga(action) {
 }
 
 // 작성한 아이디어 요청
-export function* getMyListSaga(action) {
-  const { userId } = action;
+export function* getMyListSaga({ payload: userId }) {
   yield put(actions.getMyListStart());
 
   try {
@@ -57,8 +55,7 @@ export function* getMyListSaga(action) {
 }
 
 // 좋아요한 아이디어 요청
-export function* getLikeListSaga(action) {
-  const { userId } = action;
+export function* getLikeListSaga({ payload: userId }) {
   yield put(actions.getLikeListStart());
 
   try {
@@ -79,8 +76,7 @@ export function* getLikeListSaga(action) {
 }
 
 // 팔로우 관련 유저목록 요청
-export function* getFollowListSaga(action) {
-  const { userId } = action;
+export function* getFollowListSaga({ payload: userId }) {
   yield put(actions.getFollowListStart());
 
   try {
@@ -108,7 +104,7 @@ export function* getFollowListSaga(action) {
     }
 
     // 팔로잉, 팔로워 리스트 저장
-    yield put(actions.getFollowListSuccess(followingList, followerList));
+    yield put(actions.getFollowListSuccess({ followingList, followerList }));
     console.log('GET_FOLLOW_LIST_SUCCESS', followingList, followerList);
   } catch (err) {
     yield put(actions.getFollowListFail());

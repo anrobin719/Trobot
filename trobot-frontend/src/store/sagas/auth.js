@@ -14,15 +14,15 @@ export function* logoutSaga() {
   yield put(actions.logoutSucceed());
 }
 
-export function* checkAuthTimeOutSaga(action) {
-  yield delay(action.expirationTime * 1000);
+export function* checkAuthTimeOutSaga({ payload: expirationTime }) {
+  yield delay(expirationTime * 1000);
   yield put(actions.authLogout());
 }
 
-export function* authUserSaga(action) {
+export function* authUserSaga({ payload: authForm }) {
   yield put(actions.authStart());
   let url;
-  if (action.authForm.signup) {
+  if (authForm.signup) {
     // 회원가입 url
     url =
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD06IewZiniZT4xSs4lT0dcfCv7gBXPIZ0';
@@ -32,8 +32,8 @@ export function* authUserSaga(action) {
       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD06IewZiniZT4xSs4lT0dcfCv7gBXPIZ0';
   }
   const authData = {
-    email: action.authForm.email,
-    password: action.authForm.password,
+    email: authForm.email,
+    password: authForm.password,
     returnSecureToken: true,
   };
 
@@ -42,12 +42,12 @@ export function* authUserSaga(action) {
     const response = yield axios.post(url, authData);
 
     // 회원가입시 => user컬렉션에 userId를 key값으로 유저정보 저장 + 유저 정보 localStorage 저장
-    if (action.authForm.signup) {
+    if (authForm.signup) {
       const userId = response.data.localId;
       try {
         const saveUserInfoRes = yield axiosBase.put(
           `/user/${userId}.json`,
-          action.authForm,
+          authForm,
         );
         yield localStorage.setItem('nickname', saveUserInfoRes.data.nickname);
         yield localStorage.setItem('img', saveUserInfoRes.data.img);
@@ -89,7 +89,12 @@ export function* authUserSaga(action) {
         }
 
         // 팔로우 목록 스토어에 저장
-        yield put(actions.authSaveFollow(followingArray, followerArray));
+        yield put(
+          actions.authSaveFollow({
+            following: followingArray,
+            follower: followerArray,
+          }),
+        );
         // 좋아요 목록 스토어에 저장
         yield put(actions.saveLike(likePostArray));
         console.log(`[SUCCESS] SIGN_IN USER INFO SET`);
@@ -99,21 +104,16 @@ export function* authUserSaga(action) {
     }
 
     // 회원가입, 로그인 공통 : 유저 토큰, 아이디, 이메일, 만료일 localStorage 저장
-    yield localStorage.setItem('token', response.data.idToken);
-    yield localStorage.setItem('userId', response.data.localId);
-    yield localStorage.setItem('email', response.data.email);
+    const { idToken, localId, email, expiresIn } = response.data;
+    yield localStorage.setItem('token', idToken);
+    yield localStorage.setItem('userId', localId);
+    yield localStorage.setItem('email', email);
     const expirationDate = yield new Date(
-      new Date().getTime() + response.data.expiresIn * 1000,
+      new Date().getTime() + expiresIn * 1000,
     );
     yield localStorage.setItem('expirationDate', expirationDate);
-    yield put(actions.checkAuthTimeOut(response.data.expiresIn));
-    yield put(
-      actions.authSuccess(
-        response.data.idToken,
-        response.data.localId,
-        response.data.email,
-      ),
-    );
+    yield put(actions.checkAuthTimeOut(expiresIn));
+    yield put(actions.authSuccess({ token: idToken, userId: localId, email }));
     console.log(`[SUCCESS] AUTH`);
   } catch (error) {
     // 인증 실패시 오류 메세지 반환
@@ -137,7 +137,7 @@ export function* checkAuthSaga() {
     } else {
       const userId = yield localStorage.getItem('userId');
       const email = yield localStorage.getItem('email');
-      yield put(actions.authSuccess(token, userId, email));
+      yield put(actions.authSuccess({ token, userId, email }));
       yield put(
         actions.checkAuthTimeOut(
           (expirationDate.getTime() - new Date().getTime()) / 1000,
@@ -150,8 +150,9 @@ export function* checkAuthSaga() {
   }
 }
 
-export function* followSaga(action) {
-  const { authorId, followingData, followBtn } = action;
+export function* followSaga({
+  payload: { authorId, followingData, followBtn },
+}) {
   const userId = yield localStorage.getItem('userId');
   const nickname = yield localStorage.getItem('nickname');
   const email = yield localStorage.getItem('email');
@@ -214,9 +215,7 @@ export function* followSaga(action) {
 }
 
 // 팔로우 데이터 리로드
-export function* reloadFollowSaga(action) {
-  const { userId } = action;
-
+export function* reloadFollowSaga({ payload: userId }) {
   try {
     const getUserInfoRes = yield axiosBase.get(`/user/${userId}.json`);
     // 팔로잉 유저 목록
@@ -233,7 +232,12 @@ export function* reloadFollowSaga(action) {
         ...getUserInfoRes.data.follower[followerId],
       });
     }
-    yield put(actions.authSaveFollow(followingArray, followerArray));
+    yield put(
+      actions.authSaveFollow({
+        following: followingArray,
+        follower: followerArray,
+      }),
+    );
   } catch (err) {
     console.log(err);
   }

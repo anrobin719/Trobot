@@ -1,3 +1,4 @@
+import { handleActions } from 'redux-actions';
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../lib/shared/utility';
 
@@ -12,36 +13,8 @@ const initialState = {
   error: false,
 };
 
-const authStart = state => {
-  return updateObject(state, {
-    loading: true,
-  });
-};
-
-const authSuccess = (state, action) => {
-  return updateObject(state, {
-    token: action.token,
-    userId: action.userId,
-    email: action.email,
-    loading: false,
-  });
-};
-
-const authSaveFollow = (state, action) => {
-  return updateObject(state, {
-    following: action.following,
-    follower: action.follower,
-  });
-};
-
-const saveLike = (state, action) => {
-  return updateObject(state, {
-    likePost: action.likePostArray,
-  });
-};
-
-const authFail = (state, action) => {
-  switch (action.errorMessage) {
+const authFail = (state, { payload: errorMessage }) => {
+  switch (errorMessage) {
     case 'EMAIL_EXISTS':
       return updateObject(state, {
         loading: false,
@@ -75,32 +48,51 @@ const authFail = (state, action) => {
     default:
       return updateObject(state, {
         loading: false,
-        error: action.errorMessage,
+        error: errorMessage,
       });
   }
 };
 
-const authLogout = state => {
-  return updateObject(state, initialState);
-};
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.AUTH_START:
-      return authStart(state);
-    case actionTypes.AUTH_SUCCESS:
-      return authSuccess(state, action);
-    case actionTypes.AUTH_SAVE_FOLLOW:
-      return authSaveFollow(state, action);
-    case actionTypes.SAVE_LIKE:
-      return saveLike(state, action);
-    case actionTypes.AUTH_FAIL:
+const reducer = handleActions(
+  {
+    [actionTypes.AUTH_START]: (state, action) => {
+      return updateObject(state, {
+        loading: true,
+      });
+    },
+    [actionTypes.AUTH_SUCCESS]: (
+      state,
+      { payload: { token, userId, email } },
+    ) => {
+      return updateObject(state, {
+        token,
+        userId,
+        email,
+        loading: false,
+      });
+    },
+    [actionTypes.AUTH_SAVE_FOLLOW]: (
+      state,
+      { payload: { following, follower } },
+    ) => {
+      return updateObject(state, {
+        following,
+        follower,
+      });
+    },
+    [actionTypes.SAVE_LIKE]: (state, { payload: likePostArray }) => {
+      return updateObject(state, {
+        likePost: likePostArray,
+      });
+    },
+    [actionTypes.AUTH_FAIL]: (state, action) => {
       return authFail(state, action);
-    case actionTypes.AUTH_LOGOUT:
-      return authLogout(state);
-    default:
-      return state;
-  }
-};
+    },
+    [actionTypes.AUTH_LOGOUT]: (state, action) => {
+      return updateObject(state, initialState);
+    },
+  },
+  initialState,
+);
 
 export default reducer;

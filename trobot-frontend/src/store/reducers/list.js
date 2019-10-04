@@ -1,3 +1,4 @@
+import { handleActions } from 'redux-actions';
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../lib/shared/utility';
 
@@ -11,110 +12,89 @@ const initialState = {
   error: false,
 };
 
-const getListStart = state => {
-  return updateObject(state, {
-    loading: true,
-  });
-};
-const getListSuccess = (state, action) => {
-  return updateObject(state, {
-    list: action.listData,
-    loading: false,
-  });
-};
-const getListFail = state => {
-  return updateObject(state, {
-    loading: false,
-    error: true,
-  });
-};
-// 작성한 아이디어 목록 저장
-const getMyListStart = state => {
-  return updateObject(state, {
-    loading: true,
-  });
-};
-const getMyListSuccess = (state, action) => {
-  return updateObject(state, {
-    myList: action.myList,
-    loading: false,
-  });
-};
-const getMyListFail = state => {
-  return updateObject(state, {
-    loading: false,
-    error: true,
-  });
-};
+const reducer = handleActions(
+  {
+    // 아이디어 리스트 가져오기
+    [actionTypes.GET_LIST_START]: (state, action) => {
+      return updateObject(state, {
+        loading: true,
+      });
+    },
+    [actionTypes.GET_LIST_SUCCESS]: (state, { payload: listData }) => {
+      return updateObject(state, {
+        list: listData,
+        loading: false,
+      });
+    },
+    [actionTypes.GET_LIST_FAIL]: (state, action) => {
+      return updateObject(state, {
+        loading: false,
+        error: true,
+      });
+    },
 
-// 좋아요한 아이디어 목록 저장
-const getLikeListStart = state => {
-  return updateObject(state, {
-    loading: true,
-  });
-};
-const getLikeListSuccess = (state, action) => {
-  return updateObject(state, {
-    likeList: action.likeList,
-    loading: false,
-  });
-};
-const getLikeListFail = state => {
-  return updateObject(state, {
-    loading: false,
-    error: true,
-  });
-};
+    // 작성한 아이디어 목록 저장
+    [actionTypes.GET_MY_LIST_START]: (state, action) => {
+      return updateObject(state, {
+        loading: true,
+      });
+    },
+    [actionTypes.GET_MY_LIST_SUCCESS]: (state, { payload: myList }) => {
+      return updateObject(state, {
+        myList,
+        loading: false,
+      });
+    },
+    [actionTypes.GET_MY_LIST_FAIL]: (state, action) => {
+      return updateObject(state, {
+        loading: false,
+        error: true,
+      });
+    },
 
-// 팔로잉, 팔로워 목록 저장
-const getFollowListStart = state => {
-  return updateObject(state, {
-    loading: true,
-  });
-};
-const getFollowListSuccess = (state, action) => {
-  return updateObject(state, {
-    followingList: action.followingList,
-    followerList: action.followerList,
-    loading: false,
-  });
-};
-const getFollowListFail = state => {
-  return updateObject(state, {
-    loading: false,
-    error: true,
-  });
-};
+    // 좋아요한 아이디어 목록 저장
+    [actionTypes.GET_LIKE_LIST_START]: (state, action) => {
+      return updateObject(state, {
+        loading: true,
+      });
+    },
+    [actionTypes.GET_LIKE_LIST_SUCCESS]: (state, { payload: likeList }) => {
+      return updateObject(state, {
+        likeList,
+        loading: false,
+      });
+    },
+    [actionTypes.GET_LIKE_LIST_FAIL]: (state, action) => {
+      return updateObject(state, {
+        loading: false,
+        error: true,
+      });
+    },
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.GET_LIST_START:
-      return getListStart(state);
-    case actionTypes.GET_LIST_SUCCESS:
-      return getListSuccess(state, action);
-    case actionTypes.GET_LIST_FAIL:
-      return getListFail(state);
-    case actionTypes.GET_MY_LIST_START:
-      return getMyListStart(state);
-    case actionTypes.GET_MY_LIST_SUCCESS:
-      return getMyListSuccess(state, action);
-    case actionTypes.GET_MY_LIST_FAIL:
-      return getMyListFail(state);
-    case actionTypes.GET_LIKE_LIST_START:
-      return getLikeListStart(state);
-    case actionTypes.GET_LIKE_LIST_SUCCESS:
-      return getLikeListSuccess(state, action);
-    case actionTypes.GET_LIKE_LIST_FAIL:
-      return getLikeListFail(state);
-    case actionTypes.GET_FOLLOW_LIST_START:
-      return getFollowListStart(state);
-    case actionTypes.GET_FOLLOW_LIST_SUCCESS:
-      return getFollowListSuccess(state, action);
-    case actionTypes.GET_FOLLOW_LIST_FAIL:
-      return getFollowListFail(state);
-    default:
-      return state;
-  }
-};
+    // 팔로잉, 팔로워 목록 저장
+    [actionTypes.GET_FOLLOW_LIST_START]: (state, action) => {
+      return updateObject(state, {
+        loading: true,
+      });
+    },
+    [actionTypes.GET_FOLLOW_LIST_SUCCESS]: (
+      state,
+      { payload: { followingList, followerList } },
+    ) => {
+      return updateObject(state, {
+        followingList,
+        followerList,
+        loading: false,
+      });
+    },
+    [actionTypes.GET_FOLLOW_LIST_FAIL]: (state, action) => {
+      return updateObject(state, {
+        loading: false,
+        error: true,
+      });
+    },
+  },
+  initialState,
+);
 
 export default reducer;

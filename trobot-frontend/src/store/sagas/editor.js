@@ -4,8 +4,7 @@ import axios from '../../axios-post';
 import * as actions from '../actions/index';
 
 // eslint-disable-next-line import/prefer-default-export
-export function* writePostSaga(action) {
-  const { newPostData } = action;
+export function* writePostSaga({ payload: newPostData }) {
   yield put(actions.writePostStart());
 
   try {
@@ -18,8 +17,7 @@ export function* writePostSaga(action) {
   }
 }
 
-export function* editPostSaga(action) {
-  const { pnum, postData } = action;
+export function* editPostSaga({ payload: { pnum, postData } }) {
   yield put(actions.editPostStart());
 
   try {

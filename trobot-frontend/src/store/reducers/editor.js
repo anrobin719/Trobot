@@ -1,3 +1,4 @@
+import { handleActions } from 'redux-actions';
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../lib/shared/utility';
 
@@ -7,69 +8,49 @@ const initialState = {
   error: false,
 };
 
-const writePostStart = state => {
-  return updateObject(state, {
-    loading: true,
-  });
-};
+const reducer = handleActions(
+  {
+    // 포스트 작성시 실행합니다.
+    [actionTypes.WRITE_POST_START]: (state, action) => {
+      return updateObject(state, {
+        loading: true,
+      });
+    },
+    [actionTypes.WRITE_POST_SUCCESS]: (state, { payload: postId }) => {
+      return updateObject(state, {
+        loading: false,
+        postId,
+      });
+    },
+    [actionTypes.WRITE_POST_FAIL]: (state, action) => {
+      return updateObject(state, {
+        loading: false,
+        error: true,
+      });
+    },
 
-const writePostSuccess = (state, action) => {
-  return updateObject(state, {
-    loading: false,
-    postId: action.postId,
-  });
-};
-
-const writePostFail = state => {
-  return updateObject(state, {
-    loading: false,
-    error: true,
-  });
-};
-
-const editPostStart = state => {
-  return updateObject(state, {
-    loading: true,
-  });
-};
-
-const editPostSuccess = (state, action) => {
-  return updateObject(state, {
-    loading: false,
-    postId: action.postId,
-  });
-};
-
-const editPostFail = state => {
-  return updateObject(state, {
-    loading: false,
-    error: true,
-  });
-};
-
-const initEdit = () => {
-  return initialState;
-};
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.WRITE_POST_START:
-      return writePostStart(state);
-    case actionTypes.WRITE_POST_SUCCESS:
-      return writePostSuccess(state, action);
-    case actionTypes.WRITE_POST_FAIL:
-      return writePostFail(state);
-    case actionTypes.EDIT_POST_START:
-      return editPostStart(state);
-    case actionTypes.EDIT_POST_SUCCESS:
-      return editPostSuccess(state, action);
-    case actionTypes.EDIT_POST_FAIL:
-      return editPostFail(state);
-    case actionTypes.INIT_EDIT:
-      return initEdit(state);
-    default:
-      return state;
-  }
-};
-
+    // 포스트 수정시 실행합니다.
+    [actionTypes.EDIT_POST_START]: (state, action) => {
+      return updateObject(state, {
+        loading: true,
+      });
+    },
+    [actionTypes.EDIT_POST_SUCCESS]: (state, { payload: postId }) => {
+      return updateObject(state, {
+        loading: false,
+        postId,
+      });
+    },
+    [actionTypes.EDIT_POST_FAIL]: (state, action) => {
+      return updateObject(state, {
+        loading: false,
+        error: true,
+      });
+    },
+    [actionTypes.INIT_EDIT]: (state, action) => {
+      return initialState;
+    },
+  },
+  initialState,
+);
 export default reducer;

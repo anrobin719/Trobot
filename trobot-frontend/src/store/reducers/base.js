@@ -1,4 +1,5 @@
 import { Map } from 'immutable';
+import { handleActions } from 'redux-actions';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = Map({
@@ -10,25 +11,16 @@ const initialState = Map({
   }),
 });
 
-const showModal = (state, action) => {
-  const newState = state.setIn(['modal', action.modalName], true);
-  return newState;
-};
-
-const hideModal = (state, action) => {
-  const newState = state.setIn(['modal', action.modalName], false);
-  return newState;
-};
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.SHOW_MODAL:
-      return showModal(state, action);
-    case actionTypes.HIDE_MODAL:
-      return hideModal(state, action);
-    default:
-      return state;
-  }
-};
+const reducer = handleActions(
+  {
+    [actionTypes.SHOW_MODAL]: (state, { payload: modalName }) => {
+      return state.setIn(['modal', modalName], true);
+    },
+    [actionTypes.HIDE_MODAL]: (state, { payload: modalName }) => {
+      return state.setIn(['modal', modalName], false);
+    },
+  },
+  initialState,
+);
 
 export default reducer;
