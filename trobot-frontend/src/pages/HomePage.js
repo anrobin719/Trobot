@@ -80,6 +80,7 @@ const Intro = styled.section`
   }
   p {
     font-size: 1.2rem;
+    margin-bottom: 0;
   }
 
   @media ${device.tablet} {

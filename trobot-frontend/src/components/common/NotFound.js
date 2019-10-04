@@ -3,12 +3,15 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Button from '../ui/Button';
+import device from '../../lib/styles/device';
 
 const NotFound = () => {
   return (
     <Back>
       <Content>
-        <span>🤦🏻‍♀️</span>
+        <span role="img" aria-label="not found">
+          🤦🏻‍♀️
+        </span>
         <h3>404 Error</h3>
         <div>
           {/* <p>페이지를 표시할 수 없습니다.</p> */}
@@ -52,6 +55,16 @@ const Content = styled.div`
       margin-right: 2rem;
       font-size: 1.4rem;
       font-weight: 400;
+    }
+  }
+
+  @media ${device.mobileL} {
+    span {
+      font-size: 6rem;
+    }
+    h3 {
+      font-size: 3rem;
+      line-height: 3.6rem;
     }
   }
 `;

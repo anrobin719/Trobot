@@ -18,6 +18,7 @@ export function* getListSaga({ payload: tag }) {
     const res = yield axios.get(url);
     const receivedData = [];
     for (const postId in res.data) {
+      if (!res.data.hasOwnProperty(postId)) continue;
       receivedData.push({
         ...res.data[postId],
         postId,

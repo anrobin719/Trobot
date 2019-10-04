@@ -41,7 +41,7 @@ class ListContainer extends Component {
   };
 
   render() {
-    const { list, resource, loading, isAuthenticated } = this.props;
+    const { tag, list, resource, loading, isAuthenticated } = this.props;
     return (
       <>
         {!list ? (
@@ -49,6 +49,7 @@ class ListContainer extends Component {
         ) : (
           <>
             <List
+              tag={tag}
               list={list}
               resource={resource}
               loading={loading}

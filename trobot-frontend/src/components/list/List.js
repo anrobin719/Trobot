@@ -7,7 +7,7 @@ import ResourceList from './ResourceList';
 import Loading from '../ui/Loading';
 import device from '../../lib/styles/device';
 
-const List = ({ list, resource, loading, pathHandler }) => {
+const List = ({ tag, list, loading, pathHandler }) => {
   return (
     <Wrapper>
       {loading ? (
@@ -22,7 +22,7 @@ const List = ({ list, resource, loading, pathHandler }) => {
           {/* 오른쪽 flex box */}
           <ResourceBox>
             <h3>자료</h3>
-            <ResourceList />
+            <ResourceList tag={tag} />
           </ResourceBox>
         </>
       )}
