@@ -132,6 +132,16 @@ const PersonOutBox = styled.div`
       font-size: .8rem;
     }
   }
+  @media ${device.mobileM} {
+    h6 {
+      font-size: .7rem;
+    }
+  }
+  @media (max-width: 340px) {
+    h6 {
+      font-size: .6rem;
+    }
+  }
 `;
 
 const StyleDiv = styled.div`

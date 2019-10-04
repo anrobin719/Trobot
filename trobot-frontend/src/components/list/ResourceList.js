@@ -36,7 +36,7 @@ const ResourceList = ({ tag = '기타분류' }) => {
 const IdeaBox = styled.article`
   width: 100%;
   border-bottom: 1px solid ${palette.gray[1]};
-  padding: 1.6rem 2rem;
+  padding: 1.6rem;
   cursor: pointer;
 `;
 

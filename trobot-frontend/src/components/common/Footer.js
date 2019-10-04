@@ -16,7 +16,7 @@ const Footer = () => {
 
 const FooterBlock = styled.div`
   width: 100%;
-  height: 16rem;
+  padding: 4rem 0;
   background: ${palette.gray[1]};
 `;
 

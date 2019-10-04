@@ -21,7 +21,7 @@ const List = ({ tag, list, loading, pathHandler }) => {
           </IdeaBox>
           {/* 오른쪽 flex box */}
           <ResourceBox>
-            <h3>자료</h3>
+            <h3>관련자료</h3>
             <ResourceList tag={tag} />
           </ResourceBox>
         </>
@@ -35,7 +35,7 @@ const Wrapper = styled(Responsive)`
   justify-content: space-between;
   padding-top: 4rem;
   padding-bottom: 6rem;
-  min-height: calc(100vh - 22rem);
+  min-height: 100vh;
 `;
 
 const IdeaBox = styled.section`

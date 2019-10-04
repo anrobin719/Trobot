@@ -1,8 +1,12 @@
 import { put, call, delay } from 'redux-saga/effects';
 
+import dotenv from 'dotenv';
 import axios from 'axios';
 import axiosBase from '../../axios-post';
 import * as actions from '../actions/index';
+
+dotenv.config();
+const { REACT_APP_FIREBASE_API_KEY } = process.env;
 
 export function* logoutSaga() {
   yield call([localStorage, 'removeItem'], 'token');
@@ -24,12 +28,10 @@ export function* authUserSaga({ payload: authForm }) {
   let url;
   if (authForm.signup) {
     // 회원가입 url
-    url =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD06IewZiniZT4xSs4lT0dcfCv7gBXPIZ0';
+    url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${REACT_APP_FIREBASE_API_KEY}`;
   } else {
     // 로그인 url
-    url =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD06IewZiniZT4xSs4lT0dcfCv7gBXPIZ0';
+    url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${REACT_APP_FIREBASE_API_KEY}`;
   }
   const authData = {
     email: authForm.email,
