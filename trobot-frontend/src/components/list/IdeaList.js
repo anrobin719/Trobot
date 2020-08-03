@@ -4,7 +4,6 @@ import Idea from './Idea';
 import ListBox from './ListBox';
 
 const IdeaList = ({ list, pathHandler }) => {
-  // const { like } = list.toJS();
   const ideas = list.map(idea => {
     return (
       <Idea

@@ -9,7 +9,6 @@ import device from '../lib/styles/device';
 const HomePage = () => {
   return (
     <>
-      {/* 인트로 */}
       <Intro>
         <Wrapper>
           <h1>Trouble Bot</h1>
@@ -17,7 +16,6 @@ const HomePage = () => {
         </Wrapper>
       </Intro>
 
-      {/* 태그 선택 섹션 */}
       <TagSection>
         <Wrapper>
           <h3>아이디어</h3>
@@ -26,7 +24,6 @@ const HomePage = () => {
         </Wrapper>
       </TagSection>
 
-      {/* 정보 섹션 */}
       <InfoSection>
         <Wrapper>
           <h3>아이디어를 쉽게 저장하고 공유하세요</h3>
@@ -39,7 +36,6 @@ const HomePage = () => {
         </Wrapper>
       </InfoSection>
 
-      {/* 컨텍트 섹션 */}
       <ContactSection>
         <Wrapper>
           <h2>의견이 있으신가요?</h2>
@@ -76,7 +72,6 @@ const Wrapper = styled(Responsive)`
   }
 `;
 
-// 헤드 부분 입니다.
 const Intro = styled.section`
   padding-bottom: 3rem;
   background: white;
@@ -107,13 +102,11 @@ const Intro = styled.section`
   }
 `;
 
-// 아이디어 태크 부분 입니다.
 const TagSection = styled.section`
   background-color: ${palette.backBlue[0]};
   text-align: center;
 `;
 
-// 중간 흰색 배경 부분입니다.
 const InfoSection = styled.section`
   background: white;
   padding-top: 2rem;
@@ -145,7 +138,6 @@ const SecondImg = styled(ImgBox)`
   padding-bottom: 56%;
 `;
 
-// 컨택트 메세지 부분 입니다.
 const ContactSection = styled.section`
   background: ${palette.blue[9]};
   padding: 3rem 0;

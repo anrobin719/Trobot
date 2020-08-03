@@ -18,16 +18,13 @@ const Comment = ({
 
   return (
     <CommentBox>
-      {/* 프로필 이미지 */}
       <ProfileImg img={img} userId={userId} />
-      {/* 유저 닉네임, 댓글 내용 */}
       <Contents>
         <Link to={`/user/${userId}`}>
           <h6>{id}</h6>
         </Link>
         <p>{comment}</p>
       </Contents>
-      {/* 삭제버튼 - 본인 댓글일때 삭제 가능 */}
       {userId === myId && (
         <DeleteBtnBox onClick={() => deleteCommentHandler(commentId)}>
           <CloseIcon />

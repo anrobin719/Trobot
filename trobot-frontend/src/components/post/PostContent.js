@@ -18,7 +18,6 @@ const PostContent = ({
   return (
     <ContentBox>
       {body}
-      {/* 로그인 아이디와 작성자 아이디가 같으면, 수정/삭제 버튼 디스플레이 */}
       {userId === authorId ? (
         <EditBtnBox>
           <span role="presentation" onClick={editPostHandler}>

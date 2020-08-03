@@ -80,7 +80,6 @@ class Editor extends Component {
     };
   }
 
-  // 포스트 아이디가 있으면 수정. 기존 포스트 내용 세팅
   componentDidMount() {
     const { pnum, post } = this.props;
     const { title, sub, tag, body } = post.toJS();
@@ -104,7 +103,6 @@ class Editor extends Component {
     }
   }
 
-  // 저장시
   onSubmit = async e => {
     const { post, pnum, editPostHandler, submitPostHandler } = this.props;
     const { controls } = this.state;
@@ -112,7 +110,7 @@ class Editor extends Component {
     const img = localStorage.getItem('img');
     const originPost = post.toJS();
     e.preventDefault();
-    // 기존 포스트 수정시
+  
     const editorData = {
       title: controls.title.value,
       sub: controls.sub.value,
@@ -125,7 +123,7 @@ class Editor extends Component {
       ...originPost,
       ...editorData,
     };
-    // 새로운 포스트 작성시
+  
     const userId = localStorage.getItem('userId');
     const email = localStorage.getItem('email');
     const newPostpublishedDate = new Date();
@@ -137,7 +135,6 @@ class Editor extends Component {
       like: 0,
       comment: null,
     };
-    // 수정 or 새포스트 작성에 따른 핸들러 설정
     try {
       if (pnum) {
         await editPostHandler(pnum, postData);
@@ -148,8 +145,7 @@ class Editor extends Component {
       console.log(err);
     }
   };
-
-  // 인풋 state 연동해 입력
+  
   inputChangedHandler = (event, controlName) => {
     const { controls } = this.state;
     const updateControls = updateObject(controls, {
@@ -200,7 +196,6 @@ class Editor extends Component {
         <form onSubmit={this.onSubmit}>
           <EditorBox>{form}</EditorBox>
           <Button theme="basic" size="big" type="submit">
-            {/* 버튼 내용 - 상태에 따라 다르게 출력 */}
             {pnum ? '수정' : '작성'}하기
           </Button>
         </form>

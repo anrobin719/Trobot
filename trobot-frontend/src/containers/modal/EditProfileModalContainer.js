@@ -38,7 +38,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onCancelModal: modalName => dispatch(actions.hideModal(modalName)),
-    // onEditProfile: postId => dispatch(actions.editProfile(postId)),
   };
 };
 

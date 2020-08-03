@@ -46,17 +46,16 @@ export const deleteComment = createAction(
   (postId, commentId) => ({ postId, commentId }),
 );
 
-// 포스트의 좋아요 클릭 시 실행
 export const likePost = createAction(
   actionTypes.LIKE_POST,
   (postId, post, likeBtn) => ({ postId, post, likeBtn }),
 );
-// 좋아요 클릭 시, 로그인 시 실행
+
 export const reloadLike = createAction(
   actionTypes.RELOAD_LIKE,
   userId => userId,
 );
-// 좋아요 목록 스토어에 저장
+
 export const saveLike = createAction(
   actionTypes.SAVE_LIKE,
   likePostArray => likePostArray,

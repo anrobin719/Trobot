@@ -30,7 +30,6 @@ class ListContainer extends Component {
 
   pathHandler = (postId, postTag) => {
     const { onShowModal, onStorePostId } = this.props;
-    // 아이디어 클릭 시, 포스트 아이디와 태그를 저장
     onStorePostId(postId, postTag);
     onShowModal('post');
   };

@@ -6,11 +6,9 @@ import Post from '../../components/post/Post';
 import * as actions from '../../store/actions/index';
 
 class PostContainer extends Component {
-  // 포스트 출력
   componentDidMount() {
     const { onGetPost, onStorePostId, pnum } = this.props;
     onGetPost(pnum);
-    // 포스트 아이디와 태그를 저장. 태그는 없음으로 저장
     onStorePostId(pnum, '');
   }
 
@@ -28,7 +26,6 @@ class PostContainer extends Component {
 
     return (
       <>
-        {/* 삭제된 상태일 경우, 기본 아이디어 페이지인 /list로 경로 이동 */}
         {deleted ? <Redirect to={`/list/${postTag}`} /> : null}
         <Post
           pnum={pnum}
@@ -48,7 +45,6 @@ const mapStateToProps = state => {
     postTag: state.post.get('postTag'),
     deleted: state.post.get('deleted'),
     loading: state.post.get('loading'),
-    // isAuthenticated: state.auth.token !== null,
   };
 };
 

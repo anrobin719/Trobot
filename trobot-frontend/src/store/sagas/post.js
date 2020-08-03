@@ -36,7 +36,6 @@ export function* deletePostSaga({ payload: postId }) {
   try {
     const res = yield axios.delete(`/list/${postId}.json`);
     yield put(actions.deletePostSuccess());
-    // 경로이동으로 남겨둔 tag 삭제, deleted 기본 값으로
     yield put(actions.initDelete());
     console.log('DELETE_POST_SUCCESS', res);
   } catch (err) {
@@ -60,20 +59,17 @@ export function* deleteCommentSaga({ payload: { postId, commentId } }) {
   }
 }
 
-// 포스트의 좋아요 클릭 시 실행
 export function* likePostSaga({ payload: { postId, post, likeBtn } }) {
   const userId = localStorage.getItem('userId');
   const likeData = { userId };
 
-  // 좋아요가 됐을 때 정보를 저장합니다.
   if (!likeBtn) {
     try {
-      // 포스트 데이터에 좋아요 저장 - 유저 아이디를 key 값으로 저장합니다.
       const res = yield axios.put(
         `/list/${postId}/like/${userId}.json`,
         likeData,
       );
-      // 내 데이터에 좋아요 정보 저장 - 포스트 아이디를 key 값으로 저장합니다.
+
       try {
         const saveMySideRes = yield axios.put(
           `/user/${userId}/likePost/${postId}.json`,
@@ -84,18 +80,15 @@ export function* likePostSaga({ payload: { postId, post, likeBtn } }) {
         console.log(`SAVE_LIKE_TO_MY_DATA_ERROR`, e);
       }
       console.log('LIKE_POST_SUCCESS', res);
-      // 성공시 유저 아이디로 좋아요 데이터를 리로드합니다.
+      
       yield put(actions.reloadLike(userId));
     } catch (err) {
       console.log('LIKE_POST_FAIL', err);
     }
-  }
-  // 좋아요가 취소됐을 때 정보를 삭제합니다.
-  else {
+  } else {
     try {
-      // 포스트 데이터에 좋아요 삭제 - 유저 아이디를 key 값으로 삭제합니다.
       const res = yield axios.delete(`/list/${postId}/like/${userId}.json`);
-      // 내 데이터에 좋아요 정보 삭제 - 포스트 아이디를 key 값으로 삭제합니다.
+
       try {
         const deleteMySideRes = yield axios.delete(
           `/user/${userId}/likePost/${postId}.json`,
@@ -105,7 +98,7 @@ export function* likePostSaga({ payload: { postId, post, likeBtn } }) {
         console.log(`DELETE_LIKE_TO_MY_DATA_ERROR`, e);
       }
       console.log('DELETE_LIKE_POST_SUCCESS', res);
-      // 성공시 유저 아이디로 좋아요 데이터를 리로드합니다.
+    
       yield put(actions.reloadLike(userId));
     } catch (err) {
       console.log('DELETE_LIKE_POST_FAIL', err);
@@ -113,12 +106,9 @@ export function* likePostSaga({ payload: { postId, post, likeBtn } }) {
   }
 }
 
-// 좋아요 데이터 리로드
 export function* reloadLikeSaga({ payload: userId }) {
   try {
-    // 유저의 좋아요 포스트 정보 가져오기
     const getlikePostRes = yield axios.get(`/user/${userId}/likePost.json`);
-    // array 목록을 만들어 저장
     const likePostArray = [];
     for (const postId in getlikePostRes.data) {
       likePostArray.push({
@@ -126,7 +116,7 @@ export function* reloadLikeSaga({ payload: userId }) {
         postId,
       });
     }
-    // 가져온 데이터 스토어에 저장
+    
     yield put(actions.saveLike(likePostArray));
   } catch (err) {
     console.log(err);

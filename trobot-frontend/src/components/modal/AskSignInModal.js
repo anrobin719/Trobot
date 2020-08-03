@@ -20,7 +20,6 @@ const AskSignInModal = ({
       <ContentBox>
         <span>🙈</span>
         <h4>로그인 후 이용해주세요.</h4>
-        {/* 로그인, 회원가입 버튼 박스 */}
         <BtnBox>
           <div>
             <Button onClick={signInSubmit} theme="outline">

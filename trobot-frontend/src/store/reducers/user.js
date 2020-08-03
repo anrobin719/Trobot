@@ -10,7 +10,6 @@ const initialState = Map({
 
 const reducer = handleActions(
   {
-    // 포스트 출력
     [actionTypes.GET_USER_INFO_START]: (state, action) => {
       return state.set('loading', true);
     },

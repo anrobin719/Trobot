@@ -32,7 +32,6 @@ export function* getListSaga({ payload: tag }) {
   }
 }
 
-// 작성한 아이디어 요청
 export function* getMyListSaga({ payload: userId }) {
   yield put(actions.getMyListStart());
 
@@ -55,7 +54,6 @@ export function* getMyListSaga({ payload: userId }) {
   }
 }
 
-// 좋아요한 아이디어 요청
 export function* getLikeListSaga({ payload: userId }) {
   yield put(actions.getLikeListStart());
 
@@ -76,15 +74,13 @@ export function* getLikeListSaga({ payload: userId }) {
   }
 }
 
-// 팔로우 관련 유저목록 요청
 export function* getFollowListSaga({ payload: userId }) {
   yield put(actions.getFollowListStart());
 
   try {
     const followingList = [];
     const followerList = [];
-
-    // 팔로잉 리스트 요성
+    
     const followingRes = yield axios.get(`/user/${userId}/following.json`);
     for (const userId in followingRes.data) {
       followingList.push({
@@ -92,7 +88,6 @@ export function* getFollowListSaga({ payload: userId }) {
       });
     }
 
-    // 팔로워 리스트 요청
     try {
       const followerRes = yield axios.get(`/user/${userId}/follower.json`);
       for (const userId in followerRes.data) {
@@ -103,8 +98,7 @@ export function* getFollowListSaga({ payload: userId }) {
     } catch (err) {
       console.log('GET_FOLLOWER_LIST_FAIL', err);
     }
-
-    // 팔로잉, 팔로워 리스트 저장
+    
     yield put(actions.getFollowListSuccess({ followingList, followerList }));
     console.log('GET_FOLLOW_LIST_SUCCESS', followingList, followerList);
   } catch (err) {

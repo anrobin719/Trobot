@@ -20,7 +20,6 @@ class EditorContainer extends Component {
     const { loading, pnum, post, postId, postTag } = this.props;
     return (
       <>
-        {/* 새 포스트 작성시 생성되는 포스트 아이디가 저장되면, 그 위치로 이동 (editor state의 포스트 아이디) */}
         {postId ? <Redirect to={`/post/${postId}`} /> : null}
         <Editor
           editPostHandler={this.editPostHandler}

@@ -23,7 +23,6 @@ export function* editPostSaga({ payload: { pnum, postData } }) {
   try {
     const res = yield axios.put(`/list/${pnum}.json`, postData);
     yield put(actions.editPostSuccess(pnum));
-    // 에디트 state에 저장되어있는 postId 삭제
     yield put(actions.initEdit());
     console.log('[SAGA] EDIT_POST_SUCCESS', res);
   } catch (err) {

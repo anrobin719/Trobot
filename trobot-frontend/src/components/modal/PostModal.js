@@ -1,6 +1,5 @@
 import React from 'react';
 
-// import styled from 'styled-components';
 import Modal from '../ui/Modal';
 import Post from '../post/Post';
 

@@ -14,12 +14,10 @@ const List = ({ tag, list, loading, pathHandler }) => {
         <Loading />
       ) : (
         <>
-          {/* 왼쪽 flex box */}
           <IdeaBox>
             <h3>아이디어</h3>
             <IdeaList list={list} pathHandler={pathHandler} />
           </IdeaBox>
-          {/* 오른쪽 flex box */}
           <ResourceBox>
             <h3>관련자료</h3>
             <ResourceList tag={tag} />

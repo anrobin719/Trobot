@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
@@ -9,12 +8,7 @@ const Idea = ({
   title,
   tag,
   sub,
-  // authorNickname,
-  // authorId,
   like,
-  // body,
-  // comments,
-  // publishedDate,
   pathHandler,
 }) => {
   return (

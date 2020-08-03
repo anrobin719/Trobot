@@ -28,7 +28,6 @@ const UserProfile = ({
             </ContentBox>
 
             <NumberBox>
-              {/* 현재 유저 페이지가 자신의 페이지일때, 수정하기 버튼 디스플레이 */}
               {myPage && (
                 <Button
                   type="button"

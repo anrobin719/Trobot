@@ -15,7 +15,6 @@ const CommentCollection = ({
   showAskSignInModal,
   deleteCommentHandler,
 }) => {
-  // 댓글 작성시
   const submitHandler = inputVal => {
     const whole = post.toJS();
     const userId = localStorage.getItem('userId');
@@ -23,7 +22,6 @@ const CommentCollection = ({
     const img = localStorage.getItem('img');
     const generatedId = userId + new Date().getTime();
 
-    // 기존 댓글들에 새로운 키값으로 새 댓글 추가
     const updatedComments = updateObject(comments, {
       [generatedId]: {
         userId,
@@ -33,15 +31,14 @@ const CommentCollection = ({
         comment: inputVal,
       },
     });
-    // 기존 포스트 데이터에 댓글 업데이트
+    
     const updatedPost = updateObject(whole, {
       comments: updatedComments,
     });
-    // 데이터에 업데이트 된 포스트 저장
+    
     updatePostHandler(updatedPost);
   };
 
-  // 출력용 댓글 배열
   const commentArray = [];
   if (comments !== 0) {
     for (const commentId in comments) {
@@ -55,7 +52,6 @@ const CommentCollection = ({
     }
   }
 
-  // 댓글 배열을 각각의 댓글로 변환
   const commentList = commentArray.map(com => {
     return (
       <Comment
@@ -70,7 +66,6 @@ const CommentCollection = ({
     );
   });
 
-  // 댓글 인풋 옆 디폴트 이미지, 로그인 시 본인 이미지로 설정
   let myImg =
     'https://d2x5ku95bkycr3.cloudfront.net/App_Themes/Common/images/profile/0_200.png';
   if (isAuthenticated) {
@@ -79,16 +74,13 @@ const CommentCollection = ({
 
   return (
     <CommentWrapper>
-      {/* 코멘트 인풋 */}
       <CommentInput
         myImg={myImg}
         submitHandler={submitHandler}
         isAuthenticated={isAuthenticated}
         showAskSignInModal={showAskSignInModal}
       />
-      {/* 코멘트 리스트 */}
       <CommentList>
-        {/* 출력할 코멘트가 없을 시, 디폴트 멘트 출력 */}
         {commentList.length === 0 ? (
           <p>아이디어에 대해 소통해보세요!</p>
         ) : (

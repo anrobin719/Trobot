@@ -15,7 +15,6 @@ const PostSide = ({
   const userId = localStorage.getItem('userId');
 
   const onClickBtn = btnName => {
-    // 로그인 상태인 경우 정상 작동
     if (userId && btnName === 'like') {
       likeHandler();
       console.log(`like btn clicked!`);
@@ -23,14 +22,12 @@ const PostSide = ({
       followHanlder();
       console.log(`follow btn clicked!`);
     }
-    // 아닌 경우 로그인 모달
     else {
       showAskSignInModal();
     }
   };
 
   return (
-    // 일치할 경우, 다른 값 출력
     <ContentBox>
       <Button
         theme={likeBtn ? 'outlinePoint' : 'point'}
@@ -40,7 +37,6 @@ const PostSide = ({
       >
         {likeBtn ? `Like ✓` : 'Like'}
       </Button>
-      {/* 로그인 되어있지 않거나, 현재 포스트가 자신의 포스트가 아닐 때, 팔로우 버튼 디스플레이 */}
       {authorId !== userId && (
         <Button
           theme={followBtn ? 'outline' : 'basic'}

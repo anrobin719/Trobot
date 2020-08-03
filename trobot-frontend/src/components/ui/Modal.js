@@ -18,7 +18,6 @@ const Modal = ({ show, isPost, modalClosed, children }) => {
 };
 
 const ModalWrapper = styled.div`
-  // 로그인 모달이 포스트 모달보다 위에 있도록 설정
   // Backdrop
   > div {
     z-index: ${props => (props.isPost ? `200` : `400`)};
@@ -45,7 +44,6 @@ const ModalWrapper = styled.div`
   }
 `;
 
-// 기본 모달 슬라이드 애니메이션입니다.
 const slideUp = keyframes`
   0% {
     transform: translate(-50%, -40%);
@@ -57,7 +55,6 @@ const slideUp = keyframes`
   }
 `;
 
-// 포스트 모달 슬라이드 애니메이션입니다.
 const PostSlideUp = keyframes`
 0% {
   transform: translate(-50%, 10%);
@@ -77,7 +74,7 @@ const ModalBox = styled.div`
   box-sizing: border-box;
   transition: all 1s ease-in-out;
   left: 50%;
-  // 모달이 포스트일 경우 top, transform, animation 값 변화
+  
   top: ${props => (props.isPost ? `none` : `50%`)};
   position: ${props => (props.isPost ? `relative` : `fixed`)};
   transform: ${props =>

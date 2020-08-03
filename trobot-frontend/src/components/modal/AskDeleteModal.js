@@ -15,7 +15,6 @@ const AskDeleteModal = ({ show, deleteSubmit, cancelHandler }) => {
       <ContentBox>
         <span>🤷🏻‍♂️</span>
         <h4>아이디어를 정말 삭제하시겠습니까?</h4>
-        {/* 삭제 버튼 박스 */}
         <BtnBox>
           <div>
             <Button onClick={deleteSubmit} theme="outline">

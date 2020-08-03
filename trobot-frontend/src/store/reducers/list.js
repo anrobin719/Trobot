@@ -14,7 +14,6 @@ const initialState = {
 
 const reducer = handleActions(
   {
-    // 아이디어 리스트 가져오기
     [actionTypes.GET_LIST_START]: (state, action) => {
       return updateObject(state, {
         loading: true,
@@ -33,7 +32,6 @@ const reducer = handleActions(
       });
     },
 
-    // 작성한 아이디어 목록 저장
     [actionTypes.GET_MY_LIST_START]: (state, action) => {
       return updateObject(state, {
         loading: true,
@@ -52,7 +50,6 @@ const reducer = handleActions(
       });
     },
 
-    // 좋아요한 아이디어 목록 저장
     [actionTypes.GET_LIKE_LIST_START]: (state, action) => {
       return updateObject(state, {
         loading: true,
@@ -71,7 +68,6 @@ const reducer = handleActions(
       });
     },
 
-    // 팔로잉, 팔로워 목록 저장
     [actionTypes.GET_FOLLOW_LIST_START]: (state, action) => {
       return updateObject(state, {
         loading: true,

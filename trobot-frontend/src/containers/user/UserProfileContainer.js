@@ -8,7 +8,6 @@ class UserProfileContainer extends Component {
   componentDidMount() {
     const { onGetUserInfo, unum } = this.props;
     const userId = localStorage.getItem('userId');
-    // 마이페이지가 아닌 다른 유저 페이지 방문시에만 유저 정보 get
     if (userId !== unum) {
       onGetUserInfo(unum);
       console.log('MOUNT');
@@ -17,7 +16,6 @@ class UserProfileContainer extends Component {
 
   componentDidUpdate(prevProps) {
     const { onGetUserInfo, unum } = this.props;
-    // 다른 유저 페이지로 전환시 유저 정보 get
     if (unum !== prevProps.unum) {
       onGetUserInfo(unum);
       console.log('UPDATE');
@@ -35,14 +33,11 @@ class UserProfileContainer extends Component {
     let email;
     let img;
 
-    // 마이페이지 방문시
     if (isAuthenticated && userId === unum) {
       nickname = localStorage.getItem('nickname');
       email = localStorage.getItem('email');
       img = localStorage.getItem('img');
-    }
-    // 다른 유저 페이지 방문시
-    else {
+    } else {
       const userInfo = user.toJS();
       nickname = userInfo.nickname;
       email = userInfo.email;

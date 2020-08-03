@@ -11,7 +11,6 @@ const EditProfileModal = ({ show, profileSubmit, cancelHandler }) => {
     console.log(e.target.files[0]);
 
     if (e.target.files != null || e.target.files[0] != null) {
-      // const { changeFile } = props;
       const { name } = e.target;
 
       const reader = new FileReader();
@@ -29,33 +28,24 @@ const EditProfileModal = ({ show, profileSubmit, cancelHandler }) => {
         <CloseIcon />
       </CloseBtnBox>
       <ContentBox>
-        {/* 프로필 이미지 인풋 : display none */}
         <input
           style={{ display: 'none' }}
           type="file"
           name="img"
           onChange={fileSelectedHandler}
-          // ref={ref => (refInput = ref)}
         />
-        {/* 실제 보이는 이미지 */}
         <ImgContainer>
           <img
-            // ref={ref => (refImg = ref)}
-            // src={img}
             alt="profile_image"
             align="middle"
             width="100%"
             height="100%"
           />
-          <EditImgText
-          // onClick={() => refInput.click()}
-          >
+          <EditImgText>
             수정하기
           </EditImgText>
         </ImgContainer>
-        {/* 닉네임 설정 박스 */}
         <h4>닉네임 : </h4>
-        {/* 저장 버튼 박스 */}
         <BtnBox>
           <Button onClick={profileSubmit} theme="outline">
             저장하기
@@ -91,8 +81,6 @@ const EditImgText = styled.div`
   line-height: 2rem;
   background: rgba(0, 0, 0, 0.2);
 `;
-
-////
 
 const CloseBtnBox = styled.div`
   position: absolute;

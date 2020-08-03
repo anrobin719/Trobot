@@ -14,7 +14,6 @@ const NotFound = () => {
         </span>
         <h3>404 Error</h3>
         <div>
-          {/* <p>페이지를 표시할 수 없습니다.</p> */}
           <Button to="/" theme="outlineWhite" type="button">
             홈으로 이동
           </Button>

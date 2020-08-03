@@ -20,7 +20,6 @@ const Post = ({
   followBtn,
   showAskSignInModal,
 }) => {
-  // 포스트 할당
   const {
     title,
     tag,
@@ -36,13 +35,11 @@ const Post = ({
 
   return (
     <>
-      {/* 포스트 컨테이너 */}
       <PostBox onClick={stoppropagation}>
         {loading ? (
           <Loading size="fit" />
         ) : (
           <>
-            {/* 포스트 제목과 정보 */}
             <PostHeader
               title={title}
               tag={tag}
@@ -50,7 +47,6 @@ const Post = ({
               authorNickname={authorNickname}
               publishedDate={publishedDate}
             />
-            {/* 포스트 컨텐츠 */}
             <section>
               <PostContent
                 body={body}
@@ -67,7 +63,6 @@ const Post = ({
                 showAskSignInModal={showAskSignInModal}
               />
 
-              {/* 댓글 관련 컴포넌트 : 댓글 인풋 + 댓글 출력 */}
               <CommentCollectionContainer />
             </section>
           </>

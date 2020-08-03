@@ -27,11 +27,10 @@ class CommentInput extends Component {
     };
   }
 
-  // 댓글 인풋 체인지 핸들러
   inputChangeHandler = e => {
     const { controls } = this.state;
     const { isAuthenticated, showAskSignInModal } = this.props;
-    // 로그인 상태인 경우 정상 작동
+
     if (isAuthenticated) {
       const updatedFormElement = updateObject(controls.comments, {
         value: e.target.value,
@@ -45,13 +44,12 @@ class CommentInput extends Component {
 
       this.setState({ controls: updatedForm });
     }
-    // 아닌 경우 로그인 모달
+
     else {
       showAskSignInModal();
     }
   };
 
-  // 작성시 인풋 값 전송, 인풋 값 초기화
   onSubmit = e => {
     e.preventDefault();
     const { submitHandler } = this.props;
@@ -60,7 +58,7 @@ class CommentInput extends Component {
 
     if (inputVal) {
       submitHandler(inputVal);
-      // 댓글 인풋값 초기화
+      
       const clearInputValue = updateObject(controls, {
         comments: updateObject(controls.comments, {
           value: '',

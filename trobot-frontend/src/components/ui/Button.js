@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
@@ -28,7 +27,6 @@ const Button = ({ to, onClick, disabled, theme, size, type, children }) => {
   );
 };
 
-// 버튼 테마
 const basic = () => ({ theme }) => {
   if (theme === 'basic') {
     return `
@@ -120,7 +118,6 @@ const active = () => ({ theme }) => {
   return null;
 };
 
-//  버튼 사이즈
 const full = () => ({ size }) => {
   if (size === 'full') {
     return `
@@ -142,23 +139,18 @@ const big = () => ({ size }) => {
   return null;
 };
 
-// 버튼 비활성화
 const disable = () => ({ disabled }) => {
   if (disabled) {
     return `
-    // background-color: ${palette.gray[3]};
-    // color: ${palette.gray[6]};
     cursor: default;
     &:hover, &:active {
         box-shadow: none;
-        // background-color: ${palette.gray[3]};
     }
       `;
   }
   return null;
 };
 
-// 디폴트 버튼 - button 태그
 const BasicButton = styled.button`
     display: flex;
     justify-content: center;
@@ -184,7 +176,6 @@ const BasicButton = styled.button`
     ${active}
 `;
 
-// 디폴트 버튼 - a 태그
 const LinkButton = styled.a`
     display: flex;
     justify-content: center;

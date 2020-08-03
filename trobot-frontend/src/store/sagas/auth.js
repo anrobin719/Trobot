@@ -27,10 +27,8 @@ export function* authUserSaga({ payload: authForm }) {
   yield put(actions.authStart());
   let url;
   if (authForm.signup) {
-    // 회원가입 url
     url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${REACT_APP_FIREBASE_API_KEY}`;
   } else {
-    // 로그인 url
     url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${REACT_APP_FIREBASE_API_KEY}`;
   }
   const authData = {
@@ -40,10 +38,8 @@ export function* authUserSaga({ payload: authForm }) {
   };
 
   try {
-    // 인증 요청
     const response = yield axios.post(url, authData);
 
-    // 회원가입시 => user컬렉션에 userId를 key값으로 유저정보 저장 + 유저 정보 localStorage 저장
     if (authForm.signup) {
       const userId = response.data.localId;
       try {
@@ -57,23 +53,20 @@ export function* authUserSaga({ payload: authForm }) {
       } catch (error) {
         console.log(`[FAIL] SIGN_UP USER INFO SET`, error);
       }
-    }
-    // 로그인시 => user컬렉션에서 유저정보 가져오기 + 유저 정보 localStorage 저장
-    else {
+    } else {
       const userId = response.data.localId;
       try {
         const getUserInfoRes = yield axiosBase.get(`/user/${userId}.json`);
         yield localStorage.setItem('nickname', getUserInfoRes.data.nickname);
         yield localStorage.setItem('img', getUserInfoRes.data.img);
 
-        // 팔로잉 유저 목록
         const followingArray = [];
         for (const followingId in getUserInfoRes.data.following) {
           followingArray.push({
             ...getUserInfoRes.data.following[followingId],
           });
         }
-        // 팔로워 유저 목록
+        
         const followerArray = [];
         for (const followerId in getUserInfoRes.data.follower) {
           followerArray.push({
@@ -81,7 +74,6 @@ export function* authUserSaga({ payload: authForm }) {
           });
         }
 
-        // 좋아요 포스트 목록
         const likePostArray = [];
         for (const postId in getUserInfoRes.data.likePost) {
           likePostArray.push({
@@ -89,23 +81,21 @@ export function* authUserSaga({ payload: authForm }) {
             postId,
           });
         }
-
-        // 팔로우 목록 스토어에 저장
+        
         yield put(
           actions.authSaveFollow({
             following: followingArray,
             follower: followerArray,
           }),
         );
-        // 좋아요 목록 스토어에 저장
+        
         yield put(actions.saveLike(likePostArray));
         console.log(`[SUCCESS] SIGN_IN USER INFO SET`);
       } catch (error) {
         console.log(`[FAIL] SIGN_IN USER INFO SET`, error);
       }
     }
-
-    // 회원가입, 로그인 공통 : 유저 토큰, 아이디, 이메일, 만료일 localStorage 저장
+    
     const { idToken, localId, email, expiresIn } = response.data;
     yield localStorage.setItem('token', idToken);
     yield localStorage.setItem('userId', localId);
@@ -118,7 +108,6 @@ export function* authUserSaga({ payload: authForm }) {
     yield put(actions.authSuccess({ token: idToken, userId: localId, email }));
     console.log(`[SUCCESS] AUTH`);
   } catch (error) {
-    // 인증 실패시 오류 메세지 반환
     yield put(actions.authFail(error.response.data.error.message));
     console.log(`[FAIL] AUTH`, error.response);
   }
@@ -146,7 +135,6 @@ export function* checkAuthSaga() {
         ),
       );
     }
-    // 로그인 되어 있을 때, 팔로우 정보, 좋아요 정보 저장
     yield put(actions.reloadFollow(userId));
     yield put(actions.reloadLike(userId));
   }
@@ -166,16 +154,13 @@ export function* followSaga({
     img,
   };
 
-  // 포스트 팔로우를 클릭했을 때 실행합니다.
   if (!followBtn) {
-    // 내 팔로잉에 상대 정보를 저장합니다.
     try {
       const res = yield axiosBase.put(
         `/user/${userId}/following/${authorId}.json`,
         followingData,
       );
       console.log(`FOLLOWING  - MY SIDE`, res.data);
-      // 상대 유저 팔로워에 내정보를 저장합니다.
       try {
         const saveOtherSideRes = yield axiosBase.put(
           `/user/${authorId}/follower/${userId}.json`,
@@ -185,21 +170,17 @@ export function* followSaga({
       } catch (e) {
         console.log('FOLLOWER ERROR - OTHER SIDE', e);
       }
-      // 팔로잉, 팔로워 유저 저장 뒤, 리로드합니다.
+
       yield put(actions.reloadFollow(userId));
     } catch (err) {
       console.log('FOLLOWING ERROR', err);
     }
-  }
-  // 팔로우를 취소했을 때 실행합니다.
-  else {
-    // 내 팔로잉에 상대 정보를 삭제합니다.
+  } else {
     try {
       const res = yield axiosBase.delete(
         `/user/${userId}/following/${authorId}.json`,
       );
       console.log(`DELETE FOLLOWING - MY SIDE`, res.data);
-      // 상대 유저 팔로워에 내정보를 삭제합니다.
       try {
         const deleteOtherSideRes = yield axiosBase.delete(
           `/user/${authorId}/follower/${userId}.json`,
@@ -208,7 +189,6 @@ export function* followSaga({
       } catch (e) {
         console.log('DELETE FOLLOWER ERROR - OTHER SIDE', e);
       }
-      // 팔로잉, 팔로워 유저 저장 뒤, 리로드합니다.
       yield put(actions.reloadFollow(userId));
     } catch (err) {
       console.log('DELETE FOLLOWING ERROR', err);
@@ -216,18 +196,16 @@ export function* followSaga({
   }
 }
 
-// 팔로우 데이터 리로드
 export function* reloadFollowSaga({ payload: userId }) {
   try {
     const getUserInfoRes = yield axiosBase.get(`/user/${userId}.json`);
-    // 팔로잉 유저 목록
     const followingArray = [];
     for (const followingId in getUserInfoRes.data.following) {
       followingArray.push({
         ...getUserInfoRes.data.following[followingId],
       });
     }
-    // 팔로워 유저 목록
+    
     const followerArray = [];
     for (const followerId in getUserInfoRes.data.follower) {
       followerArray.push({

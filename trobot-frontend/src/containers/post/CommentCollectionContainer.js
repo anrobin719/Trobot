@@ -5,7 +5,6 @@ import Commentcollection from '../../components/post/CommentCollection';
 import * as actions from '../../store/actions/index';
 
 class CommentCollectionContainer extends Component {
-  // 포스트 업데이트 핸들러
   updatePostHandler = updatedPost => {
     const { postId, onUpdatePost } = this.props;
     onUpdatePost(postId, updatedPost);

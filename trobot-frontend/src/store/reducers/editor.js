@@ -10,7 +10,6 @@ const initialState = {
 
 const reducer = handleActions(
   {
-    // 포스트 작성시 실행합니다.
     [actionTypes.WRITE_POST_START]: (state, action) => {
       return updateObject(state, {
         loading: true,
@@ -29,7 +28,6 @@ const reducer = handleActions(
       });
     },
 
-    // 포스트 수정시 실행합니다.
     [actionTypes.EDIT_POST_START]: (state, action) => {
       return updateObject(state, {
         loading: true,

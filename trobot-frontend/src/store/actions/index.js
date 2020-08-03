@@ -9,7 +9,7 @@ export {
   checkAuth,
   checkAuthTimeOut,
   follow,
-  reloadFollow, // followingSucceess, // followerSucceess,
+  reloadFollow,
 } from './auth';
 export {
   writePost,

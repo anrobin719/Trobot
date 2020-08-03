@@ -20,12 +20,11 @@ class UserContents extends Component {
   onClickBtn = () => {
     const { followHanlder, showAskSignInModal } = this.props;
     const userId = localStorage.getItem('userId');
-    // 로그인 상태인 경우 정상 작동
+
     if (userId) {
       followHanlder();
       console.log(`follow btn clicked!`);
     }
-    // 아닌 경우 로그인 모달
     else {
       showAskSignInModal();
     }
@@ -36,19 +35,12 @@ class UserContents extends Component {
       myPage,
       unum,
       isLikeList,
-      // 저장한 아이디어 리스트
       myList,
-      // 좋아요한 아이디어 리스트 - 로그인한 유저 용
       likeList,
-      // 좋아요한 아이디어 리스트 - 다른 유저용
       likePost,
-      // 팔로우 버튼 디스플레이 판단용 내 팔로잉 리스트
       following,
-      // 팔로잉 리스트
       followingList,
-      // 팔로워 리스트
       followerList,
-      // 팔로우 버튼 활성화 상태
       followBtn,
       changeListHandler,
       pathHandler,
@@ -56,9 +48,7 @@ class UserContents extends Component {
 
     return (
       <Wrapper>
-        {/* 오른쪽 버튼 + 팔로우 정보 */}
         <MoreInfo>
-          {/* 현재 유저 페이지가 자신의 페이지가 아닐 때, 팔로우 버튼 디스플레이 */}
           {!myPage && (
             <Button theme="basic" size="full" onClick={this.onClickBtn}>
               {followBtn ? `Following ✓` : 'Follow'}
@@ -91,9 +81,7 @@ class UserContents extends Component {
               작성한 아이디어
             </Button>
           </div>
-          {/* 좋아요한 아이디어, 작성한 아이디어 스위치 버튼 */}
           {isLikeList ? (
-            // 내 페이지 일 때, 다른 유저 페이지 일 때 구분
             <IdeaList
               list={myPage ? likePost : likeList}
               pathHandler={pathHandler}
